@@ -11,8 +11,11 @@ phpcs filename.php
 # 这条命令也可以用在 git hook 中，如果你的分支代码不符合选择的代码标准则无法提交
 ```
 
-## Mysql字符集
+## 日期和时间 
 
+PHP 中 DateTime 类的作用是在你读、写、比较或者计算日期和时间时提供帮助。除了 DateTime 类之外，PHP 还有很多与日期和时间相关的函数，但 DateTime 类为大多数常规使用提供了优秀的面向对象接口。它还可以处理时区。
+
+文档：http://php.net/manual/en/class.datetime.php
 
 ## 浏览器层面的 UTF-8
 
@@ -83,7 +86,7 @@ if (password_verify('bad-password', $passwordHash)) {
 
 ### 数据过滤
 
-- 永远不要信任外部输入。请在使用外部输入前进行过滤和验证。filter_var() 和 filter_input() 函数可以过滤文本并对格式进行校验（例如 email 地址）。
+- 永远不要信任外部输入。请在使用外部输入前进行过滤和验证。filter\_var() 和 filter\_input() 函数可以过滤文本并对格式进行校验（例如 email 地址）。
 - 记住，外部输入的定义并不局限于用户通过表单提交的数据。上传和下载的文档，session 值，cookie 数据，还有来自第三方 web 服务的数据，这些都是外服输入。
 
 ### 配置文件
@@ -159,27 +162,23 @@ docker stop my-php-webserver
 docker start my-php-webserver
 ```
 
+## 缓存 
+
+### Opcache：opcode缓存
+
+php5.5自带了opcode缓存工具Opcache。
+
+API: http://php.net/manual/zh/ref.opcache.php 
+
+### 对象缓存
 
 
+- APCu 和 Memcached 。APCu 对于对象缓存来说是个很好的选择，它提供了简单的 API 让你能将数据缓存到内存，并且很容易设置和使用。APCu 的局限性表现在它依赖于所在的服务器。
+- 值得注意的是当你以 CGI(FastCGI) 的形式使用 PHP 时，每个进程将会有各自的缓存，比如说，APCu 缓存数据无法在多个工作进程中共享。
 
+## 文档撰写
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+PHPDoc 是注释 PHP 代码的非正式标准。它有许多不同的标记可以使用。完整的标记列表和范例可以查看 PHPDoc 指南。
 
 
 
