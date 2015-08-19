@@ -1,8 +1,14 @@
 # IBBD技术博客
 
-```
-print 'Hello, world!'
+```php
 echo 'Hello, world!';
+```
+
+```python
+print 'Hello, world!'
+```
+
+```javascript
 console.log('Hello, world!');
 ```
 
