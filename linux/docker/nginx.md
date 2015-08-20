@@ -38,5 +38,19 @@ sudo docker stop|start|restart|rm some-nginx
 
 ## 自定义配置文件
 
+dockerfile: https://github.com/IBBD/dockerfile-nginx
+
+```sh 
+
+```
+
+## 问题
+
+1. 启动不了
+
+```
+tail -f tail -f /var/log/nginx/error.log 
+
+```
 
 
