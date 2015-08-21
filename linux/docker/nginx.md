@@ -40,6 +40,14 @@ sudo docker stop|start|restart|rm some-nginx
 
 dockerfile: https://github.com/IBBD/dockerfile-nginx
 
+### 与php-fpm的交互问题
+
+```
+docker run -ti -rm --name php-fpm php:5.6-fpm
+```
+
+在启动nginx容易的时候，加上```--link``` 和 ```--volumes-from``` 两个参数。
+
 ## 问题
 
 1. 启动不了
