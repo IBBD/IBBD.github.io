@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# 发布博客
+
+source create_index
+
+git commit -am $1
+
+git push 
+
