@@ -1,0 +1,27 @@
+#!/bin/bash
+# 
+# 生成index文件列表
+# 
+
+files=$(find ./[0-9a-z_]*)
+index_filename='index.md'
+echo '# 索引文件' > $index_filename
+echo '' >> $index_filename
+
+for p in $files
+do
+    f=${p##*/}
+    num=$(echo $p | awk -F'/' '{print NF-1}')
+    num=$[($num-1)*2]
+    spaces=$(seq -s' ' $num | tr -d '[0-9]')
+    echo $p
+    if [ -d $p ]
+    then
+        echo "$spaces"'-'$f >> $index_filename
+    elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} ] 
+    then
+        echo "$spaces"'-('$f')[https://github.com/IBBD/blog/tree/master'${f:1}']' >> $index_filename
+    fi
+done
+
+echo '====> finish!'

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# USAGES:
+# ./search keyword
+
+# @todo 按照第一个冒号将结果拆分
+
+
+find ./[0-9a-z_]* | xargs grep -s $*
+
