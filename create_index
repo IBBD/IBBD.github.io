@@ -20,7 +20,7 @@ do
         echo "$spaces"'- '$f >> $index_filename
     elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} ] 
     then
-        echo "$spaces"'- ('$f')[https://github.com/IBBD/blog/tree/master'${f:1}']' >> $index_filename
+        echo "$spaces"'- ('$f')[https://github.com/IBBD/blog/tree/master/'$f']' >> $index_filename
     fi
 done
 
