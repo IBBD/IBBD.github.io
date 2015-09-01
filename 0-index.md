@@ -5,14 +5,14 @@
 - front-end
 - linux
  - docker
-   - (nginx.md)[https://github.com/IBBD/blog/tree/master/nginx.md]
-   - (docker分享会.md)[https://github.com/IBBD/blog/tree/master/docker分享会.md]
-   - (docker-questions.md)[https://github.com/IBBD/blog/tree/master/docker-questions.md]
-   - (docker-compose.md)[https://github.com/IBBD/blog/tree/master/docker-compose.md]
+   - (nginx.md)[https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md]
+   - (docker分享会.md)[https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md]
+   - (docker-questions.md)[https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md]
+   - (docker-compose.md)[https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md]
 - php
  - laravel
  - php-the-right-way-learning
-   - (alex.md)[https://github.com/IBBD/blog/tree/master/alex.md]
+   - (alex.md)[https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md]
 - python
  - scrapy
-   - (源码结构.md)[https://github.com/IBBD/blog/tree/master/源码结构.md]
+   - (源码结构.md)[https://github.com/IBBD/blog/tree/master/python/scrapy/源码结构.md]
