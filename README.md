@@ -12,3 +12,13 @@ print 'Hello, world!'
 console.log('Hello, world!');
 ```
 
+## 使用步骤
+
+1. git clone本项目
+2. 编辑一个文档，markdown格式
+3. 生成索引文件`0-index.md`，命令：`./create_index`
+4. git add相应的文件
+5. git commit -am 'commit'
+6. git push
+7. 按关键词搜索：`./search your-keyword`
+
