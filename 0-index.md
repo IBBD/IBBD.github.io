@@ -1,18 +1,18 @@
 # 索引文件
 
+- (0-index.md)[https://github.com/IBBD/blog/tree/master/0-index.md]
 - database
 - front-end
-- (index.md)[https://github.com/IBBD/blog/tree/masterndex.md]
 - linux
  - docker
-   - (nginx.md)[https://github.com/IBBD/blog/tree/masterginx.md]
-   - (docker分享会.md)[https://github.com/IBBD/blog/tree/masterocker分享会.md]
-   - (docker-questions.md)[https://github.com/IBBD/blog/tree/masterocker-questions.md]
-   - (docker-compose.md)[https://github.com/IBBD/blog/tree/masterocker-compose.md]
+   - (nginx.md)[https://github.com/IBBD/blog/tree/master/nginx.md]
+   - (docker分享会.md)[https://github.com/IBBD/blog/tree/master/docker分享会.md]
+   - (docker-questions.md)[https://github.com/IBBD/blog/tree/master/docker-questions.md]
+   - (docker-compose.md)[https://github.com/IBBD/blog/tree/master/docker-compose.md]
 - php
  - laravel
  - php-the-right-way-learning
-   - (alex.md)[https://github.com/IBBD/blog/tree/masterlex.md]
+   - (alex.md)[https://github.com/IBBD/blog/tree/master/alex.md]
 - python
  - scrapy
-   - (源码结构.md)[https://github.com/IBBD/blog/tree/master码结构.md]
+   - (源码结构.md)[https://github.com/IBBD/blog/tree/master/源码结构.md]
