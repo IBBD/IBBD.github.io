@@ -29,4 +29,17 @@ connect to the Docker daemon. Is 'docker -d' running on this host?
 ```
 sudo route del -net 172.16.0.0 netmask 255.240.0.0  
 ```
+4. 在阿里云ECS上通过dockerfile编译php-fpm的镜像时，出错
+
+```
+E: Unable to locate package libmcrypt-dev
+E: Unable to locate package libfreetype6-dev
+E: Unable to locate package libjpeg62-turbo-dev
+E: Unable to locate package libpng12-dev
+E: Unable to locate package libssl-dev
+```
+在本地编译时没问题，应该是刚安装，软件源还来不及更新，所以才会无法找到包。我猜测在更换软件源之后，也很可能会出现这个问题。
+
+解决：暂时注释掉更换源的语句。
+
 
