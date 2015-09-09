@@ -42,4 +42,13 @@ E: Unable to locate package libssl-dev
 
 解决：暂时注释掉更换源的语句。
 
+5. 构建时，可能会一直卡在pulling那里，重试也没有用，这时重启docker可能可以解决问题：`sudo service docker restart`
+
+6. 构建scrapy时，run命令错误提示如下：
+
+```
+End of CmdRun(), Waiting for hijack to finish
+```
+可能是`docker run`这个命令写得有问题，重新写一个就ok了。
+
 
