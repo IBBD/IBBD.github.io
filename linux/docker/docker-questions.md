@@ -51,4 +51,19 @@ End of CmdRun(), Waiting for hijack to finish
 ```
 可能是`docker run`这个命令写得有问题，重新写一个就ok了。
 
+7. 构建时的cache问题
+
+Dockerfile可能写成如下形式：
+
+```
+RUN apt-get update \ 
+    && apt-get install -y gcc
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install -y git
+```
+
+这样会失败，前面已经rm了。最后写在一起，如果不能写在一起，就要先update，最后rm多余的内容
+
+
 
