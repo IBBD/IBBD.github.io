@@ -1,6 +1,5 @@
 ## 文章目录
 
-- [文章目录](https://github.com/IBBD/blog/tree/master/0-index.md)
 - database
 - front-end
 - linux
