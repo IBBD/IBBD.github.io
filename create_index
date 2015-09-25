@@ -5,7 +5,7 @@
 
 files=$(find ./[0-9a-z_]*)
 index_filename='0-index.md'
-echo '# 索引文件' > $index_filename
+echo '## 文章目录' > $index_filename
 echo '' >> $index_filename
 
 for p in $files

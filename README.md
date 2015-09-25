@@ -1,5 +1,8 @@
 # IBBD技术博客
 
+[文章目录请点击这里](https://github.com/IBBD/blog/blob/master/0-index.md)
+
+
 ```php
 echo 'Hello, world!';
 ```

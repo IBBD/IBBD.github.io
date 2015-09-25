@@ -1,6 +1,6 @@
-# 索引文件
+## 文章目录
 
-- [索引文件](https://github.com/IBBD/blog/tree/master/0-index.md)
+- [文章目录](https://github.com/IBBD/blog/tree/master/0-index.md)
 - database
 - front-end
 - linux
