@@ -21,6 +21,9 @@ cd /var/www
 git clone git@github.com:BootstrapCMS/CMS.git laravel_cms
 chown -R www-data:www-data storage
 
+# 后台初始的管理员的账号密码在这个文件：app/Seeds/UsersTableSeeder.php
+# 修改成自己的
+
 # 2. composer install
 composer install --no-dev -o
 
