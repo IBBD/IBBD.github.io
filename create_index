@@ -12,9 +12,9 @@ for p in $files
 do
     f=${p##*/}
     num=$(echo $p | awk -F'/' '{print NF-1}')
-    num=$[($num-1)*2]
+    num=$[($num-1)*2+1]
     spaces=$(seq -s' ' $num | tr -d '[0-9]')
-    echo $p
+    echo $num:"$spaces"$p
     if [ -d $p ]
     then
         # 输出目录
