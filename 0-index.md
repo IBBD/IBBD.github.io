@@ -14,7 +14,7 @@
   - git
 - php
   - laravel
-    - [基于laravel的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
+    - [基于laravel和Bootstrap的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
   - php-the-right-way-learning
     - [阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - python
