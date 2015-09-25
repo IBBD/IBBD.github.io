@@ -9,6 +9,8 @@ Github：https://github.com/BootstrapCMS/CMS/
 - `docker pull ibbd/mariadb`
 - `docker pull ibbd/node-dev`
 
+关于镜像的使用说明，可以看这里：https://github.com/IBBD/docker-images
+
 ## 安装 
 
 除非特别说明，否则步骤是基于ibbd/php-fpm的命令行进行：
