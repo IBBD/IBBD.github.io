@@ -1,4 +1,4 @@
-# Nginx
+# 使用dockerfile来构建nginx镜像
 
 - 镜像：https://hub.docker.com/_/nginx/
 - dockerfile：https://github.com/nginxinc/docker-nginx/

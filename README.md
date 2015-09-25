@@ -26,3 +26,7 @@ console.log('Hello, world!');
 
 1. 按关键词搜索：`./search your-keyword`
 
+*注意* 
+
+- 索引文件所使用的title，默认使用md文件的第一行的字符串，会自动去掉前面的#号和空格，如果为空，则直接使用文件名
+

@@ -17,10 +17,14 @@ do
     echo $p
     if [ -d $p ]
     then
+        # 输出目录
         echo "$spaces"'- '$f >> $index_filename
     elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} ] 
     then
-        echo "$spaces"'- ['$f'](https://github.com/IBBD/blog/tree/master/'${p:2}')' >> $index_filename
+        # 输出文件
+        title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
+        [ ${#title} -lt 2 ] && title=${p%.*}
+        echo "$spaces"'- ['$title'](https://github.com/IBBD/blog/tree/master/'${p:2}')' >> $index_filename
     fi
 done
 

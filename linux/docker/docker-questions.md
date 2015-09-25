@@ -44,6 +44,8 @@ E: Unable to locate package libssl-dev
 
 5. 构建时，可能会一直卡在pulling那里，重试也没有用，这时重启docker可能可以解决问题：`sudo service docker restart`
 
+`docker pull`的过程中尽量不要强制退出，可能会导致一些比较奇怪的问题。
+
 6. 构建scrapy时，run命令错误提示如下：
 
 ```
@@ -64,6 +66,40 @@ RUN apt-get install -y git
 ```
 
 这样会失败，前面已经rm了。最后写在一起，如果不能写在一起，就要先update，最后rm多余的内容
+
+8. 镜像无法删除
+
+```
+sudo docker rmi --force=true 8c00acfb0175 
+Error response from daemon: Conflict, 8c00acfb0175 wasn't deleted
+Error: failed to remove images: [8c00acfb0175]
+```
+
+确定 `sudo docker ps -a`返回为空，没有依赖的容器了。
+
+后来又可以了，暂时无解
+
+9. 使用pip安装依赖时出现的问题
+
+```
+error: command 'gcc' failed with exit status 1
+```
+
+确认gcc已经安装成功，网上有人说是因为没有安装libxml2-dev和libxlst1-dev，并给出的解决方案是：
+
+```sh
+sudo apt-get install python-dev
+sudo apt-get install libxml2 libxml2-dev
+sudo apt-get install libxslt1.1 libxslt1-dev
+```
+
+解决。出现新的问题：
+
+```
+Download error on https://pypi.python.org/simple/cffi/: EOF occurred in violation of protocol (_ssl.c:590) -- Some packages may not be found!
+Couldn't find index page for 'cffi' (maybe misspelled?)
+```
+
 
 
 

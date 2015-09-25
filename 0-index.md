@@ -1,18 +1,22 @@
 # 索引文件
 
-- [0-index.md](https://github.com/IBBD/blog/tree/master/0-index.md)
+- [索引文件](https://github.com/IBBD/blog/tree/master/0-index.md)
 - database
 - front-end
 - linux
+ - vim
  - docker
-   - [nginx.md](https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md)
-   - [docker分享会.md](https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md)
-   - [docker-questions.md](https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md)
-   - [docker-compose.md](https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md)
+   - [使用dockerfile来构建nginx镜像](https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md)
+   - [20150901 Docker主题分享](https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md)
+   - [Docker平时遇到的问题](https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md)
+   - [Docker Compose](https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md)
+ - shell
+   - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
+ - git
 - php
  - laravel
  - php-the-right-way-learning
-   - [alex.md](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
+   - [阅读笔记](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - python
  - scrapy
-   - [源码结构.md](https://github.com/IBBD/blog/tree/master/python/scrapy/源码结构.md)
+   - [Scrapy源码结构](https://github.com/IBBD/blog/tree/master/python/scrapy/源码结构.md)
