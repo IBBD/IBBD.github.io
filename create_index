@@ -3,8 +3,19 @@
 # 生成index文件列表
 # 
 
-files=$(find ./[0-9a-z_]*)
+# 索引文件
 index_filename='0-index.md'
+
+# 字典配置
+declare -A dict
+dict[database]=数据库
+dict[front-end]=前端
+#dict[]=
+#dict[]=
+
+
+url_prefix=https://github.com/IBBD/blog/tree/master/
+files=$(find ./[0-9a-z_]*)
 echo '## 文章目录' > $index_filename
 echo '' >> $index_filename
 
@@ -18,13 +29,19 @@ do
     if [ -d $p ]
     then
         # 输出目录
-        echo "$spaces"'- '$f >> $index_filename
+        if [ ${dict[$f]} ]
+        then
+            title=${dict[$f]}
+        else
+            title=$f
+        fi
+        echo "$spaces- $title($url_prefix${p:2})" >> $index_filename
     elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} -a $index_filename != ${p:2} ] 
     then
         # 输出文件
         title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
         [ ${#title} -lt 2 ] && title=${p%.*}
-        echo "$spaces"'- ['$title'](https://github.com/IBBD/blog/tree/master/'${p:2}')' >> $index_filename
+        echo "$spaces- $title($url_prefix${p:2})" >> $index_filename
     fi
 done
 
