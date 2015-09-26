@@ -1,22 +1,22 @@
 ## 文章目录
 
-- [数据库](https://github.com/IBBD/blog/tree/master/database)
-- [前端](https://github.com/IBBD/blog/tree/master/front-end)
-- [linux](https://github.com/IBBD/blog/tree/master/linux)
-  - [vim](https://github.com/IBBD/blog/tree/master/linux/vim)
-  - [docker](https://github.com/IBBD/blog/tree/master/linux/docker)
+- 数据库
+- 前端
+- linux
+  - vim
+  - docker
     - [使用dockerfile来构建nginx镜像](https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md)
     - [20150901 Docker主题分享](https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md)
     - [Docker平时遇到的问题](https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md)
     - [Docker Compose](https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md)
-  - [shell](https://github.com/IBBD/blog/tree/master/linux/shell)
+  - shell
     - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
-  - [git](https://github.com/IBBD/blog/tree/master/linux/git)
-- [php](https://github.com/IBBD/blog/tree/master/php)
-  - [laravel](https://github.com/IBBD/blog/tree/master/php/laravel)
+  - git
+- php
+  - laravel
     - [基于laravel和Bootstrap的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
-  - [php-the-right-way-learning](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning)
+  - php-the-right-way-learning
     - [阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
-- [python](https://github.com/IBBD/blog/tree/master/python)
-  - [scrapy](https://github.com/IBBD/blog/tree/master/python/scrapy)
+- python
+  - scrapy
     - [Scrapy源码结构](https://github.com/IBBD/blog/tree/master/python/scrapy/源码结构.md)

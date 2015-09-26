@@ -35,7 +35,8 @@ do
         else
             title=$f
         fi
-        echo "$spaces- [$title]($url_prefix${p:2})" >> $index_filename
+        #echo "$spaces- [$title]($url_prefix${p:2})" >> $index_filename
+        echo "$spaces- $title" >> $index_filename
     elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} -a $index_filename != ${p:2} ] 
     then
         # 输出文件
