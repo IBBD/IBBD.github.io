@@ -10,6 +10,7 @@
     - [20150901 Docker主题分享](https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md)
     - [Docker平时遇到的问题](https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md)
     - [Docker Compose](https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md)
+    - [Docker最佳实践之Docerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
   - shell
     - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
   - git
