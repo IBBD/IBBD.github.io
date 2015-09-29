@@ -49,7 +49,7 @@ do
         fi
         #echo "$spaces- [$title]($url_prefix${p:2})" >> $index_filename
         echo "$spaces- $title" >> $index_filename
-    elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} -a $index_filename != ${p:2} ] 
+    elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} -a $index_filename != ${p:2} -a $index_date_filename != ${p:2} ] 
     then
         # 输出文件
         title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
@@ -59,6 +59,8 @@ do
 done
 
 echo '============= END OF 按目录索引 ================'
+echo 
+echo 
 
 ############## 按日期排序 ######################
 
@@ -71,21 +73,21 @@ file_date_last=
 files=$(find ./ -name "*.md" | xargs ls -t)
 for p in $files
 do
-    #echo $p
     f=${p##*/}
-    file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
-    #echo $file_date
-    if [ "$file_date_last" != "$file_date" ]; then 
-        echo >> $index_date_filename
-        echo "#### \033[40;33m"$file_date"\033[0m" | tee -a $index_date_filename
-        echo >> $index_date_filename
-        file_date_last=$file_date
-    fi
+    if [ '0-index' != ${f:0:7} -a 'README.md' != $f ]; then 
+        file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
+        if [ "$file_date_last" != "$file_date" ]; then 
+            echo >> $index_date_filename
+            echo "#### \033[40;33m"$file_date"\033[0m" | tee -a $index_date_filename
+            echo >> $index_date_filename
+            file_date_last=$file_date
+        fi
 
-    # 输出文件
-    title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
-    [ ${#title} -lt 2 ] && title=${p%.*}
-    echo "- [$title]($url_prefix${p:2})" | tee -a $index_date_filename
+        # 输出文件
+        title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
+        [ ${#title} -lt 2 ] && title=${p%.*}
+        echo "- [$title]($url_prefix${p:2})" | tee -a $index_date_filename
+    fi
 done
 
 echo '============= END OF 按日期索引 ================'

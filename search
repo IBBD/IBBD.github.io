@@ -18,7 +18,7 @@ find ./ -name "*.md" \
     | xargs grep -s $* \
     | awk -F: 'BEGIN {last_file = $1} 
         {
-            if ("./0-index.md" != $1) { 
+            if (3 != index($1, "0-index")) { 
                 if (keyword) {
                     gsub(/'$keyword'/, "\033[1;31m"keyword"\033[0m", $2)
                 }
