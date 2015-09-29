@@ -78,7 +78,7 @@ do
         file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
         if [ "$file_date_last" != "$file_date" ]; then 
             echo >> $index_date_filename
-            echo "#### \033[40;33m"$file_date"\033[0m" | tee -a $index_date_filename
+            echo "#### $file_date" | tee -a $index_date_filename
             echo >> $index_date_filename
             file_date_last=$file_date
         fi
