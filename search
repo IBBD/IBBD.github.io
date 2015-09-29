@@ -1,10 +1,35 @@
 #!/bin/bash
 
+# 
+# 对md文件进行搜索
 # USAGES:
 # ./search keyword
+#
+# @author cyy0523xc@gmail.com
+#
 
-# @todo 按照第一个冒号将结果拆分
+keyword=
+if [ 1 -eq $# ]; then 
+    keyword=$1
+fi
 
-
-find ./[0-9a-z_]* | xargs grep -s $*
+#find ./[0-9a-z_]* \
+find ./ -name "*.md" \
+    | xargs grep -s $* \
+    | awk -F: 'BEGIN {last_file = $1} 
+        {
+            if ("./0-index.md" != $1) { 
+                if (keyword) {
+                    gsub(/'$keyword'/, "\033[1;31m"keyword"\033[0m", $2)
+                }
+                if (last_file == $1) {
+                    print $2;
+                } else {
+                    last_file = $1; 
+                    print ""; 
+                    print "\033[40;33m"$1"\033[0m"; 
+                    print $2
+                } 
+            } 
+        }' keyword=$keyword
 
