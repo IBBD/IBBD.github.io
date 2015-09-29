@@ -1,6 +1,6 @@
 # IBBD技术博客
 
-[文章目录请点击这里](https://github.com/IBBD/blog/blob/master/0-index.md)
+文章目录： [按目录索引](https://github.com/IBBD/blog/blob/master/0-index.md) | [按日期索引](https://github.com/IBBD/blog/blob/master/0-index-date.md)  
 
 
 ```php

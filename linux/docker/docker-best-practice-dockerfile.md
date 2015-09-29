@@ -1,4 +1,4 @@
-# Docker最佳实践之Docerfile
+# Docker最佳实践之Dockerfile
 
 上一篇讲了镜像构建，这一篇讲Dockerfile，这是构建的核心。最近写了好几个镜像的Dockerfile，主要都托管在github上（这没什么可以值得隐瞒的），重要的如下：
 
