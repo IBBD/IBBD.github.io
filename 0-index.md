@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2015年 09月 29日 星期二 12:20:56 CST
+    Created by ./create_index   date: 2015年 09月 29日 星期二 12:55:46 CST
 
 按目录索引  |  [按日期索引](https://github.com/IBBD/blog/tree/master/0-index-date.md )
 
@@ -16,7 +16,7 @@
     - [20150901 Docker主题分享](https://github.com/IBBD/blog/tree/master/linux/docker/docker分享会.md)
     - [Docker平时遇到的问题](https://github.com/IBBD/blog/tree/master/linux/docker/docker-questions.md)
     - [Docker Compose](https://github.com/IBBD/blog/tree/master/linux/docker/docker-compose.md)
-    - [Docker最佳实践之Docerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
+    - [Docker最佳实践之Dockerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
   - shell
     - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
   - git

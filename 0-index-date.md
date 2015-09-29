@@ -1,22 +1,19 @@
 ## 文章目录 - 按日期索引
 
-    Created by ./create_index   date: 2015年 09月 29日 星期二 12:20:56 CST
+    Created by ./create_index   date: 2015年 09月 29日 星期二 12:55:46 CST
 
 [按目录索引](https://github.com/IBBD/blog/tree/master/0-index.md )  |  按日期索引
 
 
 #### 2015-09-29
 
+- [Docker最佳实践之Dockerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
 - [php-the-right-way-learning-阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - [使用变量来简化nginx配置文件](https://github.com/IBBD/blog/tree/master/linux/nginx/nginx-conf-use-var.md)
 
 #### 2015-09-28
 
 - [Docker最佳实践之镜像构建](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-build.md)
-
-#### 2015-09-27
-
-- [Docker最佳实践之Docerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
 
 #### 2015-09-25
 
