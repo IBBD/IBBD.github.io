@@ -4,6 +4,8 @@
 - 前端
 - linux
   - vim
+  - nginx
+    - [使用变量来简化nginx配置文件](https://github.com/IBBD/blog/tree/master/linux/nginx/nginx-conf-use-var.md)
   - docker
     - [使用dockerfile来构建nginx镜像](https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md)
     - [Docker最佳实践之镜像构建](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-build.md)
