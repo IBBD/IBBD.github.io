@@ -18,7 +18,7 @@ dict[front-end]=前端
 url_prefix=https://github.com/IBBD/blog/tree/master/
 output_index() {
     sortby=$1
-    if [ 'date' ]; then 
+    if [ 'date' = $sortby ]; then 
         echo "[按目录索引]($url_prefix$index_filename )  |  按日期索引"
     else 
         echo "按目录索引  |  [按日期索引]($url_prefix$index_date_filename )"

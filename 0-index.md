@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-[按目录索引](https://github.com/IBBD/blog/tree/master/0-index.md )  |  按日期索引
+按目录索引  |  [按日期索引](https://github.com/IBBD/blog/tree/master/0-index-date.md )
 
 - 数据库
 - 前端
