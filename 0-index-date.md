@@ -1,10 +1,13 @@
 ## 文章目录 - 按日期索引
 
+    Created by ./create_index   date: 2015年 09月 29日 星期二 12:20:56 CST
+
 [按目录索引](https://github.com/IBBD/blog/tree/master/0-index.md )  |  按日期索引
 
 
 #### 2015-09-29
 
+- [php-the-right-way-learning-阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - [使用变量来简化nginx配置文件](https://github.com/IBBD/blog/tree/master/linux/nginx/nginx-conf-use-var.md)
 
 #### 2015-09-28
@@ -18,7 +21,6 @@
 #### 2015-09-25
 
 - [基于laravel和Bootstrap的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
-- [阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - [使用dockerfile来构建nginx镜像](https://github.com/IBBD/blog/tree/master/linux/docker/nginx.md)
 - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
 

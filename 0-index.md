@@ -1,5 +1,7 @@
 ## 文章目录 - 按目录索引
 
+    Created by ./create_index   date: 2015年 09月 29日 星期二 12:20:56 CST
+
 按目录索引  |  [按日期索引](https://github.com/IBBD/blog/tree/master/0-index-date.md )
 
 - 数据库
@@ -22,7 +24,7 @@
   - laravel
     - [基于laravel和Bootstrap的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
   - php-the-right-way-learning
-    - [阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
+    - [php-the-right-way-learning-阅读笔记 By Alex](https://github.com/IBBD/blog/tree/master/php/php-the-right-way-learning/alex.md)
 - python
   - scrapy
     - [Scrapy源码结构](https://github.com/IBBD/blog/tree/master/python/scrapy/源码结构.md)

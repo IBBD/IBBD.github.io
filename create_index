@@ -28,6 +28,8 @@ output_index() {
 files=$(find ./[0-9a-z_]*)
 echo '## 文章目录 - 按目录索引' > $index_filename
 echo >> $index_filename
+echo '    Created by '$0'   date: '$(date)>> $index_filename
+echo >> $index_filename
 output_index >> $index_filename
 echo >> $index_filename
 
@@ -66,6 +68,8 @@ echo
 
 echo '## 文章目录 - 按日期索引' > $index_date_filename
 echo >> $index_date_filename
+echo '    Created by '$0'   date: '$(date)>> $index_date_filename
+echo >> $index_date_filename
 output_index 'date' >> $index_date_filename
 echo >> $index_date_filename
 
@@ -90,6 +94,9 @@ do
     fi
 done
 
+echo 
+
 echo '============= END OF 按日期索引 ================'
+echo 
 
 echo '====> finish!'
