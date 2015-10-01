@@ -1,5 +1,7 @@
 # TCP连接的状态
 
+http://wiki.swoole.com/wiki/page/173.html
+
 - LISTEN:首先服务端需要打开一个socket进行监听，状态为LISTEN. /\* The socket is listening for incoming connections. 侦听来自远方TCP端口的连接请求 \*/
 - SYN\_SENT:客户端通过应用程序调用connect进行active open.于是客户端tcp发送一个SYN以请求建立一个连接.之后状态置为SYN\_SENT. /\*The socket is actively attempting to establish a connection. 在发送连接请求后等待匹配的连接请求 \*/
 - SYN\_RECV:服务端应发出ACK确认客户端的SYN,同时自己向客户端发送一个SYN.之后状态置为SYN\_RECV /\* A connection request has been received from the network. 在收到和发送一个连接请求后等待对连接请求的确认 \*/

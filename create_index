@@ -21,7 +21,7 @@ output_index() {
     if [ 'date' = $sortby ]; then 
         echo "[按目录索引]($url_prefix$index_filename )  |  按日期索引"
     else 
-        echo "按目录索引  |  [按日期索引]($url_prefix$index_date_filename )"
+        echo "按目录索引  |  [按修改日期索引]($url_prefix$index_date_filename )"
     fi
 }
 
@@ -100,3 +100,4 @@ echo '============= END OF 按日期索引 ================'
 echo 
 
 echo '====> finish!'
+
