@@ -17,7 +17,7 @@ dict[front-end]=前端
 output_index() {
     sortby=$1
 
-    echo "[首页](/ )  |  按日期索引"
+    echo "[首页](/ )  |  "
     if [ 'date' = $sortby ]; then 
         echo "[按目录索引]($index_filename )  |  按日期索引"
     else 
