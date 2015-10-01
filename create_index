@@ -18,9 +18,9 @@ output_index() {
     sortby=$1
 
     if [ 'date' = $sortby ]; then 
-        echo "[首页](/ )  |  [按目录索引]($index_filename )  |  按日期索引"
+        echo "[首页](https://github.com/IBBD/blog )  |  [按目录索引]($index_filename )  |  按日期索引"
     else 
-        echo "[首页](/ )  |  按目录索引  |  [按修改日期索引]($index_date_filename )"
+        echo "[首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引]($index_date_filename )"
     fi
 }
 

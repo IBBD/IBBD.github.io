@@ -1,8 +1,8 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2015年 10月 01日 星期四 18:55:10 CST
+    Created by ./create_index   date: 2015年 10月 01日 星期四 19:02:25 CST
 
-[首页](/ )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
+[首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
 - 前端
