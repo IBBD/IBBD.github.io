@@ -1,9 +1,17 @@
 ## 文章目录 - 按日期索引
 
-    Created by ./create_index   date: 2015年 09月 29日 星期二 12:55:46 CST
+    Created by ./create_index   date: 2015年 10月 01日 星期四 15:28:42 CST
 
 [按目录索引](https://github.com/IBBD/blog/tree/master/0-index.md )  |  按日期索引
 
+
+#### 2015-10-01
+
+- [TCP连接的状态](https://github.com/IBBD/blog/tree/master/linux/tcp-connection-status.md)
+- [tcpdump抓包工具的使用](https://github.com/IBBD/blog/tree/master/linux/tcpdump-tools.md)
+- [strace工具的使用](https://github.com/IBBD/blog/tree/master/linux/strace-tools.md)
+- [编译PHP扩展的相关工具](https://github.com/IBBD/blog/tree/master/linux/php-build-tools.md)
+- [gdb工具的使用](https://github.com/IBBD/blog/tree/master/linux/gdb-tools.md)
 
 #### 2015-09-29
 

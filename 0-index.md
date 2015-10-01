@@ -1,12 +1,13 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2015年 09月 29日 星期二 12:55:46 CST
+    Created by ./create_index   date: 2015年 10月 01日 星期四 15:28:41 CST
 
 按目录索引  |  [按日期索引](https://github.com/IBBD/blog/tree/master/0-index-date.md )
 
 - 数据库
 - 前端
 - linux
+  - [TCP连接的状态](https://github.com/IBBD/blog/tree/master/linux/tcp-connection-status.md)
   - vim
   - nginx
     - [使用变量来简化nginx配置文件](https://github.com/IBBD/blog/tree/master/linux/nginx/nginx-conf-use-var.md)
@@ -19,7 +20,11 @@
     - [Docker最佳实践之Dockerfile](https://github.com/IBBD/blog/tree/master/linux/docker/docker-best-practice-dockerfile.md)
   - shell
     - [一个文件备份的shell脚本](https://github.com/IBBD/blog/tree/master/linux/shell/files-backup.md)
+  - [编译PHP扩展的相关工具](https://github.com/IBBD/blog/tree/master/linux/php-build-tools.md)
+  - [strace工具的使用](https://github.com/IBBD/blog/tree/master/linux/strace-tools.md)
   - git
+  - [tcpdump抓包工具的使用](https://github.com/IBBD/blog/tree/master/linux/tcpdump-tools.md)
+  - [gdb工具的使用](https://github.com/IBBD/blog/tree/master/linux/gdb-tools.md)
 - php
   - laravel
     - [基于laravel和Bootstrap的cms系统](https://github.com/IBBD/blog/tree/master/php/laravel/laravel-bootstrapt-cms.md)
