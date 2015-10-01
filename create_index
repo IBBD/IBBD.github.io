@@ -16,6 +16,7 @@ dict[front-end]=前端
 ############## 按目录排序 ######################
 
 url_prefix=https://github.com/IBBD/blog/tree/master/
+url_prefix=
 output_index() {
     sortby=$1
     if [ 'date' = $sortby ]; then 
