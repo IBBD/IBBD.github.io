@@ -17,11 +17,10 @@ dict[front-end]=前端
 output_index() {
     sortby=$1
 
-    echo "[首页](/ )  |  "
     if [ 'date' = $sortby ]; then 
-        echo "[按目录索引]($index_filename )  |  按日期索引"
+        echo "[首页](/ )  |  [按目录索引]($index_filename )  |  按日期索引"
     else 
-        echo "按目录索引  |  [按修改日期索引]($index_date_filename )"
+        echo "[首页](/ )  |  按目录索引  |  [按修改日期索引]($index_date_filename )"
     fi
 }
 
