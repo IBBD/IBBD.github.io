@@ -1,6 +1,6 @@
 ## 文章目录 - 按日期索引
 
-    Created by ./create_index   date: 2015年 10月 01日 星期四 15:28:42 CST
+    Created by ./create_index   date: 2015年 10月 01日 星期四 15:34:52 CST
 
 [按目录索引](https://github.com/IBBD/blog/tree/master/0-index.md )  |  按日期索引
 
