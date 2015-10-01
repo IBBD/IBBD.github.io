@@ -1,7 +1,8 @@
-## 文章目录 - 按日期索引
+## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2015年 10月 01日 星期四 18:41:08 CST
+    Created by ./create_index   date: 2015年 10月 01日 星期四 18:51:44 CST
 
+[首页](/ )  |  按日期索引
 [按目录索引](0-index.md )  |  按日期索引
 
 
