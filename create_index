@@ -9,13 +9,12 @@ index_date_filename='0-index-date.md'
 
 # 字典配置
 declare -A dict
+dict['.']=首页
 dict[database]=数据库
 dict[front-end]=前端
-#dict[]=
 
 ############## 按目录排序 ######################
 
-url_prefix=https://github.com/IBBD/blog/tree/master/
 url_prefix=
 output_index() {
     sortby=$1
@@ -31,18 +30,20 @@ echo '## 文章目录 - 按目录索引' > $index_filename
 echo >> $index_filename
 echo '    Created by '$0'   date: '$(date)>> $index_filename
 echo >> $index_filename
-output_index >> $index_filename
+output_index 'dir' >> $index_filename
 echo >> $index_filename
 
-for p in $files
-do
+# 递归输出一个目录
+# @param 目录路径，值如：./linux/shell
+output_dir() {
+    #echo 'output_dir '$1'================='
+    p=$1
     f=${p##*/}
-    num=$(echo $p | awk -F'/' '{print NF-1}')
+    num=$(echo $1 | awk -F'/' '{print NF-1}')
     num=$[($num-1)*2+1]
     spaces=$(seq -s' ' $num | tr -d '[0-9]')
-    echo $num:"$spaces"$p
-    if [ -d $p ]
-    then
+
+    if [ -d $p ]; then 
         # 输出目录
         if [ ${dict[$f]} ]
         then
@@ -50,16 +51,35 @@ do
         else
             title=$f
         fi
-        #echo "$spaces- [$title]($url_prefix${p:2})" >> $index_filename
-        echo "$spaces- $title" >> $index_filename
-    elif [ -f $p -a 'md' = ${f##*.} -a 'README' != ${f%.*} -a $index_filename != ${p:2} -a $index_date_filename != ${p:2} ] 
-    then
+        echo "$spaces- $title" | tee -a $index_filename
+
+        # 先处理子目录
+        list=$(find $1/[0-9a-z_]* -maxdepth 0 -type d)
+        for child in $list 
+        do
+            output_dir $child
+        done
+
+        # 处理子文件
+        list=$(find $1/*.md -maxdepth 0 -type f)
+        echo '===========>' $1
+        for child in $list 
+        do 
+            output_dir $child
+        done
+    else
         # 输出文件
-        title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
-        [ ${#title} -lt 2 ] && title=${p%.*}
-        echo "$spaces- [$title]($url_prefix${p:2})" >> $index_filename
+        if [ 'README' != ${f%.*} -a $index_filename != ${child:2} -a $index_date_filename != ${child:2} ]; then
+            title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
+            [ ${#title} -lt 2  ] && title=${p%.*}
+            echo "$spaces- [$title]($url_prefix${p:2})" | tee -a $index_filename
+        fi
     fi
-done
+
+}
+
+output_dir .
+
 
 echo '============= END OF 按目录索引 ================'
 echo 
