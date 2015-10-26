@@ -1,5 +1,25 @@
 # Shell使用过程中遇到的问题集合 
 
+## sed的问题 
+
+命令直接修改redis配置文件的绑定ip
+
+```sh 
+sed -i 's/^bind\s[\s0-9\.]*$/bind 10.161.221.70/g' /etc/redis/redis.conf
+
+# 报错：sed: -e expression #1, char 26: unterminated `s' command
+# 改成如下：
+
+sed -i 's/^bind\s[\s0-9\.]*$/bind\s10.161.221.70/g' /etc/redis/redis.conf
+
+# 这个没有报错了，但是结果却不对，把对应的行修改成了：binds10.161.221.70
+# 改成下面的形式能够正常，但是很别扭
+
+sed -i 's/^bind(\s)[\s0-9\.]*$/bind$110.161.221.70/' /etc/redis/redis.conf
+```
+
+
+
 ## if语句中有多个条件组合时 
 
 例如下面的语句：
