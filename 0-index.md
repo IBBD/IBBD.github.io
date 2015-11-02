@@ -1,10 +1,11 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2015年 10月 23日 星期五 21:01:14 CST
+    Created by ./create_index   date: 2015年 11月 02日 星期一 17:55:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
+  - [《高性能Mysql》读书笔记](database/mysql.md)
 - 前端
 - linux
   - docker
