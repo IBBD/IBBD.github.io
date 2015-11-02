@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2015年 10月 01日 星期四 19:02:25 CST
+    Created by ./create_index   date: 2015年 10月 23日 星期五 21:01:14 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -15,12 +15,15 @@
     - [20150901 Docker主题分享](linux/docker/docker分享会.md)
     - [使用dockerfile来构建nginx镜像](linux/docker/nginx.md)
   - git
+    - [Git分支管理](linux/git/git-branch.md)
   - nginx
     - [使用变量来简化nginx配置文件](linux/nginx/nginx-conf-use-var.md)
   - shell
     - [一个文件备份的shell脚本](linux/shell/files-backup.md)
+    - [Shell使用过程中遇到的问题集合](linux/shell/questions.md)
   - vim
   - [gdb工具的使用](linux/gdb-tools.md)
+  - [iptables线上服务器配置案例](linux/iptables-config.md)
   - [编译PHP扩展的相关工具](linux/php-build-tools.md)
   - [strace工具的使用](linux/strace-tools.md)
   - [TCP连接的状态](linux/tcp-connection-status.md)
