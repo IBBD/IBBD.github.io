@@ -5,6 +5,7 @@
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
+  - [《高性能Mysql》读书笔记](database/mysql.md)
 - 前端
   - [React相关资源](front-end/react-source.md)
 - linux
