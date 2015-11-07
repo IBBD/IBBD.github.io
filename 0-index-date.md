@@ -1,18 +1,22 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2015年 10月 23日 星期五 21:01:14 CST
+    Created by ./create_index   date: 2015年 11月 07日 星期六 09:02:59 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2015-11-07
+
+- [React相关资源](front-end/react-source.md)
+
+#### 2015-10-28
+
+- [Shell使用过程中遇到的问题集合](linux/shell/questions.md)
 
 #### 2015-10-23
 
 - [iptables线上服务器配置案例](linux/iptables-config.md)
 - [Git分支管理](linux/git/git-branch.md)
-
-#### 2015-10-14
-
-- [Shell使用过程中遇到的问题集合](linux/shell/questions.md)
 
 #### 2015-10-11
 
