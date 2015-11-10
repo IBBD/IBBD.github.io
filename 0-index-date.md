@@ -1,14 +1,18 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2015年 11月 07日 星期六 09:05:49 CST
+    Created by ./create_index   date: 2015年 11月 10日 星期二 09:54:07 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
 
+#### 2015-11-10
+
+- [基于React，React-router, Flux等的前端工程的目录结构](front-end/react-router-flux-dir-structure.md)
+
 #### 2015-11-07
 
-- [《高性能Mysql》读书笔记](database/mysql.md)
 - [React相关资源](front-end/react-source.md)
+- [《高性能Mysql》读书笔记](database/mysql.md)
 
 #### 2015-10-28
 
