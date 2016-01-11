@@ -1,5 +1,24 @@
 # Shell使用过程中遇到的问题集合 
 
+## 解决命令行的locale问题
+
+之前一直提示：
+
+```
+bash: warning: setlocale: LC_ALL: cannot change locale (en_GB.UTF-8)
+```
+
+解决
+
+```
+vim /etc/default/locale
+LC_ALL=""
+
+locale-gen en_US.UTF-8
+```
+
+重启终端即可。
+
 ## sed的问题 
 
 命令直接修改redis配置文件的绑定ip
