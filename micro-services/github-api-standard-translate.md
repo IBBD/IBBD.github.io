@@ -1,6 +1,7 @@
 # github v3 api规范文档翻译
 
 - 源文档：https://developer.github.com/v3/
+- 翻译文档：http://laravel.ibbd.net/d/15
 - 2016-01-24 凌晨
 
 ## 目录
