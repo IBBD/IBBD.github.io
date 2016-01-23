@@ -1,13 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 01月 23日 星期六 18:43:06 CST
+    Created by ./create_index   date: 2016年 01月 24日 星期日 00:34:29 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
 
-#### 2016-01-23
+#### 2016-01-24
 
-- [github api规范文档翻译](micro-services/github-api-standard-translate.md)
+- [github v3 api规范文档翻译](micro-services/github-api-standard-translate.md)
 
 #### 2016-01-11
 

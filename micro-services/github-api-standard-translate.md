@@ -1,6 +1,7 @@
-# github api规范文档翻译
+# github v3 api规范文档翻译
 
-源文档：https://developer.github.com/v3/
+- 源文档：https://developer.github.com/v3/
+- 2016-01-24 凌晨
 
 ## 目录
 
@@ -20,6 +21,7 @@
 14. 跨域资源共享（Cross Origin Resource Sharing）
 15. JSON-P回调
 16. 时区
+17. 附录
 
 ## 当前版本
 
@@ -52,6 +54,8 @@ Content-Length: 5
 Cache-Control: max-age=0, private, must-revalidate
 X-Content-Type-Options: nosniff
 ```
+
+注：`X-Content-Type-Options`见最后的附录部分。
 
 - 空白的字段使用`null`，而不是省略。
 - 所有的时间戳在返回时使用`ISO 8601`的格式，`YYYY-MM-DDTHH:MM:SSZ`
@@ -143,7 +147,6 @@ Content-Length: 149
 
 除了上面的错误信息，还会有一些错误代码，以方便客户端定位问题：
 
-
 Error Name     | Description
 ---------      | --------------
 missing        | 资源不存在
@@ -170,14 +173,14 @@ v3版API的每个action会尽量保持和HTTP动作（verbs）一致。
 
 Verb   | 描述
 ----   | -----
-head   |
-get    | 查询
-post   | 创建
-patch  | 更新，请求的时候可以在`body`带上部分的JSON数据。
-put    | 替换。这个方式的请求不能待`body`属性，所以请求头的`Content-Length`必须为0
-delete | 删除
+HEAD   |
+GET    | 查询
+POST   | 创建
+PATCH  | 更新，请求的时候可以在`body`带上部分的JSON数据。
+PUT    | 替换。这个方式的请求不能待`body`属性，所以请求头的`Content-Length`必须为0
+DELETE | 删除
 
-## 权限
+## 授权
 
 在一些接口，请求需要授权的接口会得到`404 Not Found`的信息（正常情况是`403 Forbidden`）。在第三版API中，有三种方式的授权方式，将有效防止未授权用户对私有资料的访问。
 
@@ -207,7 +210,7 @@ curl 'https://api.github.com/users/whatever?client_id=xxxx&client_secret=yyyy'
 
 这种方式只允许用在服务器之间的通信上, 注意不要泄露你的秘钥。更多关于未授权的访问限制看[这里](https://developer.github.com/v3/#increasing-the-unauthenticated-rate-limit-for-oauth-applications)
 
-### 错误的登陆限制
+### 异常登陆限制（避免暴力破解）
 
 使用错误的信息进行登陆时，会得到`401 Unauthorized`的响应：
 
@@ -235,6 +238,21 @@ HTTP/1.1 403 Forbidden
 
 ## 超媒体（Hypermedia）
 
+所有资源都可能有一个或者多个链接到其他资源的`*_url`属性。这意味着提供明确的URL以便适当的API客户端不再需要构建URL。在API客户端中是非常值得推荐的，也会是未来的升级变得更加容易。所有都应该遵循这个规范[RFC 6570](http://tools.ietf.org/html/rfc6570)。
+
+你可以使用一些工具去展开URL，例如gem的uri_template：
+
+```ruby
+>> tmpl = URITemplate.new('/notifications{?since,all,participating}')
+>> tmpl.expand
+=> "/notifications"
+
+>> tmpl.expand :all => 1
+=> "/notifications?all=1"
+
+>> tmpl.expand :all => 1, :participating => 1
+=> "/notifications?all=1&participating=1"
+```
 
 ## 分页
 
@@ -247,6 +265,20 @@ curl 'https://api.github.com/user/repos?page=2&per_page=100'
 注意：页码是从1开始的，如果省略了page参数，则默认为1.
 
 ### Link Header
+
+```
+Link: <https://api.github.com/user/repos?page=3&per_page=100>; rel="next",
+  <https://api.github.com/user/repos?page=50&per_page=100>; rel="last"
+```
+
+`rel`的值可能是：
+
+Name  | 描述
+----- | ----
+next  | 下一页
+last  | 最后一页
+first | 第一页
+prev  | 上一页
 
 
 ## 请求限速（Rate Limiting）
@@ -377,9 +409,126 @@ Access-Control-Allow-Credentials: true
 
 ## JSON-P回调函数
 
-在任何的GET请求中，你都可以使用`?callback`参数，输出结果时，会使用回调函数名进行包装。这是一种典型的应用，当我们想通过嵌入Github进行跨域时。
+在任何的GET请求中，你都可以使用`?callback`参数，输出结果时，会使用回调函数名进行包装。这是一种典型的应用，当我们想通过嵌入Github进行跨域时。接口的响应返回的信息和普通的API请求返回完全相同：
+
+```
+curl https://api.github.com?callback=foo
+
+/**/foo({
+  "meta": {
+    "status": 200,
+    "X-RateLimit-Limit": "5000",
+    "X-RateLimit-Remaining": "4966",
+    "X-RateLimit-Reset": "1372700873",
+    "Link": [ // pagination headers and other links
+      ["https://api.github.com?page=2", {"rel": "next"}]
+    ]
+  },
+  "data": {
+    // the data
+  }
+})
+```
+
+你能实现该js函数，用来处理返回值：
+
+```html
+<html>
+<head>
+<script type="text/javascript">
+function foo(response) {
+  var meta = response.meta;
+  var data = response.data;
+  console.log(meta);
+  console.log(data);
+}
+
+var script = document.createElement('script');
+script.src = 'https://api.github.com?callback=foo';
+
+document.getElementsByTagName('head')[0].appendChild(script);
+</script>
+</head>
+
+<body>
+  <p>Open up your browser's console.</p>
+</body>
+</html>
+```
+
+所有头信息都和HTTP头信息一样，都是字符串值，除了一个值得注意的例外：Link。对于你来说，Link头信息是预解释的，作为`[url, options]`的一个数组使用。
+
+Link头信息类似这样：`Link: <url1>; rel="next", <url2>; rel="foo"; bar="baz"`
+
+对比在callback时是这样的：
+
+```json
+{
+  "Link": [
+    [
+      "url1",
+      {
+        "rel": "next"
+      }
+    ],
+    [
+      "url2",
+      {
+        "rel": "foo",
+        "bar": "baz"
+      }
+    ]
+  ]
+}
+```
+
+## 时区
+
+对于指定的时间戳或者生成的带有时区信息的时间戳，一些请求是允许的。我们提供以下规则，按照先后顺序决定API调用时的时区信息：
+
+### 标准的带有时区信息的ISO 8601格式的时间错
+
+对于那些允许指定时间戳的API调用，我们使用精确的时间戳。[Commits API](https://developer.github.com/v3/git/commits)就是这样的API。
+
+时间错的格式例如`2014-02-27T15:05:06+01:00`。
+
+### 使用`Time-Zone`头信息
+
+在请求里指定`Time-Zone`是允许的，例如：
+
+```
+curl -H "Time-Zone: Europe/Amsterdam" \
+    -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+```
+
+### 使用该用户的最后的已知时区信息
+
+在没有`Time-Zone`头信息的情况下，如果用户请求了一个授权API，我们将使用授权用户最后的已知时区。当你浏览Github网站时，最后的已知时区信息就会被更新。
+
+### UTC
+
+如果上面的规则都无法得到任何的时区信息，我们将使用UTC作为时区去创建git commit。
+
+## 附录
+
+这部分不是Github API的规范文档。
+
+### X-Content-Type-Options
+
+互联网上的资源有各种类型，通常浏览器会根据响应头的Content-Type字段来分辨它们的类型。例如："text/html"代表html文档，"image/png"是PNG图片，"text/css"是CSS样式文档。然而，有些资源的Content-Type是错的或者未定义。这时，某些浏览器会启用MIME-sniffing来猜测该资源的类型，解析内容并执行。
+
+例如，我们即使给一个html文档指定Content-Type为"text/plain"，在IE8-中这个文档依然会被当做html来解析。利用浏览器的这个特性，攻击者甚至可以让原本应该解析为图片的请求被解析为JavaScript。通过下面这个响应头可以禁用浏览器的类型猜测行为：
+
+```
+X-Content-Type-Options: nosniff
+```
+
+这个响应头的值只能是nosniff，可用于IE8+和Chrome。
 
 
+## 后记
 
+在这个只有4度的深夜，还是敲着键盘把这个翻译完了，获益良多。英语不好，凑合着吧～～
 
+2016-01-24 凌晨
 

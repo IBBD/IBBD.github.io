@@ -11,6 +11,7 @@ index_date_filename='0-index-date.md'
 declare -A dict
 dict[database]=数据库
 dict[front-end]=前端
+dict[micro-services]=微服务
 
 ############## 按目录排序 ######################
 
