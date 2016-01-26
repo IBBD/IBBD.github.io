@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 01月 24日 星期日 00:34:29 CST
+    Created by ./create_index   date: 2016年 01月 26日 星期二 10:07:24 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-01-26
+
+- [Linux 命令帮助利器](linux/cheat.md)
 
 #### 2016-01-24
 
