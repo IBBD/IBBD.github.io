@@ -1,13 +1,14 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 04月 19日 星期二 11:51:56 CST
+    Created by ./create_index   date: 2016年 04月 19日 星期二 23:52:20 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
 
 #### 2016-04-19
 
-- [Mapping配置](elk/mapping.md)
+- [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
+- [ElasticSearch中的Mapping配置](elk/mapping.md)
 
 #### 2016-01-26
 

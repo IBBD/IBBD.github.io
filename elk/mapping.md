@@ -1,4 +1,4 @@
-# Mapping配置
+# ElasticSearch中的Mapping配置
 
 Mapping是用来约束一个文档的字段，以及文档是怎么被被索引的。
 以下是一个简单的mapping文件：
