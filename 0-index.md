@@ -1,15 +1,17 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 01月 26日 星期二 10:07:23 CST
+    Created by ./create_index   date: 2016年 04月 19日 星期二 11:51:55 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
   - [《高性能Mysql》读书笔记](database/mysql.md)
+- ELK
+  - [Mapping配置](elk/mapping.md)
 - 前端
   - [基于React，React-router, Flux等的前端工程的目录结构](front-end/react-router-flux-dir-structure.md)
   - [React相关资源](front-end/react-source.md)
-- linux
+- Linux
   - docker
     - [Docker最佳实践之镜像构建](linux/docker/docker-best-practice-build.md)
     - [Docker最佳实践之Dockerfile](linux/docker/docker-best-practice-dockerfile.md)
@@ -34,7 +36,7 @@
   - [tcpdump抓包工具的使用](linux/tcpdump-tools.md)
 - 微服务
   - [github v3 api规范文档翻译](micro-services/github-api-standard-translate.md)
-- php
+- PHP
   - laravel
     - [基于laravel和Bootstrap的cms系统](php/laravel/laravel-bootstrapt-cms.md)
   - php-the-right-way-learning

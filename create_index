@@ -12,6 +12,9 @@ declare -A dict
 dict[database]=数据库
 dict[front-end]=前端
 dict[micro-services]=微服务
+dict[elk]=ELK
+dict[php]=PHP
+dict[linux]=Linux
 
 ############## 按目录排序 ######################
 
