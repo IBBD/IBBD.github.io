@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 04月 19日 星期二 23:52:20 CST
+    Created by ./create_index   date: 2016年 04月 20日 星期三 15:45:14 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-04-20
+
+- [Elasticsearch的Aggregations聚合之Pipeline](elk/aggregations-pipeline.md)
 
 #### 2016-04-19
 
