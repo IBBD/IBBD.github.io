@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 04月 30日 星期六 02:55:38 CST
+    Created by ./create_index   date: 2016年 05月 11日 星期三 15:31:37 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -32,6 +32,7 @@
     - [一个文件备份的shell脚本](linux/shell/files-backup.md)
     - [Shell使用过程中遇到的问题集合](linux/shell/questions.md)
   - vim
+    - [Best vim tips](linux/vim/best-vim-tips.md)
   - [Linux 命令帮助利器](linux/cheat.md)
   - [gdb工具的使用](linux/gdb-tools.md)
   - [iptables线上服务器配置案例](linux/iptables-config.md)

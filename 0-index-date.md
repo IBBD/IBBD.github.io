@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 04月 30日 星期六 02:55:39 CST
+    Created by ./create_index   date: 2016年 05月 11日 星期三 15:31:38 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-05-11
+
+- [Best vim tips](linux/vim/best-vim-tips.md)
 
 #### 2016-04-30
 
