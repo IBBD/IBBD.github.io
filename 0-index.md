@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 05月 12日 星期四 00:00:07 CST
+    Created by ./create_index   date: 2016年 05月 12日 星期四 10:14:53 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -8,6 +8,7 @@
   - [《高性能Mysql》读书笔记](database/mysql.md)
 - 数据科学
   - [解密Airbnb数据科学部门序列文章](data-science/airbnb-data-science-department.md)
+  - [Python下Twitter数据挖掘完整工作流](data-science/mining-twitter-data-with-python.md)
 - ELK
   - [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
   - [Elasticsearch的Aggregations聚合之Pipeline](elk/aggregations-pipeline.md)

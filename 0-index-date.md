@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 05月 12日 星期四 00:00:08 CST
+    Created by ./create_index   date: 2016年 05月 12日 星期四 10:14:54 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-05-12
+
+- [Python下Twitter数据挖掘完整工作流](data-science/mining-twitter-data-with-python.md)
 
 #### 2016-05-11
 
