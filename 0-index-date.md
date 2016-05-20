@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 05月 12日 星期四 10:14:54 CST
+    Created by ./create_index   date: 2016年 05月 20日 星期五 10:13:39 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-05-20
+
+- [在Ubuntu上升级git](linux/git-update.md)
 
 #### 2016-05-12
 
