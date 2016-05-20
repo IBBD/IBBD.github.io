@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 05月 20日 星期五 10:13:38 CST
+    Created by ./create_index   date: 2016年 05月 20日 星期五 12:04:12 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -39,6 +39,7 @@
   - [Linux 命令帮助利器](linux/cheat.md)
   - [gdb工具的使用](linux/gdb-tools.md)
   - [在Ubuntu上升级git](linux/git-update.md)
+  - [Ubuntu下install sbt](linux/install-sbt.md)
   - [iptables线上服务器配置案例](linux/iptables-config.md)
   - [编译PHP扩展的相关工具](linux/php-build-tools.md)
   - [strace工具的使用](linux/strace-tools.md)
