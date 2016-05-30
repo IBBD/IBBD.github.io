@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 05月 20日 星期五 12:04:12 CST
+    Created by ./create_index   date: 2016年 05月 30日 星期一 21:10:52 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -19,6 +19,8 @@
 - 前端
   - [基于React，React-router, Flux等的前端工程的目录结构](front-end/react-router-flux-dir-structure.md)
   - [React相关资源](front-end/react-source.md)
+- Golang
+  - [Golang中的interface详解](golang/interface.md)
 - Linux
   - docker
     - [Docker最佳实践之镜像构建](linux/docker/docker-best-practice-build.md)

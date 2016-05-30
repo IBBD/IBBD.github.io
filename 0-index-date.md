@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 05月 20日 星期五 12:04:13 CST
+    Created by ./create_index   date: 2016年 05月 30日 星期一 21:10:53 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-05-30
+
+- [Golang中的interface详解](golang/interface.md)
 
 #### 2016-05-20
 

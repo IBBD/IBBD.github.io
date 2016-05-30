@@ -14,6 +14,7 @@ dict[front-end]=前端
 dict[micro-services]=微服务
 dict[elk]=ELK
 dict[php]=PHP
+dict[golang]=Golang
 dict[linux]=Linux
 dict[data-science]=数据科学
 
