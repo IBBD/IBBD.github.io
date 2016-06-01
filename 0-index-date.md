@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 05月 30日 星期一 23:53:52 CST
+    Created by ./create_index   date: 2016年 06月 01日 星期三 10:52:17 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-06-01
+
+- [Tags数据在ElasticSearch中的保存与分析](elk/tags-analyzer.md)
 
 #### 2016-05-30
 

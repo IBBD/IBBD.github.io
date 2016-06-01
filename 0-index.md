@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 05月 30日 星期一 23:53:51 CST
+    Created by ./create_index   date: 2016年 06月 01日 星期三 10:52:16 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -16,6 +16,7 @@
   - [Logstash](elk/logstash.md)
   - [Mapping字段类型说明](elk/mapping2.md)
   - [ElasticSearch中的Mapping配置](elk/mapping.md)
+  - [Tags数据在ElasticSearch中的保存与分析](elk/tags-analyzer.md)
 - 前端
   - [基于React，React-router, Flux等的前端工程的目录结构](front-end/react-router-flux-dir-structure.md)
   - [React相关资源](front-end/react-source.md)
