@@ -1,12 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 06月 01日 星期三 10:52:17 CST
+    Created by ./create_index   date: 2016年 06月 01日 星期三 22:01:27 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
 
 #### 2016-06-01
 
+- [Python中float值可能是NaN的问题](python/float-is-nan.md)
 - [Tags数据在ElasticSearch中的保存与分析](elk/tags-analyzer.md)
 
 #### 2016-05-30

@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 06月 01日 星期三 10:52:16 CST
+    Created by ./create_index   date: 2016年 06月 01日 星期三 22:01:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -59,3 +59,4 @@
 - python
   - scrapy
     - [Scrapy源码结构](python/scrapy/源码结构.md)
+  - [Python中float值可能是NaN的问题](python/float-is-nan.md)
