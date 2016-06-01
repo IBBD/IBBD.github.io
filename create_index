@@ -61,7 +61,7 @@ output_dir() {
         fi
 
         # 先处理子目录
-        list=$(find $1/[0-9a-z_]* -maxdepth 0 -type d)
+        list=$(find $1/[0-9a-zA-Z][0-9a-zA-Z\-_]* -maxdepth 0 -type d)
         for child in $list 
         do
             output_dir $child
