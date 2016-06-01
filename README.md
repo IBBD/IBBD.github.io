@@ -19,15 +19,43 @@ console.log('Hello, world!');
 fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こんにちはせかい\n")
 ```
 
-## 我们的开发语言及框架
+## 我们的技术
 
-![php](/_img/php.jpg)
-![]()
-![]()
-![]()
-![]()
+### 前端
 
-## 我们的工具
+![Javascript](/_img/javascript.jpg)
+![React](/_img/react.jpg)
+![Redux](/_img/redux.png)
+
+### 后台
+
+![PHP](/_img/php.jpg)
+![Laravel](/_img/laravel.jpg)
+![Nodejs](/_img/nodejs.jpg)
+
+### 后端
+
+![Golang](/_img/golang.jpg)
+![Shell](/_img/shell.jpg)
+![Redis](/_img/redis.jpg)
+![MariaDB](/_img/mariadb.jpg)
+![MongoDB](/_img/mongodb.jpg)
+
+### 大数据
+
+![Python](/_img/python.jpg)
+![Scrapy](/_img/scrapy.jpg)
+![NLTK](/_img/nltk.jpg)
+![Hadoop](/_img/hadoop.jpg)
+![Spark](/_img/spark.jpg)
+![ElasticSearch](/_img/elasticsearch.jpg)
+
+### 其他
+
+![Ubuntu](/_img/ubuntu.jpg)
+![Git](/_img/git.jpg)
+![vim](/_img/vim.jpg)
+
 
 ## 使用步骤
 
