@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 06月 01日 星期三 22:01:27 CST
+    Created by ./create_index   date: 2016年 06月 02日 星期四 16:05:03 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-06-02
+
+- [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 
 #### 2016-06-01
 
