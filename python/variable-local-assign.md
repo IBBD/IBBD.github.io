@@ -20,9 +20,13 @@ def func(test):
 
 ## 原因
 
-本地变量没有定义就使用了！为什么`test`变量被当成了本地变量？
+Python解释器执行到 `func2()` 中的 `if test:` 时，发现有个变量 `test` 在当前作用域(local)中无法找到该变量。它继续尝试把整块代码解释完。
 
-因为`test在本地被赋值了`！
+Bingo! 找到了。那么`test`是属于func2()作用域的。既然对变量`test`的赋值（声明）发生在if语句之后，if语句执行时变量`test`是还未被声明的，于是抛出错误：
+
+`变量在赋值前就被引用。`
+
+注：参考[文章](http://blog.cipherc.com/2015/04/25/python_namespace_and_scope/#assignment-rule)
 
 ## 解决
 
