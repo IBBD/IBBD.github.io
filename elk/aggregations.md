@@ -86,6 +86,14 @@ Bucketing聚合可以有子聚合，并且没有限制聚合的嵌套深度。
 
 `precision_threshold`参数通常取值100，允许的最大值是40000。当唯一值小于该值时，统计是准确的，大于该值时就会出现一定的误差。当该值的设置为100或以上，误差是相当小的。
 
+*注*: 在Kibana中，要提升唯一值的计算精度，可以设置该参数：
+
+```json
+{
+    "precision_threshold": 40000
+}
+```
+
 ### 扩展统计聚合：Extended Stats
 
 `extended_stats`聚合是`stats`聚合的扩展版，除了包含基础的统计值之外，还包括`sum_of_squares`, `variance`, `std_deviation` and `std_deviation_bounds`（包括`upper`, `lower`）.
