@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 06月 02日 星期四 16:05:02 CST
+    Created by ./create_index   date: 2016年 07月 04日 星期一 01:00:35 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -9,6 +9,8 @@
 - 数据科学
   - [解密Airbnb数据科学部门序列文章](data-science/airbnb-data-science-department.md)
   - [Python下Twitter数据挖掘完整工作流](data-science/mining-twitter-data-with-python.md)
+- DSP
+  - [DSP在RTB中的广告投放思路](dsp/ad-delivery-in-rtb.md)
 - ELK
   - [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
   - [Elasticsearch的Aggregations聚合之Pipeline](elk/aggregations-pipeline.md)

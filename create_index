@@ -17,6 +17,7 @@ dict[php]=PHP
 dict[golang]=Golang
 dict[linux]=Linux
 dict[data-science]=数据科学
+dict[dsp]=DSP
 
 ############## 按目录排序 ######################
 

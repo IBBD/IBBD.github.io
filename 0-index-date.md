@@ -1,9 +1,17 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 06月 02日 星期四 16:05:03 CST
+    Created by ./create_index   date: 2016年 07月 04日 星期一 01:00:37 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-07-04
+
+- [DSP在RTB中的广告投放思路](dsp/ad-delivery-in-rtb.md)
+
+#### 2016-06-30
+
+- [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
 
 #### 2016-06-02
 
@@ -45,7 +53,6 @@
 
 #### 2016-04-19
 
-- [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
 - [ElasticSearch中的Mapping配置](elk/mapping.md)
 
 #### 2016-01-26
