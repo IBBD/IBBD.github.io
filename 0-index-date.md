@@ -1,12 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 07月 04日 星期一 01:00:37 CST
+    Created by ./create_index   date: 2016年 07月 04日 星期一 21:51:34 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
 
 #### 2016-07-04
 
+- [前端文章集合](front-end/articles-collections.md)
 - [DSP在RTB中的广告投放思路](dsp/ad-delivery-in-rtb.md)
 
 #### 2016-06-30
