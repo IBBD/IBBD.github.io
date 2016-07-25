@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 07月 04日 星期一 21:51:34 CST
+    Created by ./create_index   date: 2016年 07月 25日 星期一 11:57:36 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-07-25
+
+- [Golang踩坑分享](golang/share.md)
 
 #### 2016-07-04
 

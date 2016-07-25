@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 07月 04日 星期一 21:51:33 CST
+    Created by ./create_index   date: 2016年 07月 25日 星期一 11:57:35 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -25,6 +25,7 @@
   - [React相关资源](front-end/react-source.md)
 - Golang
   - [Golang中的interface详解](golang/interface.md)
+  - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中的tag](golang/struct-tag.md)
 - Linux
   - docker
