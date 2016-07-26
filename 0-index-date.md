@@ -1,9 +1,14 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 07月 25日 星期一 11:57:36 CST
+    Created by ./create_index   date: 2016年 07月 27日 星期三 00:20:51 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-07-27
+
+- [python命令行输出的样式美化](python/python-command-line-style.md)
+- [python中使用click来构建接口应用](python/pip-module-click.md)
 
 #### 2016-07-25
 
