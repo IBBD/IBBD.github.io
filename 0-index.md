@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 07月 27日 星期三 00:20:50 CST
+    Created by ./create_index   date: 2016年 07月 27日 星期三 10:25:21 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -24,7 +24,10 @@
   - [基于React，React-router, Flux等的前端工程的目录结构](front-end/react-router-flux-dir-structure.md)
   - [React相关资源](front-end/react-source.md)
 - Golang
+  - packages
+    - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [Golang中的interface详解](golang/interface.md)
+  - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
   - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中的tag](golang/struct-tag.md)
 - Linux
