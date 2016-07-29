@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 07月 27日 星期三 10:25:21 CST
+    Created by ./create_index   date: 2016年 07月 29日 星期五 14:57:26 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -47,6 +47,7 @@
     - [Shell使用过程中遇到的问题集合](linux/shell/questions.md)
   - vim
     - [Best vim tips](linux/vim/best-vim-tips.md)
+  - [开发常用资源收集](linux/awesome.md)
   - [Linux 命令帮助利器](linux/cheat.md)
   - [gdb工具的使用](linux/gdb-tools.md)
   - [在Ubuntu上升级git](linux/git-update.md)
