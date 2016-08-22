@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 08月 20日 星期六 11:49:05 CST
+    Created by ./create_index   date: 2016年 08月 22日 星期一 14:56:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-08-22
+
+- [The 11 Rules of GitLab Flow](linux/git/gitlab-flow-rules.md)
 
 #### 2016-08-20
 

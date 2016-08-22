@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 08月 20日 星期六 11:49:04 CST
+    Created by ./create_index   date: 2016年 08月 22日 星期一 14:56:23 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -43,6 +43,7 @@
     - [使用dockerfile来构建nginx镜像](linux/docker/nginx.md)
   - git
     - [Git分支管理](linux/git/git-branch.md)
+    - [The 11 Rules of GitLab Flow](linux/git/gitlab-flow-rules.md)
   - nginx
     - [使用变量来简化nginx配置文件](linux/nginx/nginx-conf-use-var.md)
   - shell
