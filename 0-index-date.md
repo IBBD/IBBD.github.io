@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 08月 22日 星期一 14:56:25 CST
+    Created by ./create_index   date: 2016年 08月 23日 星期二 20:51:19 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-08-23
+
+- [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
 
 #### 2016-08-22
 
@@ -16,7 +20,6 @@
 #### 2016-08-18
 
 - [一个nodejs的问题解决](front-end/nodejs-and-node-error.md)
-- [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
 
 #### 2016-07-29
 
