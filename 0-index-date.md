@@ -1,9 +1,17 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 08月 23日 星期二 20:51:19 CST
+    Created by ./create_index   date: 2016年 09月 02日 星期五 11:20:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-09-02
+
+- [基于Git的分支与发布规范](linux/git/git-branch-and-release-standard.md)
+
+#### 2016-08-26
+
+- [IBBD Golang开发环境配置](golang/golang-env-config.md)
 
 #### 2016-08-23
 
@@ -12,10 +20,6 @@
 #### 2016-08-22
 
 - [The 11 Rules of GitLab Flow](linux/git/gitlab-flow-rules.md)
-
-#### 2016-08-20
-
-- [IBBD Golang开发环境配置](golang/golang-env-config.md)
 
 #### 2016-08-18
 
@@ -62,7 +66,7 @@
 #### 2016-05-20
 
 - [Ubuntu下install sbt](linux/install-sbt.md)
-- [在Ubuntu上升级git](linux/git-update.md)
+- [在Ubuntu上升级git](linux/git/git-update.md)
 
 #### 2016-05-12
 

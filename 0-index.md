@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 08月 23日 星期二 20:51:17 CST
+    Created by ./create_index   date: 2016年 09月 02日 星期五 11:20:24 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -42,8 +42,10 @@
     - [20150901 Docker主题分享](linux/docker/docker分享会.md)
     - [使用dockerfile来构建nginx镜像](linux/docker/nginx.md)
   - git
+    - [基于Git的分支与发布规范](linux/git/git-branch-and-release-standard.md)
     - [Git分支管理](linux/git/git-branch.md)
     - [The 11 Rules of GitLab Flow](linux/git/gitlab-flow-rules.md)
+    - [在Ubuntu上升级git](linux/git/git-update.md)
   - nginx
     - [使用变量来简化nginx配置文件](linux/nginx/nginx-conf-use-var.md)
   - shell
@@ -54,7 +56,6 @@
   - [开发常用资源收集](linux/awesome.md)
   - [Linux 命令帮助利器](linux/cheat.md)
   - [gdb工具的使用](linux/gdb-tools.md)
-  - [在Ubuntu上升级git](linux/git-update.md)
   - [Ubuntu下install sbt](linux/install-sbt.md)
   - [iptables线上服务器配置案例](linux/iptables-config.md)
   - [编译PHP扩展的相关工具](linux/php-build-tools.md)

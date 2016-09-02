@@ -6,6 +6,7 @@
 # 索引文件
 index_filename='0-index.md'
 index_date_filename='0-index-date.md'
+index_tag_filename='0-index-tag.md'
 
 # 字典配置
 declare -A dict
