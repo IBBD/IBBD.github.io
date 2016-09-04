@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 02日 星期五 11:20:24 CST
+    Created by ./create_index   date: 2016年 09月 04日 星期日 12:32:14 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -31,6 +31,7 @@
   - [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
   - [Golang中的interface详解](golang/interface.md)
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
+  - [并发编程注意事项](golang/parallel-coding.md)
   - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中的tag](golang/struct-tag.md)
 - Linux

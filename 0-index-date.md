@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 09月 02日 星期五 11:20:25 CST
+    Created by ./create_index   date: 2016年 09月 04日 星期日 12:32:15 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-09-04
+
+- [并发编程注意事项](golang/parallel-coding.md)
 
 #### 2016-09-02
 
