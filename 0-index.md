@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 04日 星期日 12:32:14 CST
+    Created by ./create_index   date: 2016年 09月 06日 星期二 01:05:48 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -28,6 +28,7 @@
   - packages
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
+  - [Golang最新版本安装](golang/golang-install.md)
   - [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
   - [Golang中的interface详解](golang/interface.md)
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
