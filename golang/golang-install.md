@@ -29,12 +29,21 @@ export GOROOT_BOOTSTRAP=/root/go-go1.4.2
 
 # 配置GOPATH  配置PATH
 # 这些配置最好启动时自动加载了
+# vim /etc/bash.bashrc
 export GOROOT=/root/go-go1.7/
 export GOPATH=/var/www/golang
 export PATH=/root/go-go1.7/bin:$PATH
 
 # 查看配置
 go env
-
 ```
+
+## 升级新版本
+
+1. 将新版本下载下来, 并解压
+2. 配置好`$GOROOT_BOOTSTRAP`
+3. 执行`./all.bash`
+4. 修改相应的环境变量
+
+
 
