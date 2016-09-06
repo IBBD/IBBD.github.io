@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 06日 星期二 01:05:48 CST
+    Created by ./create_index   date: 2016年 09月 06日 星期二 17:09:47 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -71,6 +71,7 @@
     - [基于laravel和Bootstrap的cms系统](php/laravel/laravel-bootstrapt-cms.md)
   - php-the-right-way-learning
     - [php-the-right-way-learning-阅读笔记 By Alex](php/php-the-right-way-learning/alex.md)
+  - [在php7-fpm的docker镜像内编译GD扩展](php/php-gd-in-docker-install.md)
 - python
   - scrapy
     - [Scrapy源码结构](python/scrapy/源码结构.md)
