@@ -3,15 +3,15 @@
 新版本的golang需要旧版本的golang(1.5以下的版本, 现在通常选择1.4.2)来编译, 所以安装时, 需要先安装golang1.5以下的版本.
 
 ```sh
-cd /home/ibbd/golang
-
 # 安装1.4.2版本
+cd /home/ibbd/golang
 wget https://github.com/golang/go/archive/go1.4.2.zip
 unzip go1.4.2.zip
 cd go1.4.2/src
 ./all.bash
 
 # 安装最新版golang
+cd /home/ibbd/golang
 wget https://github.com/golang/go/archive/go1.7.zip
 unzip go1.7.zip
 cd go1.7/src
