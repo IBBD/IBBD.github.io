@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 06日 星期二 17:09:47 CST
+    Created by ./create_index   date: 2016年 09月 08日 星期四 10:09:39 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -34,7 +34,7 @@
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
   - [并发编程注意事项](golang/parallel-coding.md)
   - [Golang踩坑分享](golang/share.md)
-  - [（Golang）struct中的tag](golang/struct-tag.md)
+  - [（Golang）struct中tag的获取与操作](golang/struct-tag.md)
 - Linux
   - docker
     - [Docker最佳实践之镜像构建](linux/docker/docker-best-practice-build.md)

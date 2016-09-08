@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 09月 06日 星期二 17:09:49 CST
+    Created by ./create_index   date: 2016年 09月 08日 星期四 10:09:41 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-09-08
+
+- [（Golang）struct中tag的获取与操作](golang/struct-tag.md)
 
 #### 2016-09-06
 
@@ -69,7 +73,6 @@
 
 #### 2016-05-30
 
-- [（Golang）struct中的tag](golang/struct-tag.md)
 - [Golang中的interface详解](golang/interface.md)
 
 #### 2016-05-20
