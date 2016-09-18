@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 09月 08日 星期四 10:09:41 CST
+    Created by ./create_index   date: 2016年 09月 18日 星期日 15:10:11 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-09-18
+
+- [IBBD Golang编码风格](golang/golang-stardard-style.md)
 
 #### 2016-09-08
 
