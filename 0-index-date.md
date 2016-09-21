@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 09月 18日 星期日 15:10:11 CST
+    Created by ./create_index   date: 2016年 09月 21日 星期三 11:42:04 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-09-21
+
+- [IBBD Git开发流程规范](linux/git/ibbd-git-flow.md)
 
 #### 2016-09-18
 
