@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 21日 星期三 11:42:02 CST
+    Created by ./create_index   date: 2016年 09月 21日 星期三 11:43:02 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -49,7 +49,7 @@
     - [Git分支管理](linux/git/git-branch.md)
     - [The 11 Rules of GitLab Flow](linux/git/gitlab-flow-rules.md)
     - [在Ubuntu上升级git](linux/git/git-update.md)
-    - [IBBD Git开发流程规范](linux/git/ibbd-git-flow.md)
+    - [IBBD Git项目协作流程与规范](linux/git/ibbd-git-flow.md)
   - nginx
     - [使用变量来简化nginx配置文件](linux/nginx/nginx-conf-use-var.md)
   - shell
