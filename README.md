@@ -26,6 +26,7 @@ fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こ
 ![Javascript](/_img/javascript.jpg)
 ![React](/_img/react.jpg)
 ![Redux](/_img/redux.png)
+![D3](/_img/d3js.jpg)
 
 ### 后台
 
