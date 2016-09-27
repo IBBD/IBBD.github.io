@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 22日 星期四 15:39:07 CST
+    Created by ./create_index   date: 2016年 09月 27日 星期二 23:04:35 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -60,6 +60,7 @@
   - [开发常用资源收集](linux/awesome.md)
   - [Linux 命令帮助利器](linux/cheat.md)
   - [gdb工具的使用](linux/gdb-tools.md)
+  - [Github的GraphQL API规范摘要](linux/graphql-for-github.md)
   - [Ubuntu下install sbt](linux/install-sbt.md)
   - [iptables线上服务器配置案例](linux/iptables-config.md)
   - [编译PHP扩展的相关工具](linux/php-build-tools.md)
