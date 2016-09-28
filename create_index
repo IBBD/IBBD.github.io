@@ -114,18 +114,17 @@ do
     f=${p##*/}
     if [ '0-index' != ${f:0:7} -a 'README.md' != $f ]; then 
         last_line=$(tail -n 1 $p)
+        file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
         if 
-            echo $last_line|grep -P "201\d\-[01]\d\-[0123]\d"
+            ! echo $last_line|grep -P "201\d\-[01]\d\-[0123]\d"
         then
-            # 日期已经记录在文件中了
-            file_date=${last_line:6:10}
-        else
             # 如果日期没有记录在文件中，则拿文件的最后修改时间，并将日期写入文件中
-            file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
             echo >> $p
             echo "---------" >> $p
             echo >> $p
             echo "Date: $file_date  Author: $user_name <$user_email>">> $p
+        #else
+            #file_date=${last_line:6:10}
         fi
 
         if [ "$file_date_last" != "$file_date" ]; then 

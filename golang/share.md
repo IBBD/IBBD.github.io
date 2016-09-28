@@ -19,3 +19,7 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 第一种方法有时会报错。
 
 
+
+---------
+
+Date: 2016-07-25  Author: alex cai <cyy0523xc@gmail.com>

@@ -82,3 +82,7 @@
 序号	名称	解释
 1	copy_to	与solr里面的copy_field字段功能一样，支持拷贝某个字段的值到集中的一个字段里面
 2	properties	mapping type，对象字段和嵌套字段可以包含子字段，这些属性可以被添加进去，例子如下
+
+---------
+
+Date: 2016-04-30  Author: alex cai <cyy0523xc@gmail.com>

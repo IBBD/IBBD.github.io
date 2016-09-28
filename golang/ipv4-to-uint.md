@@ -25,3 +25,7 @@ func Ip2uint(ip_str string) (uint32, error) {
 这里主要的坑是`net.ParseIP`函数的返回值，查了源码才确定其结构。
 
 
+
+---------
+
+Date: 2016-07-27  Author: alex cai <cyy0523xc@gmail.com>

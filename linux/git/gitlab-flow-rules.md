@@ -51,3 +51,7 @@ If you find a bug, the worst thing you can do is fix it in the just-released ver
 ## 11. Commit messages reflect intent.
 
 You should not only say what you did, but also why you did it. It’s even more useful if you explain why you did this over any other options.
+
+---------
+
+Date: 2016-08-22  Author: alex cai <cyy0523xc@gmail.com>

@@ -21,3 +21,7 @@ sudo apt-get install python3-software-properties
 如果安装完之后，使用`git version`看到的还是旧的版本号，则需要确认系统是否安装了多个git。使用`which git`看看是不是`/usr/bin/git`，还是`/usr/local/bin/git`, 或者其他，对应的确认其版本号，协作旧的即可，或者直接重命名。
 
 
+
+---------
+
+Date: 2016-05-20  Author: alex cai <cyy0523xc@gmail.com>

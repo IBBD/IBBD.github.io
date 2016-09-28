@@ -55,3 +55,7 @@ es.put_mapping(index_name, doc_type, mapping)
 然后就可以正常的往es写入数据了。。。
 
 
+
+---------
+
+Date: 2016-06-01  Author: alex cai <cyy0523xc@gmail.com>

@@ -6,3 +6,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 sudo apt-get update
 sudo apt-get install sbt
 ```
+
+---------
+
+Date: 2016-05-20  Author: alex cai <cyy0523xc@gmail.com>

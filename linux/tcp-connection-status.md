@@ -14,3 +14,7 @@ http://wiki.swoole.com/wiki/page/173.html
 - CLOSING: 比较少见./\* Both sockets are shut down but we still don't have all our data sent. 等待远程TCP对连接中断的确认 \*/
 - CLOSED: 被动关闭端在接受到ACK包后，就进入了closed的状态。连接结束./\* The socket is not being used. 没有任何连接状态 \*/
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

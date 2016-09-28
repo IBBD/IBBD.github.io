@@ -49,3 +49,7 @@ Docker的镜像类似虚拟机的快照，但更轻量，非常非常轻量。
 - 在各个目录下运行：`./build.sh`
 
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

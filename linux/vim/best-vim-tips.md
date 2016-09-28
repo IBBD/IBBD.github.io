@@ -1048,3 +1048,7 @@ Vimtips in Belarusian
 :w!|sav! vimtips.html|:/^__BEGIN__/,/^__END__/s#<#\<#g|:w!|:!vimtipsftp
 ----------------------------------------
 ```
+
+---------
+
+Date: 2016-05-11  Author: alex cai <cyy0523xc@gmail.com>

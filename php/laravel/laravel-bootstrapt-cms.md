@@ -54,3 +54,7 @@ php artisan app:install
 
 
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

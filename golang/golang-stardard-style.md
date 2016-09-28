@@ -39,3 +39,7 @@
 golang没有其他语言的try-catch结构，错误变量的命名通常为`err`，异常的处理通常只发生在主模块里，子模块通常只需要返回错误对象即可。
 
 
+
+---------
+
+Date: 2016-09-18  Author: alex cai <cyy0523xc@gmail.com>

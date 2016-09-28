@@ -242,3 +242,7 @@ select into outfile以符号分割文件格式创建数据的逻辑备份。
 
 
 [原文链接](http://ffffound.sinaapp.com/2015/04/08/%E9%AB%98%E6%80%A7%E8%83%BDmysql/)
+
+---------
+
+Date: 2015-11-07  Author: alex cai <cyy0523xc@gmail.com>

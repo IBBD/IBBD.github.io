@@ -69,3 +69,7 @@ Mapping是用来约束一个文档的字段，以及文档是怎么被被索引�
 3. 在mongoDB上，相同的字段名允许使用不同的字段类型，但是在es中是不允许的。
 
 
+
+---------
+
+Date: 2016-04-19  Author: alex cai <cyy0523xc@gmail.com>

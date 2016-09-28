@@ -50,3 +50,7 @@ zbacktrace
 
 .gdbinit还提供了其他更多指令，可以查看源码了解详细的信息。
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

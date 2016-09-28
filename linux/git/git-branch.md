@@ -33,3 +33,7 @@
 
 一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：
 
+
+---------
+
+Date: 2015-10-23  Author: alex cai <cyy0523xc@gmail.com>

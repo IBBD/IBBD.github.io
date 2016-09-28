@@ -7,3 +7,7 @@
 
 注: 在多分支的情况下, 提交代码时, 务必注意所在分支, 如在release分支提交需要用`git push origin release`or`git push origin release:release`, 在master提交到master通常是默认的, 可以使用简化的命令`git push`即可.
 
+
+---------
+
+Date: 2016-09-02  Author: alex cai <cyy0523xc@gmail.com>

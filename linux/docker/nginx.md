@@ -60,3 +60,7 @@ tail -f tail -f /var/log/nginx/error.log
 ```
 
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

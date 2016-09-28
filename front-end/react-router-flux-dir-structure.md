@@ -45,3 +45,7 @@ demo程序可以看这里：https://github.com/IBBD/react-router-flux-demo/tree/
 （可以切换到react-router-flux这个tag）
 
 
+
+---------
+
+Date: 2015-11-10  Author: alex cai <cyy0523xc@gmail.com>

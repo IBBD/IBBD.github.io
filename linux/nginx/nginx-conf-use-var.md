@@ -87,3 +87,7 @@ location ~ .*\.(js|css)$ {
 
 nginx配置通过使用变量，配置文件可以很简洁，很容易进行管理。 
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

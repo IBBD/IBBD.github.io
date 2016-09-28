@@ -88,3 +88,7 @@ func()   # [1, 1]
 - [Python命名空间和作用域窥探](http://blog.cipherc.com/2015/04/25/python_namespace_and_scope/)
 - [python学习笔记 - local, global and free variable](http://www.jianshu.com/p/e1fd4f14136a)
 
+
+---------
+
+Date: 2016-06-02  Author: alex cai <cyy0523xc@gmail.com>

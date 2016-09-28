@@ -21,3 +21,7 @@ if isnan(val) or isinf(val):
 ```
 
 注意：默认为0值，未必所有场景的适合
+
+---------
+
+Date: 2016-06-01  Author: alex cai <cyy0523xc@gmail.com>

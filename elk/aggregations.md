@@ -479,3 +479,7 @@ Terms聚合能对数据做汇总，例如对文章做Terms聚合，就能将分�
 
 
 
+
+---------
+
+Date: 2016-06-30  Author: alex cai <cyy0523xc@gmail.com>

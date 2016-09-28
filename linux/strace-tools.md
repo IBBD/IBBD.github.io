@@ -18,3 +18,7 @@ strace -o /tmp/strace.log -f -p $PID
 - -c 实时统计每个系统调用的耗时
 - -T 打印每个系统调用的耗时
 
+
+---------
+
+Date: 2015-10-09  Author: alex cai <cyy0523xc@gmail.com>

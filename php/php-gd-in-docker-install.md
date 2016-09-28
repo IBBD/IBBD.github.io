@@ -56,3 +56,7 @@ RUN  \
 - http://php.net/manual/en/image.installation.php
 - https://github.com/docker-library/php/blob/2f96a00aaa90ee1c503140724936ca7005273df5/7.0/fpm/Dockerfile
 
+
+---------
+
+Date: 2016-09-06  Author: alex cai <cyy0523xc@gmail.com>
