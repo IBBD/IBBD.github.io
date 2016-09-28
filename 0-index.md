@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 27日 星期二 23:04:35 CST
+    Created by ./create_index   date: 2016年 09月 28日 星期三 14:07:47 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
