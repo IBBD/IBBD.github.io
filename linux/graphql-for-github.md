@@ -111,3 +111,52 @@ login | String |
 
 当前登陆的用户
 
+## Mutations
+
+对应着增删改操作，这里只使用project为例：
+
+### createProject
+
+Creates a new project.
+
+Input fields
+
+- clientMutationId (String):  A unique identifier for the client performing the mutation.
+- subjectId (ID): The Node ID of the subject to modify.
+- body (String): The contents of the comment.
+
+Return fields
+
+- clientMutationId (String): A unique identifier for the client performing the mutation.
+- project (Project): The new project.
+
+### updateProject
+
+Updates an existing project.
+
+Input fields
+
+- clientMutationId (String): A unique identifier for the client performing the mutation.
+- subjectId (ID): The Node ID of the subject to modify.
+- body (String): The contents of the comment.
+
+Return fields
+
+- clientMutationId (String): A unique identifier for the client performing the mutation.
+- project (Project): The updated project.
+
+### deleteProject
+
+Deletes a project.
+
+Input fields
+
+- clientMutationId (String): A unique identifier for the client performing the mutation.
+- subjectId (ID): The Node ID of the subject to modify.
+- body (String): The contents of the comment.
+
+Return fields
+
+- clientMutationId (String): A unique identifier for the client performing the mutation.
+- owner (ProjectOwner): The repository the project was removed from.
+
