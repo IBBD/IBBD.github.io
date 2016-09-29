@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 28日 星期三 15:53:43 CST
+    Created by ./create_index   date: 2016年 09月 29日 星期四 16:18:48 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -31,6 +31,7 @@
   - [Golang最新版本安装](golang/golang-install.md)
   - [IBBD Golang编码风格](golang/golang-stardard-style.md)
   - [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
+  - [首次安装Go1.4.2碰到的一个错误](golang/install-go1.4.2-error-for-first-time.md)
   - [Golang中的interface详解](golang/interface.md)
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
   - [并发编程注意事项](golang/parallel-coding.md)
