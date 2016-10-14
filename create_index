@@ -107,44 +107,70 @@ echo >> $index_date_filename
 output_index 'date' >> $index_date_filename
 echo >> $index_date_filename
 
-file_date_last=
+# 记录按日期排序好的文件路径
+# 每行记录一个文件
+# 格式：日期;路径
+tmp_date_index_file=.tmp_date_index_file
+if [ ! -f $tmp_date_index_file ]; then
+    echo >> $tmp_date_index_file
+fi
+
 files=$(find ./ -name "*.md" | xargs ls -t)
 for p in $files
 do
     f=${p##*/}
     if [ '0-index' != ${f:0:7} -a 'README.md' != $f ]; then 
+        # 判断文件是否已经在临时文件中
+        if 
+            cat $tmp_date_index_file|grep "$p"
+        then
+            continue
+        fi
+
+        # 新文件
         last_line=$(tail -n 1 $p)
         file_date=$(ls $p --full-time|awk -F' ' '{print $6}')
         if 
-            ! echo $last_line|grep -P "201\d\-[01]\d\-[0123]\d"
+            echo $last_line|grep -P "201\d\-[01]\d\-[0123]\d"
         then
-            # 如果日期没有记录在文件中，则拿文件的最后修改时间，并将日期写入文件中
-            echo >> $p
-            echo "---------" >> $p
-            echo >> $p
-            echo "Date: $file_date  Author: $user_name <$user_email>">> $p
-        #else
-            #file_date=${last_line:6:10}
+            file_date=${last_line:6:10}
         fi
 
-        if [ "$file_date_last" != "$file_date" ]; then 
-            echo >> $index_date_filename
-            echo "#### $file_date" | tee -a $index_date_filename
-            echo >> $index_date_filename
-            file_date_last=$file_date
-        fi
-
-        # 输出文件
-        title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
-        [ ${#title} -lt 2 ] && title=${p%.*}
-        echo "- [$title](${p:2})" | tee -a $index_date_filename
+        # 写入临时文件中
+        echo "$file_date;$p" >> $tmp_date_index_file
     fi
 done
 
-echo 
+# 临时文件进行排序
+cat $tmp_date_index_file | sort -t";" -k1 -r | tee $tmp_date_index_file
 
+# 生成最后的目录文件
+file_date_last=
+rows=$(cat $tmp_date_index_file)
+for row in $rows
+do
+    if [ ${#row} -lt 10 ]; then
+        continue
+    fi
+
+    # 判断是否需要输出日期
+    file_date=${row:0:10}
+    if [ "$file_date_last" != "$file_date" ]; then 
+        echo | tee -a $index_date_filename
+        echo "#### $file_date" | tee -a $index_date_filename
+        echo | tee -a $index_date_filename
+        file_date_last=$file_date
+    fi
+
+    p=${row:11}
+    title=$(head -n 1 $p|sed 's/^#*\s*//'|sed 's/\s*$//')
+    [ ${#title} -lt 2 ] && title=${p%.*}
+    echo "- [$title](${p:2})" | tee -a $index_date_filename
+done
+
+
+echo 
 echo '============= END OF 按日期索引 ================'
 echo 
 
 echo '====> finish!'
-

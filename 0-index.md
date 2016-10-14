@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 09月 29日 星期四 16:18:48 CST
+    Created by ./create_index   date: 2016年 10月 14日 星期五 15:20:46 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -34,6 +34,7 @@
   - [首次安装Go1.4.2碰到的一个错误](golang/install-go1.4.2-error-for-first-time.md)
   - [Golang中的interface详解](golang/interface.md)
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
+  - [net.runtime_pollWait问题解决过程（Golang）](golang/net.runtime_pollWait-error-fix.md)
   - [并发编程注意事项](golang/parallel-coding.md)
   - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中tag的获取与操作](golang/struct-tag.md)
