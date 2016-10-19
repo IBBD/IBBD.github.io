@@ -22,7 +22,16 @@
 - `长度`：一个函数通常不宜太长，超过50行的应该是少数，超过100行的更是少数的少数。
 - 函数是在整个package内部有效的，如果模块聚合不合理，很容易出现找不到在哪里定义的问题。函数名应该是跟文件名有某种联系的（功能的内聚），这个比较难判断。
 - 函数内部的变量都是局部变量，不应该使用大写字母开头
+- 传入变量和返回变量以小写字母开头
+- 在godoc生成的文档中，带有返回值的函数声明更利于理解
 
+### 参数传递
+
+- 对于少量数据，不要传递指针
+- 对于大量数据的struct可以考虑使用指针
+- 传入参数是map，slice，chan不要传递指针
+
+因为map，slice，chan是引用类型，不需要传递指针的指针
 
 ## 文件与目录
 
@@ -37,6 +46,47 @@
 ## 异常处理
 
 golang没有其他语言的try-catch结构，错误变量的命名通常为`err`，异常的处理通常只发生在主模块里，子模块通常只需要返回错误对象即可。
+
+## 注释
+
+在编码阶段同步写好变量、函数、包注释，注释可以通过godoc导出生成文档。
+
+注释必须是完整的句子，以需要注释的内容作为开头，句点作为结尾。
+
+程序中每一个被导出的（大写的）名字，都应该有一个文档注释。
+
+### 包注释: doc.go
+
+每个程序包都应该有一个包注释，一个位于package子句之前的块注释或行注释。使用`doc.go`这样一个空文件，内容例如：
+
+```
+//Package regexp implements a simple library 
+//for regular expressions.
+package regexp 
+```
+
+### 函数，变量，结构等注释
+
+第一条语句应该为一条概括语句，并且使用被声明的名字作为开头。
+
+```
+// Compile parses a regular expression and returns, if successful, a Regexp
+// object that can be used to match against text.
+func Compile(str string) (regexp *Regexp, err error) {}
+```
+
+## 控制结构
+
+### if
+
+如果需要局部变量，使用如下方式：
+
+```go
+if err := file.Chmod(0664); err != nil {
+    return err
+}
+```
+
 
 
 
