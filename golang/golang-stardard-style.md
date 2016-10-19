@@ -49,6 +49,8 @@ golang没有其他语言的try-catch结构，错误变量的命名通常为`err`
 
 ## 注释
 
+关于注释，更多的看[这里](http://www.philo.top/2015/07/10/golang-doc/)
+
 在编码阶段同步写好变量、函数、包注释，注释可以通过godoc导出生成文档。
 
 注释必须是完整的句子，以需要注释的内容作为开头，句点作为结尾。
@@ -74,6 +76,8 @@ package regexp
 // object that can be used to match against text.
 func Compile(str string) (regexp *Regexp, err error) {}
 ```
+
+注意：注释的第一行的第一个单词应该是函数名（例如Compile）
 
 ## 控制结构
 
