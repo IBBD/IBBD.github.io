@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 10月 14日 星期五 15:20:46 CST
+    Created by ./create_index   date: 2016年 10月 20日 星期四 14:56:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-10-20
+
+- [使用Golang来模拟Python的yield](golang/golang-python-yield.md)
 
 #### 2016-10-14
 
