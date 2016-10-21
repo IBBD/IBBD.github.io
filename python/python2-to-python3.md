@@ -33,6 +33,9 @@ except NameError:
     long = int
 ```
 
+- `file`函数在python3中不支持，报错：`builtins.NameError: name 'file' is not defined`, 使用`open`函数替代。
+
+
 ## 相关文章
 
 - http://cdwanze.github.io/%E7%94%B5%E8%84%91/python/python3%E8%AF%AD%E8%A8%80/python2%E5%88%B0python3%E7%9A%84%E7%A7%BB%E6%A4%8D%E9%97%AE%E9%A2%98.html
