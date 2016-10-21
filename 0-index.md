@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 10月 20日 星期四 14:56:24 CST
+    Created by ./create_index   date: 2016年 10月 21日 星期五 11:17:31 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -84,5 +84,6 @@
     - [Scrapy源码结构](python/scrapy/源码结构.md)
   - [Python中float值可能是NaN的问题](python/float-is-nan.md)
   - [python中使用click来构建接口应用](python/pip-module-click.md)
+  - [从python2到python3的迁移](python/python2-to-python3.md)
   - [python命令行输出的样式美化](python/python-command-line-style.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
