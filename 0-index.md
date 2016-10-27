@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 10月 21日 星期五 11:17:31 CST
+    Created by ./create_index   date: 2016年 10月 27日 星期四 12:22:52 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -28,6 +28,7 @@
   - packages
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
+  - [Golang高并发编程](golang/golang-high-concurrence.md)
   - [Golang最新版本安装](golang/golang-install.md)
   - [使用Golang来模拟Python的yield](golang/golang-python-yield.md)
   - [IBBD Golang编码风格](golang/golang-stardard-style.md)
