@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 10月 27日 星期四 12:22:53 CST
+    Created by ./create_index   date: 2016年 11月 01日 星期二 11:11:56 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-11-01
+
+- [Golang中append函数的性能分析](golang/golang-append.md)
 
 #### 2016-10-27
 

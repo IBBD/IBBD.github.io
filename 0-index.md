@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 10月 27日 星期四 12:22:52 CST
+    Created by ./create_index   date: 2016年 11月 01日 星期二 11:11:55 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -27,6 +27,7 @@
 - Golang
   - packages
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
+  - [Golang中append函数的性能分析](golang/golang-append.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
   - [Golang高并发编程](golang/golang-high-concurrence.md)
   - [Golang最新版本安装](golang/golang-install.md)
