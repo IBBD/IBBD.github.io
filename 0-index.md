@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 11月 01日 星期二 11:11:55 CST
+    Created by ./create_index   date: 2016年 11月 02日 星期三 21:24:49 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -39,6 +39,7 @@
   - [[Golang]将IP地址转化为整型](golang/ipv4-to-uint.md)
   - [net.runtime_pollWait问题解决过程（Golang）](golang/net.runtime_pollWait-error-fix.md)
   - [并发编程注意事项](golang/parallel-coding.md)
+  - [安装及使用Protobuf-v3（golang）](golang/protobuf-v3-for-golang.md)
   - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中tag的获取与操作](golang/struct-tag.md)
 - Linux
