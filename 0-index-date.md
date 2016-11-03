@@ -1,9 +1,17 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 11月 02日 星期三 21:24:50 CST
+    Created by ./create_index   date: 2016年 11月 04日 星期五 00:02:14 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-11-04
+
+- [database/sql包源码学习（Golang）](golang/packages/database-sql.md)
+
+#### 2016-11-03
+
+- [Golang Tips](golang/golang-tips.md)
 
 #### 2016-11-02
 

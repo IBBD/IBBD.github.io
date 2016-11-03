@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 11月 02日 星期三 21:24:49 CST
+    Created by ./create_index   date: 2016年 11月 04日 星期五 00:02:12 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -26,6 +26,7 @@
   - [React相关资源](front-end/react-source.md)
 - Golang
   - packages
+    - [database/sql包源码学习（Golang）](golang/packages/database-sql.md)
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [Golang中append函数的性能分析](golang/golang-append.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
@@ -33,6 +34,7 @@
   - [Golang最新版本安装](golang/golang-install.md)
   - [使用Golang来模拟Python的yield](golang/golang-python-yield.md)
   - [IBBD Golang编码风格](golang/golang-stardard-style.md)
+  - [Golang Tips](golang/golang-tips.md)
   - [Go发布周期（Go Release Cycle）](golang/go-release-cycle.md)
   - [首次安装Go1.4.2碰到的一个错误](golang/install-go1.4.2-error-for-first-time.md)
   - [Golang中的interface详解](golang/interface.md)
