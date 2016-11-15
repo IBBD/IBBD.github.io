@@ -13,7 +13,8 @@
 - 常量名字如果是几个单词的首字母缩写，则可能会全部大写，例如`const KB = 1024`
 - `结构体内的字段`：采用和普通变量一样的驼峰命名方式，首字母大小写区分是否全局。
 - `循环变量`：对于短循环的循环变量，可能使用像`i`，`j`，`k`，`v`等之类的单字母变量（这是习惯用法，通常不应该命名为其他的字母，例如abc等）。
-- `type新类型`：采用和普通变量一样的方式。例如`type helloWorld int`，或者`type HelloWorld int`（全局类型）
+- `type新类型`：采用和普通变量一样的方式。例如`type tHelloWorld int`，或者`type THelloWorld int`（全局类型）：在加上前缀`t` or `T`（除了接口以外的）。
+- `interface类型`：和普通变量类型，加上前缀`i` or `I`，例如`type iHello interface{}` or `type IHello interface{}`
 
 
 ## 函数
