@@ -15,6 +15,7 @@
 - `循环变量`：对于短循环的循环变量，可能使用像`i`，`j`，`k`，`v`等之类的单字母变量（这是习惯用法，通常不应该命名为其他的字母，例如abc等）。
 - `type新类型`：采用和普通变量一样的方式。例如`type tHelloWorld int`，或者`type THelloWorld int`（全局类型）：在加上前缀`t` or `T`（除了接口以外的）。
 - `interface类型`：和普通变量类型，加上前缀`i` or `I`，例如`type iHello interface{}` or `type IHello interface{}`
+- `type`在golang是一个关键词，不能作为变量命名，如果需要约定命名为`typ`
 
 
 ## 函数
