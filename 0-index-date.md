@@ -1,9 +1,14 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 11月 04日 星期五 00:02:14 CST
+    Created by ./create_index   date: 2016年 11月 19日 星期六 18:54:28 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-11-19
+
+- [使用锁数组来避免全局锁，提升map结构的并发性能（golang）](golang/golang-lock-array.md)
+- [读多写少的场景下的并发优化(golang)](golang/golang-benchmark-sync-lock-atomic.md)
 
 #### 2016-11-04
 

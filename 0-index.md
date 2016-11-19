@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 11月 04日 星期五 00:02:12 CST
+    Created by ./create_index   date: 2016年 11月 19日 星期六 18:54:27 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -29,9 +29,11 @@
     - [database/sql包源码学习（Golang）](golang/packages/database-sql.md)
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [Golang中append函数的性能分析](golang/golang-append.md)
+  - [读多写少的场景下的并发优化(golang)](golang/golang-benchmark-sync-lock-atomic.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
   - [Golang高并发编程](golang/golang-high-concurrence.md)
   - [Golang最新版本安装](golang/golang-install.md)
+  - [使用锁数组来避免全局锁，提升map结构的并发性能（golang）](golang/golang-lock-array.md)
   - [使用Golang来模拟Python的yield](golang/golang-python-yield.md)
   - [IBBD Golang编码风格](golang/golang-stardard-style.md)
   - [Golang Tips](golang/golang-tips.md)
