@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 11月 23日 星期三 00:31:53 CST
+    Created by ./create_index   date: 2016年 11月 23日 星期三 23:56:57 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -95,4 +95,5 @@
   - [python命令行输出的样式美化](python/python-command-line-style.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 - Tech
+  - [日志分析之shell篇](tech/log-analyse-by-shell.md)
   - [大型系统的日志系统架构思考](tech/log-system.md)

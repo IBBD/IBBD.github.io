@@ -1,6 +1,6 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 11月 23日 星期三 00:31:54 CST
+    Created by ./create_index   date: 2016年 11月 23日 星期三 23:56:58 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
@@ -8,6 +8,7 @@
 #### 2016-11-23
 
 - [大型系统的日志系统架构思考](tech/log-system.md)
+- [日志分析之shell篇](tech/log-analyse-by-shell.md)
 
 #### 2016-11-19
 
