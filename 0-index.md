@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 11月 23日 星期三 23:56:57 CST
+    Created by ./create_index   date: 2016年 11月 27日 星期日 17:34:24 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -97,3 +97,4 @@
 - Tech
   - [日志分析之shell篇](tech/log-analyse-by-shell.md)
   - [大型系统的日志系统架构思考](tech/log-system.md)
+  - [保证程序的可测试性](tech/testing-tech.md)
