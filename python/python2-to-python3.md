@@ -79,6 +79,48 @@ fix：
 env['save_fields'] = list(env['save_fields'])
 ```
 
+这是keys方法导致的，在python2中：
+
+```python
+$ python
+>>> foo = { 'bar': "hello", 'baz': "world" }
+>>> type(foo.keys())
+<type 'list'>
+>>> foo.keys()
+['baz', 'bar']
+>>> foo.keys()[0]
+'baz'
+```
+
+但是在python3中：
+
+```python
+$ python3
+>>> foo = { 'bar': "hello", 'baz': "world" }
+>>> type(foo.keys())
+<class 'dict_keys'>
+>>> foo.keys()
+dict_keys(['baz', 'bar'])
+>>> foo.keys()[0]
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+TypeError: 'dict_keys' object does not support indexing
+```
+
+- `TypeError: 'str' does not support the buffer interface`
+
+```python
+plaintext = 'Polish text: ąćęłńóśźżĄĆĘŁŃÓŚŹŻ'
+filename = 'foo.gz'
+with gzip.open(filename, 'wb') as outfile:
+    outfile.write(bytes(plaintext, 'UTF-8'))
+with gzip.open(filename, 'r') as infile:
+    outfile_content = infile.read().decode('UTF-8')
+```
+
+- `TypeError: can't use a string pattern on a bytes-like object`转成bytes
+- `TypeError: unsupported operand type(s) for +: 'dict_items' and 'dict_items'`，python3不再支持这样
+- `POST data should be bytes or an iterable of bytes. It cannot be of type str.`, 主要是改成这样：`urllib.parse.urlencode(d).encode("utf-8")`
 
 ## 相关文章
 
