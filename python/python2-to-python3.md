@@ -123,7 +123,7 @@ with gzip.open(filename, 'r') as infile:
 - `POST data should be bytes or an iterable of bytes. It cannot be of type str.`, 主要是改成这样：`urllib.parse.urlencode(d).encode("utf-8")`
 - `TypeError: Unicode-objects must be encoded before hashing`
 
-```
+```python
 # 修改后的代码
 if type(val) == str:
     val = val.encode("utf-8")
