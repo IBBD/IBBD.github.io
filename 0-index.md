@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 12月 04日 星期日 12:13:23 CST
+    Created by ./create_index   date: 2016年 12月 09日 星期五 11:03:49 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -98,4 +98,5 @@
 - Tech
   - [日志分析之shell篇](tech/log-analyse-by-shell.md)
   - [大型系统的日志系统架构思考](tech/log-system.md)
+  - [IBBD Restful API 规范](tech/restful-api-standard.md)
   - [保证程序的可测试性](tech/testing-tech.md)

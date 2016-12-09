@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 12月 04日 星期日 12:13:24 CST
+    Created by ./create_index   date: 2016年 12月 09日 星期五 11:03:51 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-12-09
+
+- [IBBD Restful API 规范](tech/restful-api-standard.md)
 
 #### 2016-12-04
 
