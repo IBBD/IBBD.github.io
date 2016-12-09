@@ -4,7 +4,43 @@
 
 - 基于Laravel的RESTful规范 http://laravelacademy.org/post/60.html#ipt_kb_toc_60_6 ，我们只使用get, post, put, delete
 
-## HTTP状态码
+### 1，每个响应头部都包含如下版本号信息
+
+```
+ X-DSP-Version: v3
+```
+
+### 2，每个需要验证的请求头部都包含如下验证信息
+
+```
+ Authorization: token_value_of_successful_login
+```
+
+### 3，每个请求头部都包含如下版本号信息
+
+```
+ X-DSP-Version: v3
+```
+
+### 4，HTTP状态码表及说明
+
+http status code | message                  | method     | usage
+----             | ------                   | ------     | --------                     
+200              | OK                       | get        | 查询数据
+201              | CREATED                  | post,patch | 添加或修改数据成功
+204              | NO CONTENT               | delete     | 删除数据成功
+400              | INVALID REQUEST          | post,patch | 添加或修改数据时参数错误
+401              | Unauthorized             | all        | 权限校验失败
+403              | Forbidden                | all        | 请求被禁止
+404              | NOT FOUND                | all        | 请求的资源不存在
+405              | Method Not Allowed       | all        | 请求方法不存在
+406              | Not Acceptable           | get        | 请求的格式无法提供
+408              | Request Timeout          | all        | 请求超时
+409              | Conflict                 | post,patch | 添加或修改数据时参数值冲突
+413              | Request Entity Too Large | post,patch | 一般文件上传时数据较大
+414              | Request-URI Too Long     | all        | URL过长
+415              | Unsupported Media Type   | post       | 一般文件上传时数据类型不支持
+500              | Internal Server Error    | all        | 服务出现异常
 
 ## 返回值格式
 
