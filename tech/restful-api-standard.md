@@ -4,6 +4,21 @@
 
 - 基于Laravel的RESTful规范 http://laravelacademy.org/post/60.html#ipt_kb_toc_60_6 ，我们只使用get, post, put, delete
 
+## HTTP状态码
+
+## 返回值格式
+
+```
+{
+    error: {
+        type: "",
+        msg: ""
+    }
+
+    data: <data object or data array>
+}
+```
+
 ## Query
 
 ```
@@ -15,7 +30,7 @@ http://host/{prefix}/{databaseName}/{tableName}?fields={fieldNameList}query={jso
 query   | json string | 是           |        | 查询参数，见详细说明
 fields  | string      | 是           |        | 查询字段，默认返回所有字段
 sort    | json string | 是           |        | 排序参数，见详细说明
-skip    | uint        | 是           | 0      | 跳过前面若干条
+offset  | uint        | 是           | 0      | 跳过前面若干条
 limit   | uint        | 是           | 20     | 返回多少条记录
 groupby | string      | 是           |        | 对应sql中的group by
 
@@ -81,13 +96,16 @@ $nin | Matches none of the values specified in an array.
 ORDER BY fieldName1 ASC, fieldName2 DESC
 ```
 
-#### skip and limit
+#### offset and limit
 
-分页参数，对应sql中的limit，skip和limit是mongodb中的方法。
+分页参数，对应sql中的limit
 
 #### groupby
 
 对应sql的group by，如果多个字段，则用逗号分隔
+
+### 查询返回值
+
 
 ## Create
 
