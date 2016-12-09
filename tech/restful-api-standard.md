@@ -63,7 +63,12 @@ Example：
 // 最简单的查询
 {fildName1: val1, fieldName2: val2}
 
+// 使用模糊匹配关键词
+// $like是模糊匹配的操作符，如: hello% （匹配hello开头的字符串）
+{fildName1: val1, fieldName2: {$like: "hello%"}}
+
 // 使用操作符
+// 注：这部分功能用得不多，可以后期需要时再实现
 {fieldName1: val1, fieldName2: {$gt: 10, $lte: 100}}
 ```
 
@@ -80,9 +85,21 @@ $ne  | Matches all values that are not equal to a specified value.
 $in  | Matches any of the values specified in an array.
 $nin | Matches none of the values specified in an array.
 
+模糊匹配操作符：`$like`
+
 #### fields
 
-对应sql语句中的select部分，如：`SELECT {fieldNameList} FROM ...`
+对应sql语句中的select部分，如：`SELECT {fieldNameList} FROM ...`。example：
+
+```
+// 返回两个字段
+field1,field2
+
+// 返回的字段使用了函数
+// sum和count是sql中最基本的函数，通常和group by一起出现
+field1,sum(field2) as sum_field2
+field1,count(field2) as count_field2
+```
 
 #### sort
 
