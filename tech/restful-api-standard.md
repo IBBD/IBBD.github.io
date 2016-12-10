@@ -58,14 +58,14 @@ http status code | message                  | method     | usage
 ## Query
 
 ```
-http://host/{prefix}/{databaseName}/{tableName}?fields={fieldNameList}query={jsonData}&sort={jsonData}&skip={skip}&limit={limit}&groupby={fieldNameList}
+http://host/{prefix}/{databaseName}/{tableName}?fields={fieldNameList}query={jsonData}&sort={sort}&skip={skip}&limit={limit}&groupby={fieldNameList}
 ```
 
 参数    | 类型        | 是否允许不传 | 默认值 | 备注
 ----    | ----        | ----         | ----   | ----
 query   | json string | 是           |        | 查询参数，见详细说明
 fields  | string      | 是           |        | 查询字段，默认返回所有字段
-sort    | json string | 是           |        | 排序参数，见详细说明
+sort    | string      | 是           |        | 排序参数，见详细说明
 offset  | uint        | 是           | 0      | 跳过前面若干条
 limit   | uint        | 是           | 20     | 返回多少条记录
 groupby | string      | 是           |        | 对应sql中的group by
@@ -139,10 +139,11 @@ field1,count(field2) as count_field2
 
 #### sort
 
-对应sql中的order by部分，参数格式使用mongodb的表示形式：
+对应sql中的order by部分，可以按多个字段排序，默认为升序，如果字段名前有`-`则表示降序，如：
 
 ```
-{fieldName1: 1, fieldName2: -1}
+// 第二个字段名前有-号
+fieldName1,-fieldName2
 
 // 等价于sql：
 
