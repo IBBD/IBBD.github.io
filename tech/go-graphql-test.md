@@ -148,7 +148,7 @@ curl -g 'http://localhost:8080/graphql?query={users(status:1){id,name,status}}'
 {"data":{"users":[{"id":1,"name":"userA","status":1},{"id":2,"name":"userB","status":1}]}}
 ```
 
-### 关联查询
+### 嵌套查询
 
 查询某个用户，并且将该用户关联的书名全部查询出来
 
@@ -158,6 +158,63 @@ curl -g 'http://localhost:8080/graphql?query={user(id:1){id,name,books(userId:1)
 ```
 
 问题：
-- 如果在列表里，关联查询书名，是否会产生N+1次查询？
+- 如果在列表里，再嵌套查询，就会产生N+1次查询
 - 查询参数里有`userId:1`，但是这个参数是重复传了，是否可以省略该参数？
+
+#### 嵌套查询
+
+例如上面的查询能否改成下面这样：
+
+```sh
+# books不需要指定userId，因为这是在嵌套里面
+curl -g 'http://localhost:8080/graphql?query={user(id:1){id,name,books{name}}}'
+```
+
+事实上是可以的，`booksQuery`定义如下：
+
+```go
+var booksQuery = &graphql.Field{
+	Type: graphql.NewList(bookType),
+	Args: graphql.FieldConfigArgument{
+		"userId": &graphql.ArgumentConfig{
+			Type: graphql.Int,
+		},
+	},
+	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+		var res = make([]Book, 0)
+		var userId uint32
+
+		//fmt.Printf("%+v\n", params)
+		fmt.Printf("--------------\n")
+		if id, ok := params.Args["userId"].(int); ok {
+			userId = uint32(id)
+		} else if user, ok := params.Source.(User); ok {
+			// 如果父级对象是user，则获取其user.Id
+			userId = user.Id
+		} else {
+			return books, nil
+		}
+
+		for _, book := range books {
+			if book.UserId == userId {
+				res = append(res, book)
+			}
+		}
+
+		return res, nil
+	},
+}
+```
+
+可以通过判断父级对象，获取对应的userId值。（这样是可以解决，但是这样并不完美）
+
+#### N+1查询问题
+
+下面这个查询就会产生N+1次查询，怎么优化？
+
+```sh
+curl -g 'http://localhost:8080/graphql?query={users{id,name,books{name}}}'
+```
+
+
 
