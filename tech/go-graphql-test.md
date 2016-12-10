@@ -48,7 +48,7 @@ curl -g 'http://localhost:8080/graphql?query={hello}'
 
 命名可以注意，当个用户的查询为userQuery，多个用户的查询为usersQuery。
 
-```
+```go
 var userQuery = &graphql.Field{
 	Type: userType,  // 单个用户
 	Args: graphql.FieldConfigArgument{
@@ -107,7 +107,7 @@ var usersQuery = &graphql.Field{
 
 上面已经定义了一个用户的查询，现在来定义用户类型：
 
-```
+```go
 var userType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "User",
 	Fields: graphql.Fields{
