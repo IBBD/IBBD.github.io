@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 12月 10日 星期六 21:33:40 CST
+    Created by ./create_index   date: 2016年 12月 12日 星期一 00:11:52 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-12-12
+
+- [IBBD GraphQL API 规范文档](tech/graphql-api-standard.md)
 
 #### 2016-12-10
 
