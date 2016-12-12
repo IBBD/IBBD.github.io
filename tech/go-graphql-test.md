@@ -141,6 +141,17 @@ curl -g 'http://localhost:8080/graphql?query={user(id:1){id,name}}'
 {"data":{"user":{"id":1,"name":"userA"}}}
 ```
 
+注：实际使用时，query参数会放到post body中。
+
+使用变量：
+
+```
+curl -g 'http://localhost:8080/graphql?vars={"id":1}' -d 'query=query+getUserList($id:Int!){user(id:$id){id,name}}'
+{"data":{"user":{"id":1,"name":"userA"}}}
+```
+
+
+
 ### 查询用户列表
 
 ```sh
