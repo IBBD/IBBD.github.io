@@ -33,6 +33,7 @@ Authorization: token_value_of_successful_login
 - 通过配置文件，指定controller为自己实现
 - 在自己实现的controller里，就可以注入了
 - 权限判断也要实现在自己实现的controller里
+- 注入的参数需要先在每个类型的args参数里注入`loginId`等参数（注意在控制器需要避免该参数从接口传入）。 具体做法类似下面的`offset`, `limit`等参数。
 
 具体实现参照：https://github.com/Folkloreatelier/laravel-graphql/blob/master/src/Folklore/GraphQL/GraphQLController.php
 
