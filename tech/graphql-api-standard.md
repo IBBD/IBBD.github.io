@@ -37,6 +37,10 @@ Authorization: token_value_of_successful_login
 
 具体实现参照：https://github.com/Folkloreatelier/laravel-graphql/blob/master/src/Folklore/GraphQL/GraphQLController.php
 
+## 异常数据返回
+
+错误类型可以自己定义，具体实现可以指定配置文件的`error_formatter`配置项。
+
 ## 数据交换样式
 
 样例如下
