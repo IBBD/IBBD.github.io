@@ -2,6 +2,7 @@
 
 - 官网：http://graphql.org/
 - API IDE：https://github.com/graphql/graphiql
+- PHP版实现：https://github.com/Folkloreatelier/laravel-graphql
 
 ## 与RESTful差异比较大的点
 
@@ -26,6 +27,14 @@ Authorization: token_value_of_successful_login
 - 记录层面的权限: 例如用户只能访问自己账户相关的记录，而管理员可以访问所有记录。
 
 经过权限的中间件检验时，能否注入参数？例如统一注入`loginId`参数。
+
+注入参数的方式如下（php实现）：
+
+- 通过配置文件，指定controller为自己实现
+- 在自己实现的controller里，就可以注入了
+- 权限判断也要实现在自己实现的controller里
+
+具体实现参照：https://github.com/Folkloreatelier/laravel-graphql/blob/master/src/Folklore/GraphQL/GraphQLController.php
 
 ## 数据交换样式
 
@@ -61,6 +70,43 @@ offset  | uint   | 是           | 0        | 获取列表时
 limit   | uint   | 是           | 0        | 获取列表时，0表示不限
 sort    | string | 是           | 空字符串 | 获取列表时，可以同时按多个字段排序，格式如`field1,-field2`，`-`表示倒序，对应sql：`field1 ASC, field2 DESC`
 groupby | string | 是           | 空字符串 | 获取列表时，可以同时按多个字段groupby，如`field1,field2`，对应sql：`GROUP BY field1, field2`
+
+这些参数采取统一注入到args的定义里，避免每次都需要重新定义：
+
+```php
+// 原来的参数定义
+public function args()
+{
+    return [
+        'id' => ['name' => 'id', 'type' => Type::string()],
+        'email' => ['name' => 'email', 'type' => Type::string()]
+    ];
+}
+
+// 可以定义一个参数类
+class ControllerArgs {
+    public static function get(array $args, $default_offset=0, $default_limit=0, $use_sort=false, $use_groupby=false) 
+    {
+        $args["offset"] = ['name' => 'offset', 'type' => Type::int()];
+        $args["limit"] = ['name' => 'offset', 'type' => Type::int()];
+
+        // sort, groupby参数类似
+        return $args;
+    }
+}
+
+// 这里需要修改为
+public function args()
+{
+    $resArgs = [
+        'id' => ['name' => 'id', 'type' => Type::string()],
+        'email' => ['name' => 'email', 'type' => Type::string()]
+    ];
+    return ControllerArgs::get($resArgs)
+}
+```
+
+另外：`可以统一注入loginId`等参数，并且避免外部传入该值。
 
 ### POST参数
 
@@ -103,6 +149,6 @@ books(limit:10){
 
 这时，如果实现没有做特殊的处理，就会产生N+1次查询，因为对于每个Book都会对应的查询User一次！
 
-
+在php中的解决方式见：https://github.com/Folkloreatelier/laravel-graphql/blob/master/docs/advanced.md#eager-loading-relationships （关于with的用法，具体看这里：http://laravelacademy.org/post/140.html#ipt_kb_toc_140_9 ）
 
 
