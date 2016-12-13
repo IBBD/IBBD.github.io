@@ -49,28 +49,26 @@ Authorization: token_value_of_successful_login
 样例如下
 
 ```
-curl -g 'http://host/graphql?vars={"id":1}' -d '
-{
-    query getUserList($id:Int){
-        users(id:$id){
+curl -g 'http://host/graphql' -d 'params={"id":1}&query=
+query getUserList($id:Int){
+    users(id:$id){
+        id,
+        name,
+        email,
+        friends{
             id,
-            name,
-            email,
-            friends{
-                id,
-                name
-            }
+            name
         }
     }
 }
 '
 ```
 
-参数分为两部分：
+参数统一通过post的方式传递，分为两部分：
 
-### GET参数
+### json参数
 
-参数名`vars`，json结构，其中公共的参数名如下：
+参数名`params`，json结构，其中公共的参数名如下：
 
 参数    | 类型   | 是否允许不传 | 默认值   | 说明
 ---     | -----  | -------      | ------   | -------
@@ -116,9 +114,9 @@ public function args()
 
 另外：`可以统一注入loginId`等参数，并且避免外部传入该值。
 
-### POST参数
+### 查询语句
 
-以文本的方式post，参数以变量的形式通过`vars`传递，应该避免在语句中写入了参数。这样语句就可以统一写在配置文件里。
+以文本的方式post，参数以变量的形式通过`params`传递，应该避免在语句中写入了参数。这样语句就可以统一写在配置文件里。
 
 ## 避免N+1查询问题
 
@@ -158,5 +156,26 @@ books(limit:10){
 这时，如果实现没有做特殊的处理，就会产生N+1次查询，因为对于每个Book都会对应的查询User一次！
 
 在php中的解决方式见：https://github.com/Folkloreatelier/laravel-graphql/blob/master/docs/advanced.md#eager-loading-relationships （关于with的用法，具体看这里：http://laravelacademy.org/post/140.html#ipt_kb_toc_140_9 ）
+
+## Create a mutation
+通常的写法是这样：
+
+```
+mutation users {
+    updateUserPassword(id: "1", password: "newpassword") {
+        id
+        email
+    }
+}
+```
+
+但是这样生成字符串不方便，使用变量的形式，并将参数统一放到post的body中，如：
+
+```
+curl -g "http://homestead.app/graphql" -d 'query=mutation+users($id:Int,$password:String){updateUserPassword(id:$id, password:$password){id,email}}&params={id:"1", password:"newpassword"}'
+```
+
+同样，对于update的请求也是一样的处理。
+
 
 
