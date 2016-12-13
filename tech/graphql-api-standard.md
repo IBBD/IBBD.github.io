@@ -64,6 +64,8 @@ query getUserList($id:Int){
 '
 ```
 
+这样的好处是，能将参数转化为我们熟悉的json进行操作，而且对应的query语句也能统一配置。
+
 参数统一通过post的方式传递，分为两部分：
 
 ### json参数
@@ -90,7 +92,8 @@ public function args()
 }
 
 // 可以定义一个参数类
-class ControllerArgs {
+class ControllerArgs 
+{
     public static function get(array $args, $default_offset=0, $default_limit=0, $use_sort=false, $use_groupby=false) 
     {
         $args["offset"] = ['name' => 'offset', 'type' => Type::int()];
