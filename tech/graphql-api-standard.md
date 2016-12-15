@@ -9,10 +9,66 @@
 GraphQL是API的UI。
 
 - 类型系统（服务器端）描述有什么数据，客户端决定获取什么数据。
-- 不需要版本号的概念，接口可以方便的实现前后的版本兼容。对不需要的参数，可以标注为`deprecated`
+- 不需要版本号的概念，接口可以方便的实现前后的版本兼容。对不需要的参数，可以标注为`deprecated`，并且可以注明原因。
 - GraphQL可以自解释，API文档大大的减少，并且有一个强大的开发工具`Graphiql`。因此字段定义中的描述字段也是比较重要的，对应名字通常是`description`。
 - 可以通过组合的形式，将大量的数据集合到一次请求里。这样的确是减少了请求数，但是不建议这样，一次请求应该包含一个单一的目的。
 - GraphQL查询可以不断的嵌套和组合，提供了极大的灵活性，但是这样也会导致请求过于复杂，难以维护。适当的时候，可以使用数据库层面的视图功能，简化查询，简化逻辑。例如不同的用户角色如果需要访问不同的数据，那就可以通过不同的视图来提供。
+
+## 类型系统
+类型系统是GraphQL最基础也最重要的部分。
+
+- 内置类型
+  - 基础标量类型（scalar）：`ID`, `String`, `Int`, `Float`, `Boolean`
+  - 两个内置修饰类型：`ListOf` and `NonNull`
+- 枚举类型：可以用于状态等类型字段的定义
+- 接口类型：接口用于描述多个类型的通用字段，例如一个表示实体数据结构的 GraphQL 接口为：
+
+```javascript
+const EntityType = new GraphQLInterfaceType({
+  name: 'Entity',
+  fields: {
+    name: { type: GraphQLString }
+  }
+});
+```
+
+- Object类型：
+
+用于描述层级或者树形数据结构。对于树形数据结构来说，叶子字段的类型都是标量数据类型。几乎所有 GraphQL 类型都是对象类型。Object 类型有一个 name 字段，以及一个很重要的 fields 字段。fields 字段可以描述出一个完整的数据结构。例如一个表示地址数据结构的 GraphQL 对象为：
+
+```javascript
+const AddressType = new GraphQLObjectType({
+  name: 'Address',
+  fields: {
+    street: { type: GraphQLString },
+    number: { type: GraphQLInt },
+    formatted: {
+      type: GraphQLString,
+      resolve(obj) {
+        return obj.number + ' ' + obj.street
+      }
+    }
+  }
+});
+```
+
+- 联合类型：（在我们选择的php库中尚未实现，暂时不管）
+- 字段（Field）类型：
+
+## 模式Schema
+当定义好所有类型之后，就要开始定义模式。模式有两个特别的根类型组成：`query`和`mutation`，例子见：https://github.com/webonyx/graphql-php/blob/master/tests/StarWarsSchema.php 
+
+设计的思路是：`先设计好类型系统，再设计模式`。
+
+## 查询语言
+查询语言的开发原则是：
+
+- 一次查询只实现一个单一目标。
+- 尽量避免使用片段，指令之类的高级特性。
+- 使用POST提交数据
+- 参数与查询语句分离
+
+下面还会有例子说明这几点。
 
 ## 权限
 
@@ -48,7 +104,7 @@ Authorization: token_value_of_successful_login
 
 样例如下
 
-```
+```sh
 curl -g 'http://host/graphql' -d 'params={"id":1}&query=
 query getUserList($id:Int){
     users(id:$id){
@@ -64,7 +120,7 @@ query getUserList($id:Int){
 '
 ```
 
-这样的好处是，能将参数转化为我们熟悉的json进行操作，而且对应的query语句也能统一配置。
+参数与查询语句的好处是，能将参数转化为我们熟悉的json进行操作，而且对应的query语句也能统一配置。
 
 参数统一通过post的方式传递，分为两部分：
 
@@ -249,5 +305,70 @@ curl -g "http://homestead.app/graphql" -d 'query=mutation+users($id:Int,$passwor
 
 同样，对于update的请求也是一样的处理。
 
+## 自解析
+写接口的时候，通常还需要写相应的接口文档，这不仅累赘，增加了维护的负担，而且文档本身的理解也经常达不到各方的一致（例如前端，后端，测试等）。
 
+```go
+// 定义
+var userType = graphql.NewObject(graphql.ObjectConfig{
+	Name:        "User",
+	Description: "用户类型",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type:        graphql.Int,
+			Description: "用户ID",  // 字段注释
+		},
+		"name": &graphql.Field{
+			Type:        graphql.String,
+			Description: "用户名",
+		},
+		"status": &graphql.Field{
+			Type:        userStatusType,
+			Description: "用户状态",
+		},
+	},
+})
 
+// 查询
+// 使用：__type
+curl -g 'http://localhost:8080/graphql' -d 'query={__type(name:"User"){name,description,fields{name,description,type{name}}}}'
+
+// 返回值
+{
+  "data": {
+    "__type": {
+      "name": "User",
+      "description": "用户类型",
+      "fields": [
+        {
+          "description": "用户名",
+          "name": "name",
+          "type": {
+            "name": "String"
+          }
+        },
+        {
+          "description": "用户状态",
+          "name": "status",
+          "type": {
+            "name": "UserStatus"
+          }
+        },
+        {
+          "description": "用户ID",
+          "name": "id",
+          "type": {
+            "name": "Int"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+相关文档：https://facebook.github.io/graphql/?spm=5176.100239.blogcont8183.18.i5VDOY#sec-Introspection
+
+## 相关文档阅读
+
+- 深入理解 GraphQL https://yq.aliyun.com/articles/8183
