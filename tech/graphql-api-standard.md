@@ -160,6 +160,75 @@ books(limit:10){
 
 在php中的解决方式见：https://github.com/Folkloreatelier/laravel-graphql/blob/master/docs/advanced.md#eager-loading-relationships （关于with的用法，具体看这里：http://laravelacademy.org/post/140.html#ipt_kb_toc_140_9 ）
 
+## 善用枚举类型
+设计数据库或者接口的时候，经常会碰到状态类型的字段（枚举不止可以用于状态字段），程序如果设计比较合理的话，会用常量替换相应的数值（避免硬编码），增加可读性。但是这样还是不够，因为我们通常是前后端分离的，前后端都必须有一个常量定义，而且往往很难做统一。
+
+在GraphQL中使用枚举类型就很适合了。看例子：
+
+```go
+// 这里使用golang
+// php其实也是类似的
+
+// 用户状态常量定义
+const (
+	UserStatusNormal uint8 = 0
+	UserStatusMoney  uint8 = 1
+	UserStatusHigh   uint8 = 2
+)
+
+// 接口中的用户类型定义
+var userStatusType = graphql.NewEnum(graphql.EnumConfig{
+	Name: "UserStatus",
+	Values: graphql.EnumValueConfigMap{
+		// 普通用户
+		"NORMAL": &graphql.EnumValueConfig{
+			Value: UserStatusNormal,
+		},
+		// 付费用户
+		"MONEY": &graphql.EnumValueConfig{
+			Value: UserStatusMoney,
+		},
+		// 高级用户
+		"HIGH": &graphql.EnumValueConfig{
+			Value: UserStatusHigh,
+		},
+	},
+})
+
+var userType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "User",
+	Fields: graphql.Fields{
+		// 这里省略了其他字段
+		"status": &graphql.Field{
+			Type: userStatusType, // 枚举类型
+		},
+	},
+})
+
+var usersQuery = &graphql.Field{
+	Type: graphql.NewList(userType),
+	Args: graphql.FieldConfigArgument{
+		"status": &graphql.ArgumentConfig{
+			Type:         userStatusType,  // 用户状态枚举类型
+			DefaultValue: 0,
+		},
+	},
+	Resolve: func(params graphql.ResolveParams) (interface{}, error) { },
+}
+```
+
+下面看看使用效果：
+
+```sh
+# 注意status参数的类型是UserStatus
+curl -g 'http://localhost:8080/graphql' -d 'query=query+getList($status:UserStatus){users(status:$status){id,name,status}}&params={"status":"NORMAL"}'
+
+# 返回结果：
+{"data":{"users":[{"id":3,"name":"userC","status":"NORMAL"}]}}
+```
+
+这样前端使用的时候，就可以直接使用`NORMAL`，不再是没有直观意义的数值，可读性会大大提升。
+
 ## Create a mutation
 通常的写法是这样：
 
