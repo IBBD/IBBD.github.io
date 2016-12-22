@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 12月 12日 星期一 00:11:51 CST
+    Created by ./create_index   date: 2016年 12月 22日 星期四 18:26:02 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -84,6 +84,7 @@
 - PHP
   - laravel
     - [基于laravel和Bootstrap的cms系统](php/laravel/laravel-bootstrapt-cms.md)
+    - [Laravel数据迁移是的一个坑（float类型）](php/laravel/mysql-float.md)
   - php-the-right-way-learning
     - [php-the-right-way-learning-阅读笔记 By Alex](php/php-the-right-way-learning/alex.md)
   - [在php7-fpm的docker镜像内编译GD扩展](php/php-gd-in-docker-install.md)

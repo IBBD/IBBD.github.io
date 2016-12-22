@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 12月 12日 星期一 00:11:52 CST
+    Created by ./create_index   date: 2016年 12月 22日 星期四 18:26:03 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-12-22
+
+- [Laravel数据迁移是的一个坑（float类型）](php/laravel/mysql-float.md)
 
 #### 2016-12-12
 
