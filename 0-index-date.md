@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2016年 12月 22日 星期四 18:26:03 CST
+    Created by ./create_index   date: 2016年 12月 23日 星期五 12:20:02 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2016-12-23
+
+- [语料库建立步骤](tech/nlp-steps.md)
 
 #### 2016-12-22
 

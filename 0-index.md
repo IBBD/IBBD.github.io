@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 12月 22日 星期四 18:26:02 CST
+    Created by ./create_index   date: 2016年 12月 23日 星期五 12:20:01 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -101,5 +101,6 @@
   - [IBBD GraphQL API 规范文档](tech/graphql-api-standard.md)
   - [日志分析之shell篇](tech/log-analyse-by-shell.md)
   - [大型系统的日志系统架构思考](tech/log-system.md)
+  - [语料库建立步骤](tech/nlp-steps.md)
   - [IBBD Restful API 规范](tech/restful-api-standard.md)
   - [保证程序的可测试性](tech/testing-tech.md)
