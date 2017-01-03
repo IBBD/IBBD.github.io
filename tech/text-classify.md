@@ -1,5 +1,8 @@
 # 文本分类问题解决步骤
 
+python版使用svm算法对短文本进行分类的样例：https://github.com/IBBD/short-text-svm
+
+
 ## STEP0: 了解业务背景，数据产生逻辑
 
 这是问题解决的基础步骤，不详述。
