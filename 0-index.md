@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2016年 12月 23日 星期五 12:20:01 CST
+    Created by ./create_index   date: 2017年 01月 03日 星期二 11:18:10 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -104,3 +104,4 @@
   - [语料库建立步骤](tech/nlp-steps.md)
   - [IBBD Restful API 规范](tech/restful-api-standard.md)
   - [保证程序的可测试性](tech/testing-tech.md)
+  - [文本分类问题解决步骤](tech/text-classify.md)
