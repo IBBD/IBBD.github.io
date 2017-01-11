@@ -23,45 +23,45 @@ fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こ
 
 ### 前端
 
-![Javascript](/_img/javascript.jpg)
-![React](/_img/react.jpg)
-![Redux](/_img/redux.png)
-![D3](/_img/d3js.jpg)
+![Javascript](https://github.com/IBBD/IBBD.github.io/raw/master/_img/javascript.jpg)
+![React](https://github.com/IBBD/IBBD.github.io/raw/master/_img/react.jpg)
+![Redux](https://github.com/IBBD/IBBD.github.io/raw/master/_img/redux.png)
+![D3](https://github.com/IBBD/IBBD.github.io/raw/master/_img/d3js.jpg)
 
 ### 后台
 
-![PHP](/_img/php.jpg)
-![Laravel](/_img/laravel.jpg)
-![Nodejs](/_img/nodejs.jpg)
+![PHP](https://github.com/IBBD/IBBD.github.io/raw/master/_img/php.jpg)
+![Laravel](https://github.com/IBBD/IBBD.github.io/raw/master/_img/laravel.jpg)
+![Nodejs](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nodejs.jpg)
 
 ### 后端
 
-![Shell](/_img/shell.jpg)
-![Docker](/_img/docker.jpg)
-![Redis](/_img/redis.jpg)
-![MariaDB](/_img/mariadb.jpg)
-![MongoDB](/_img/mongodb.jpg)
-![Golang](/_img/golang.jpg)
+![Shell](https://github.com/IBBD/IBBD.github.io/raw/master/_img/shell.jpg)
+![Docker](https://github.com/IBBD/IBBD.github.io/raw/master/_img/docker.jpg)
+![Redis](https://github.com/IBBD/IBBD.github.io/raw/master/_img/redis.jpg)
+![MariaDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mariadb.jpg)
+![MongoDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mongodb.jpg)
+![Golang](https://github.com/IBBD/IBBD.github.io/raw/master/_img/golang.jpg)
 
 ### 大数据
 
-![Python](/_img/python.jpg)
-![Scrapy](/_img/scrapy.jpg)
-![NLTK](/_img/nltk.jpg)
-![Hadoop](/_img/hadoop.jpg)
-![Spark](/_img/spark.jpg)
-![ElasticSearch](/_img/elasticsearch.jpg)
+![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
+![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
+![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
+![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
+![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
+![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
 
 ### 其他
 
-![Ubuntu](/_img/ubuntu.jpg)
-![Git](/_img/git.jpg)
-![vim](/_img/vim.jpg)
+![Ubuntu](https://github.com/IBBD/IBBD.github.io/raw/master/_img/ubuntu.jpg)
+![Git](https://github.com/IBBD/IBBD.github.io/raw/master/_img/git.jpg)
+![vim](https://github.com/IBBD/IBBD.github.io/raw/master/_img/vim.jpg)
 
 
 ## 使用步骤
 
-发布：
+### 发布：
 
 1. git clone本项目
 2. 编辑一个文档，markdown格式
@@ -70,11 +70,21 @@ fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こ
 5. git commit -am '说明'
 6. git push
 
-搜索：
+### 搜索：
 
-1. 按关键词搜索：`./search your-keyword`
+- 使用`ag`搜索，用法如下：
 
-*注意* 
+```sh
+# Install
+apt-get install silversearcher-ag
+
+# 使用
+ag test_blah ~/code/
+```
+
+- 也可以我们实现的脚本进行搜索：`./search your-keyword`
+
+### 注意
 
 - 索引文件所使用的title，默认使用md文件的第一行的字符串，会自动去掉前面的#号和空格，如果为空，则直接使用文件名
 - 在文章最后，可以按以下格式增加日期和作者（可选项）
