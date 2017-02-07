@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 01月 11日 星期三 11:15:47 CST
+    Created by ./create_index   date: 2017年 02月 07日 星期二 11:26:28 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -84,6 +84,7 @@
   - [github v3 api规范文档翻译](micro-services/github-api-standard-translate.md)
 - PHP
   - laravel
+    - [Laravel中的授权策略](php/laravel/auth-policy.md)
     - [基于laravel和Bootstrap的cms系统](php/laravel/laravel-bootstrapt-cms.md)
     - [Laravel数据迁移是的一个坑（float类型）](php/laravel/mysql-float.md)
   - php-the-right-way-learning

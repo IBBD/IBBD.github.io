@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 01月 11日 星期三 11:15:49 CST
+    Created by ./create_index   date: 2017年 02月 07日 星期二 11:26:29 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-02-07
+
+- [Laravel中的授权策略](php/laravel/auth-policy.md)
 
 #### 2017-01-11
 
