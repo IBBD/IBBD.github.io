@@ -4,10 +4,10 @@
 
 - 基于Laravel的RESTful规范 http://laravelacademy.org/post/60.html#ipt_kb_toc_60_6 ，我们只使用get, post, put, delete
 
-### 1，每个响应头部都包含如下版本号信息
+### 1，每个响应头部都包含协议的具体版本信息
 
 ```
- X-DSP-Version: v3
+ X-DSP-Version: v1.2.2.1
 ```
 
 ### 2，每个需要验证的请求头部都包含如下验证信息
@@ -16,11 +16,12 @@
  Authorization: token_value_of_successful_login
 ```
 
-### 3，每个请求头部都包含如下版本号信息
+### ~~3，每个请求头部都包含协议的大版本号~~
 
-```
- X-DSP-Version: v3
-```
+- 基于各种情况，取消了API版本化，详情参考[这里](http://www.infoq.com/cn/news/2016/07/web-api-versioning/)
+- 服务端只会维护一个版本，版本升级向后兼容，响应头中的版本信息仅用于提示客户端当前API版本，具体的变更可以参考发布日志，例如 https://dsp.xinyue.cn/release.md
+- Restful服务的变迁后让原有的业务正常工作肯定是需要工作量，关键在于这个工作量由谁来承担。如果由服务提供者承担，那么他们需要保证接口的向后兼容性，而不是随意改变URI；如果由服务的用户承担，那么他们需要迁移代码以适应新的接口。作为服务提供者，服务就像自己的产品，当然应该是自己多做些，客户少做些来的好！
+
 
 ### 4，HTTP状态码表及说明
 
@@ -42,12 +43,12 @@ http status code | message                  | method     | usage
 415              | Unsupported Media Type   | post       | 一般文件上传时数据类型不支持
 500              | Internal Server Error    | all        | 服务出现异常
 
-## 返回值格式
+### 5，返回值格式
 
 ```
 {
     error: {
-        type: "",
+        code: "",
         msg: ""
     }
 
@@ -55,119 +56,256 @@ http status code | message                  | method     | usage
 }
 ```
 
+### 6，错误状态码code说明
+
+- httpCode为200，201，400，409时body中有数据返回，其他状态码body中均无数据
+- 产生错误时code值为具体的字段，msg值为错误详情，data为空，否则表示请求成功
+- httpCode为200，201，400时，code值为field，则表示field参数值错误
+- httpCode为409时，code值为field，则表示field参数值重复
+
+
 ## Query
 
+### 请求方式：GET
+
+### URL格式：
+
 ```
-http://host/{prefix}/{databaseName}/{tableName}?fields={fieldNameList}query={jsonData}&sort={sort}&skip={skip}&limit={limit}&groupby={fieldNameList}
+http://host/{prefix}/{resource}?query={"offset":0,"limit":20,"sort":{"field":"asc"},"fields":["field"],"search":{"fields":[],"search_value":""},"where":{"filed":{"operator":"value"}}}
 ```
 
-参数    | 类型        | 是否允许不传 | 默认值 | 备注
-----    | ----        | ----         | ----   | ----
-query   | json string | 是           |        | 查询参数，见详细说明
-fields  | string      | 是           |        | 查询字段，默认返回所有字段
-sort    | string      | 是           |        | 排序参数，见详细说明
-offset  | uint        | 是           | 0      | 跳过前面若干条
-limit   | uint        | 是           | 20     | 返回多少条记录
-groupby | string      | 是           |        | 对应sql中的group by
+参数    | 类型        | 默认值 | 备注
+----        | ----          | ----  | ----
+resource    | string        |       | 要访问的实体
+query       | json string   |       | 查询参数
+offset      | uint          | 0     | 记录起始位置，>=0，
+limit       | uint          | 20    | 返回记录数目，>=0，值为0时表示取起始位置后的所有数据
+sort        | json string   |       | 返回记录排序，field排序的字段，由具体的API定义，asc与desc字段排序的方向
+fields      | json string   |       |返回字段，默认返回所有字段，由具体的API定义
+search      | json string   |       |模糊查询匹配的字段,fields需要匹配的字段，由具体的API定义，search_value模糊匹配的值
+where       | json string   |       |搜素条件，filed搜素字段，由具体的API定义，value字段的值，operator运算符，
 
 注：
 
-url前面部分遵循restful规范，例如：
+- 1、url前面部分遵循restful规范，例如：
 
 ```
-http://host/{prefix}/{databaseName}/{tableName}
-http://host/{prefix}/{databaseName}/{tableName}/{id}
-http://host/{prefix}/{databaseName}/{tableName}/{id}/{tableName2}
+http://host/{prefix}/{resource}
+http://host/{prefix}/{resource}/{id}
+http://host/{prefix}/{resource}/{id}/{resource2}
 ```
-
-### 参数详细说明
-
-#### query
-
-参考mongodb的find方法中的query参数，见相关文档：
-
-- https://docs.mongodb.com/manual/crud/#read-operations
-- https://docs.mongodb.com/manual/reference/method/db.collection.find/#db.collection.find
-- https://docs.mongodb.com/manual/reference/operator/query/
-- https://docs.mongodb.com/manual/tutorial/query-documents/
-
-mongo的查询操作符比较多，我们最多只考虑实现比较操作符即可。
-
-Example：
-
-```
-// 最简单的查询
-{fildName1: val1, fieldName2: val2}
-
-// 使用模糊匹配关键词
-// $like是模糊匹配的操作符，如: hello% （匹配hello开头的字符串）
-{fildName1: val1, fieldName2: {$like: "hello%"}}
-
-// 使用操作符
-// 注：这部分功能用得不多，可以后期需要时再实现
-{fieldName1: val1, fieldName2: {$gt: 10, $lte: 100}}
-```
-
-比较操作符如下：
+- 2、operator运算符有
 
 Name | Description
 ---- | -----
-$eq  | Matches values that are equal to a specified value.
-$gt  | Matches values that are greater than a specified value.
-$gte | Matches values that are greater than or equal to a specified value.
-$lt  | Matches values that are less than a specified value.
-$lte | Matches values that are less than or equal to a specified value.
-$ne  | Matches all values that are not equal to a specified value.
-$in  | Matches any of the values specified in an array.
-$nin | Matches none of the values specified in an array.
+eq  | Matches values that are equal to a specified value.
+gt  | Matches values that are greater than a specified value.
+gte | Matches values that are greater than or equal to a specified value.
+lt  | Matches values that are less than a specified value.
+lte | Matches values that are less than or equal to a specified value.
+ne  | Matches all values that are not equal to a specified value.
+in  | Matches any of the values specified in an array.
+nin | Matches none of the values specified in an array.
 
-模糊匹配操作符：`$like`
-
-#### fields
-
-对应sql语句中的select部分，如：`SELECT {fieldNameList} FROM ...`。example：
+### 一个完整的例子
 
 ```
-// 返回两个字段
-field1,field2
-
-// 返回的字段使用了函数
-// sum和count是sql中最基本的函数，通常和group by一起出现
-field1,sum(field2) as sum_field2
-field1,count(field2) as count_field2
+https://dsp.xinyue.cn/admin/media?query=$query_value 
 ```
 
-#### sort
+$query_value如下
 
-对应sql中的order by部分，可以按多个字段排序，默认为升序，如果字段名前有`-`则表示降序，如：
-
+```json
+{
+    "offset":0,
+    "limit":20,
+    "sort":{
+        "id":"asc",
+        "name":"desc"
+    },
+    "fields":["id","name","position","size"],
+    "where":{
+        "id":{"gt":10},
+        "name":{"like":"zhangsan"}
+    },
+    "search":{
+        "fields":["name","id"],
+        "search_value":"adview"
+    }
+}
 ```
-// 第二个字段名前有-号
-fieldName1,-fieldName2
 
-// 等价于sql：
+请求参数
 
-ORDER BY fieldName1 ASC, fieldName2 DESC
+|参数 |类型 |说明 |范围及格式
+|--- |--- |--- |---
+| sort      | string    | 指定排序参数       | 排序参数可选：id,recommend
+| fields    | string    | 返回参数          | 可选项参考返回例子中的参数
+| where     | string    | 查询条件          | 可选参数：id,channel_id,recommend,name
+| search    | string    | 查询条件，模糊查询  | 可选参数：name
+
+返回结果
+
+```json
+{
+    "error": {
+        "code":"",
+        "msg": ""
+    },
+    "total":1,
+    "data" :[
+        {
+            "id": 1,
+            "channel_id": 1,
+            "recommend" :100,
+            "channel_name": "adview",
+            "name": "搜狐视频",
+            "position": "首页/时尚/财经/科技/汽车信息流",
+            "size": "150*150,690*345",
+            "price":12.9,
+            "updated_at":"2016.12.16 16:42:23"
+        }
+    ]
+}
 ```
-
-#### offset and limit
-
-分页参数，对应sql中的limit
-
-#### groupby
-
-对应sql的group by，如果多个字段，则用逗号分隔
-
-### 查询返回值
-
 
 ## Create
 
+### 请求方法：POST
+
+### 请求数据：JSON
+
+### URL格式：
+
+```
+http://host/{prefix}/{resource}
+```
+
+### 一个完整的例子
+
+```
+https://dsp.xinyue.cn/admin/media
+```
+
+```json
+{
+    "channel_id": 1,
+    "name": "搜狐视频",
+    "position": "首页/时尚/财经/科技/汽车信息流",
+    "size": "150*150,690*345",
+    "price":12.9,
+}
+```
+
+请求参数
+
+|参数 |类型 |说明 |范围及格式
+|--- |--- |--- |---
+| channel_id        | int       | 渠道ID\*          | >1
+| name              | string    | 名称\*             | 
+| position          | string    | 位置\*             | 
+| size              | string    | 尺寸\*             | 
+| price             | int       | 建议出价\*          | >0
+
+返回结果
+
+```json
+{
+    "error": {
+        "code":"",
+        "msg": ""
+    },
+    "data" : {
+        "id": 1,
+        "channel_id": 1,
+        "recommend" :100,
+        "channel_name": "adview",
+        "name": "搜狐视频",
+        "position": "首页/时尚/财经/科技/汽车信息流",
+        "size": "150*150,690*345",
+        "price":12.9,
+        "created_at":"2016.12.16 16:42:23",
+        "updated_at":"2016.12.16 16:42:23"
+    }
+}
+```
+
 ## Update
+
+### 请求方法：PATCH
+
+### 请求数据：JSON
+
+### URL格式：
+
+```
+http://host/{prefix}/{resource}/{id}
+```
+
+### 一个完整的例子
+
+```
+https://dsp.xinyue.cn/admin/media/1
+```
+
+```json
+{
+    "channel_id": 1,
+    "recommend" :100,
+    "name": "搜狐视频",
+    "position": "首页/时尚/财经/科技/汽车信息流",
+    "size": "150*150,690*345",
+    "price":12.9,
+}
+```
+
+请求参数
+
+|参数 |类型 |说明 |范围及格式
+|--- |--- |--- |---
+| channel_id        | int       | 渠道ID          | >1
+| recommend         | int       | 排序             | >=1
+| name              | string    | 名称             | 
+| position          | string    | 位置             | 
+| size              | string    | 尺寸             | 
+| price             | int       | 建议出价          | >0
+
+返回结果
+
+```json
+{
+    "error": {
+        "code":"",
+        "msg": ""
+    },
+    "data" : {
+        "id": 1,
+        "channel_id": 1,
+        "recommend" :100,
+        "channel_name": "adview",
+        "name": "搜狐视频",
+        "position": "首页/时尚/财经/科技/汽车信息流",
+        "size": "150*150,690*345",
+        "price":12.9,
+        "created_at":"2016.12.16 16:42:23",
+        "updated_at":"2016.12.16 16:42:23"
+    }
+}
+```
+
 
 ## Delete
 
+### 请求方法：DELETE
 
+### URL格式：
 
+```
+http://host/{prefix}/{resource}/{id}
+```
 
+### 一个完整的例子
 
+```
+https://dsp.xinyue.cn/admin/media/1
+```
