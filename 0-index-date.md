@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 02月 07日 星期二 11:26:29 CST
+    Created by ./create_index   date: 2017年 02月 13日 星期一 12:18:39 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-02-13
+
+- [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
 
 #### 2017-02-07
 

@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 02月 07日 星期二 11:26:28 CST
+    Created by ./create_index   date: 2017年 02月 13日 星期一 12:18:38 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -94,6 +94,7 @@
   - scrapy
     - [Scrapy源码结构](python/scrapy/源码结构.md)
   - [Python中float值可能是NaN的问题](python/float-is-nan.md)
+  - [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
   - [python中使用click来构建接口应用](python/pip-module-click.md)
   - [从python2到python3的迁移](python/python2-to-python3.md)
   - [python命令行输出的样式美化](python/python-command-line-style.md)
