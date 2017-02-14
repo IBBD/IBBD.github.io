@@ -13,7 +13,7 @@
 ### 2，每个需要验证的请求头部都包含如下验证信息
 
 ```
- Authorization: token_value_of_successful_login
+ X-DSP-Token: token_value_of_successful_login
 ```
 
 ### ~~3，每个请求头部都包含协议的大版本号~~
@@ -123,7 +123,7 @@ $query_value如下
         "id":"asc",
         "name":"desc"
     },
-    "fields":["id","name","position","size"],
+    "fields":["id","name","postion","size"],
     "where":{
         "id":{"gt":10},
         "name":{"like":"zhangsan"}
@@ -160,7 +160,7 @@ $query_value如下
             "recommend" :100,
             "channel_name": "adview",
             "name": "搜狐视频",
-            "position": "首页/时尚/财经/科技/汽车信息流",
+            "postion": "首页/时尚/财经/科技/汽车信息流",
             "size": "150*150,690*345",
             "price":12.9,
             "updated_at":"2016.12.16 16:42:23"
@@ -191,7 +191,7 @@ https://dsp.xinyue.cn/admin/media
 {
     "channel_id": 1,
     "name": "搜狐视频",
-    "position": "首页/时尚/财经/科技/汽车信息流",
+    "postion": "首页/时尚/财经/科技/汽车信息流",
     "size": "150*150,690*345",
     "price":12.9,
 }
@@ -203,7 +203,7 @@ https://dsp.xinyue.cn/admin/media
 |--- |--- |--- |---
 | channel_id        | int       | 渠道ID\*          | >1
 | name              | string    | 名称\*             | 
-| position          | string    | 位置\*             | 
+| postion           | string    | 位置\*             | 
 | size              | string    | 尺寸\*             | 
 | price             | int       | 建议出价\*          | >0
 
@@ -221,7 +221,7 @@ https://dsp.xinyue.cn/admin/media
         "recommend" :100,
         "channel_name": "adview",
         "name": "搜狐视频",
-        "position": "首页/时尚/财经/科技/汽车信息流",
+        "postion": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
         "price":12.9,
         "created_at":"2016.12.16 16:42:23",
@@ -253,7 +253,7 @@ https://dsp.xinyue.cn/admin/media/1
     "channel_id": 1,
     "recommend" :100,
     "name": "搜狐视频",
-    "position": "首页/时尚/财经/科技/汽车信息流",
+    "postion": "首页/时尚/财经/科技/汽车信息流",
     "size": "150*150,690*345",
     "price":12.9,
 }
@@ -266,7 +266,7 @@ https://dsp.xinyue.cn/admin/media/1
 | channel_id        | int       | 渠道ID          | >1
 | recommend         | int       | 排序             | >=1
 | name              | string    | 名称             | 
-| position          | string    | 位置             | 
+| postion           | string    | 位置             | 
 | size              | string    | 尺寸             | 
 | price             | int       | 建议出价          | >0
 
@@ -284,7 +284,7 @@ https://dsp.xinyue.cn/admin/media/1
         "recommend" :100,
         "channel_name": "adview",
         "name": "搜狐视频",
-        "position": "首页/时尚/财经/科技/汽车信息流",
+        "postion": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
         "price":12.9,
         "created_at":"2016.12.16 16:42:23",
