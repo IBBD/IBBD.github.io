@@ -129,9 +129,9 @@ $query_value如下
     "where":{
         "id":{"gt":10},
         "name":{"like":"zhangsan"},
-        "updated_at":{"bt":{ //range start and end
-            "start":{"gt":"2016.12.16 16:42:23"},//操作符仅支持gt,lt,gte,lte
-            "end":{"lt":"2016.12.16 16:42:23"},
+        "updated_at":{"rg":{ //range start and end
+            "start":{"gt":"2016-12-16 16:42:23"},//操作符仅支持gt,lt,gte,lte
+            "end":{"lt":"2016-12-16 16:42:23"},
         }}
     },
     "search":{
@@ -169,7 +169,7 @@ $query_value如下
             "position": "首页/时尚/财经/科技/汽车信息流",
             "size": "150*150,690*345",
             "price":12.9,
-            "updated_at":"2016.12.16 16:42:23"
+            "updated_at":"2016-12-16 16:42:23"
         }
     ]
 }
@@ -230,8 +230,8 @@ https://dsp.xinyue.cn/admin/media
         "position": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
         "price":12.9,
-        "created_at":"2016.12.16 16:42:23",
-        "updated_at":"2016.12.16 16:42:23"
+        "created_at":"2016-12-16 16:42:23",
+        "updated_at":"2016-12-16 16:42:23"
     }
 }
 ```
@@ -293,8 +293,8 @@ https://dsp.xinyue.cn/admin/media/1
         "position": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
         "price":12.9,
-        "created_at":"2016.12.16 16:42:23",
-        "updated_at":"2016.12.16 16:42:23"
+        "created_at":"2016-12-16 16:42:23",
+        "updated_at":"2016-12-16 16:42:23"
     }
 }
 ```
