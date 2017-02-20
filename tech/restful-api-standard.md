@@ -106,6 +106,8 @@ lte | Matches values that are less than or equal to a specified value.
 ne  | Matches all values that are not equal to a specified value.
 in  | Matches any of the values specified in an array.
 nin | Matches none of the values specified in an array.
+rg  | Matches values that are in the range(使用参照例子)
+
 
 ### 一个完整的例子
 
@@ -126,7 +128,11 @@ $query_value如下
     "fields":["id","name","position","size"],
     "where":{
         "id":{"gt":10},
-        "name":{"like":"zhangsan"}
+        "name":{"like":"zhangsan"},
+        "updated_at":{"bt":{ //range start and end
+            "start":{"gt":"2016.12.16 16:42:23"},//操作符仅支持gt,lt,gte,lte
+            "end":{"lt":"2016.12.16 16:42:23"},
+        }}
     },
     "search":{
         "fields":["name","id"],
