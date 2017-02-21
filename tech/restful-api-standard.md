@@ -26,7 +26,7 @@
 ### 4，HTTP状态码表及说明
 
 http status code | message                  | method     | usage
-----             | ------                   | ------     | --------                     
+----             | ------                   | ------     | --------
 200              | OK                       | get        | 查询数据
 201              | CREATED                  | post,patch | 添加或修改数据成功
 204              | NO CONTENT               | delete     | 删除数据成功
@@ -50,7 +50,7 @@ http status code | message                  | method     | usage
     error: {
         code: "",
         msg: ""
-    }
+    },
 
     data: <data object or data array>
 }
@@ -82,7 +82,7 @@ offset   | uint        | 0      | 记录起始位置，>=0，
 limit    | uint        | 20     | 返回记录数目，>=0，值为0时表示取起始位置后的所有数据
 sort     | json string |        | 返回记录排序，field排序的字段，由具体的API定义，asc与desc字段排序的方向
 fields   | json string |        | 返回字段，默认返回所有字段，由具体的API定义
-search   | json string |        | 模糊查询匹配的字段,fields需要匹配的字段，由具体的API定义，search_value模糊匹配的值
+search   | json string |        | 模糊查询匹配的字段,fields需要匹配的字段，由具体的API定义，value模糊匹配的值
 where    | json string |        | 搜素条件，filed搜素字段，由具体的API定义，value字段的值，operator运算符，
 
 注：
@@ -114,28 +114,30 @@ nin  | Matches none of the values specified in an array.
 https://hostname.com/admin/media?query=$query_value 
 ```
 
-$query_value如下
+`$query_value`如下:
 
 ```json
 {
-    "offset":0,
-    "limit":20,
-    "sort":{
-        "id":"asc",
-        "name":"desc"
+    "offset": 0,
+    "limit": 20,
+    "sort": {
+        "id": "asc",
+        "name": "desc"
     },
-    "fields":["id","name","position","size"],
-    "where":{
-        "id":{"gt":10},
-        "name":{"like":"zhangsan"},
-        "updated_at":{
-            "gt":"2016-12-16 16:42:23",   //操作符仅支持gt,lt,gte,lte
-            "lt":"2016-12-16 16:42:23"
+    "fields": ["id", "name", "position", "size"],
+    "where": {
+        "id": {"gt": 10},            // id值大于10
+        "name": {"eq": "zhangsan"},    // name值等于zhangsan
+        "updated_at": {            // 更新时间在两个值之间
+            "gt": "2016-12-16 16:42:23",
+            "lt": "2016-12-16 16:42:23"
         }
     },
-    "search":{
-        "fields":["name","id"],
-        "value":"adview"
+    "search": {
+        // 在name和title两个字段中搜索hello这个关键词
+        // %是通配符，这里表示只要包含hello这个关键词即可。如果需要搜索hello作为前缀的字符串，则可以：hello%
+        "fields": ["name", "title"],
+        "value": "%hello%"
     }
 }
 ```
@@ -154,21 +156,21 @@ $query_value如下
 ```json
 {
     "error": {
-        "code":"",
+        "code": "",
         "msg": ""
     },
-    "total":1,
-    "data" :[
+    "total": 1,
+    "data": [
         {
             "id": 1,
             "channel_id": 1,
-            "recommend" :100,
+            "recommend": 100,
             "channel_name": "adview",
             "name": "搜狐视频",
             "position": "首页/时尚/财经/科技/汽车信息流",
             "size": "150*150,690*345",
-            "price":12.9,
-            "updated_at":"2016-12-16 16:42:23"
+            "price": 12.9,
+            "updated_at": "2016-12-16 16:42:23"
         }
     ]
 }
@@ -198,7 +200,7 @@ https://hostname.com/admin/media
     "name": "搜狐视频",
     "position": "首页/时尚/财经/科技/汽车信息流",
     "size": "150*150,690*345",
-    "price":12.9
+    "price": 12.9
 }
 ```
 
@@ -217,13 +219,13 @@ https://hostname.com/admin/media
 ```json
 {
     "error": {
-        "code":"",
+        "code": "",
         "msg": ""
     },
-    "data" : {
+    "data": {
         "id": 1,
         "channel_id": 1,
-        "recommend" :100,
+        "recommend": 100,
         "channel_name": "adview",
         "name": "搜狐视频",
         "position": "首页/时尚/财经/科技/汽车信息流",
@@ -283,17 +285,17 @@ https://hostname.com/admin/media/1
         "code":"",
         "msg": ""
     },
-    "data" : {
+    "data": {
         "id": 1,
         "channel_id": 1,
-        "recommend" :100,
+        "recommend": 100,
         "channel_name": "adview",
         "name": "搜狐视频",
         "position": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
-        "price":12.9,
-        "created_at":"2016-12-16 16:42:23",
-        "updated_at":"2016-12-16 16:42:23"
+        "price": 12.9,
+        "created_at": "2016-12-16 16:42:23",
+        "updated_at": "2016-12-16 16:42:23"
     }
 }
 ```
