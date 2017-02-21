@@ -19,7 +19,7 @@
 ### ~~3，每个请求头部都包含协议的大版本号~~
 
 - 基于各种情况，取消了API版本化，详情参考[这里](http://www.infoq.com/cn/news/2016/07/web-api-versioning/)
-- 服务端只会维护一个版本，版本升级向后兼容，响应头中的版本信息仅用于提示客户端当前API版本，具体的变更可以参考发布日志，例如 https://dsp.xinyue.cn/release.md
+- 服务端只会维护一个版本，版本升级向后兼容，响应头中的版本信息仅用于提示客户端当前API版本，具体的变更可以参考发布日志，例如 https://hostname.com/release.md
 - Restful服务的变迁后让原有的业务正常工作肯定是需要工作量，关键在于这个工作量由谁来承担。如果由服务提供者承担，那么他们需要保证接口的向后兼容性，而不是随意改变URI；如果由服务的用户承担，那么他们需要迁移代码以适应新的接口。作为服务提供者，服务就像自己的产品，当然应该是自己多做些，客户少做些来的好！
 
 
@@ -71,48 +71,47 @@ http status code | message                  | method     | usage
 ### URL格式：
 
 ```
-http://host/{prefix}/{resource}?query={"offset":0,"limit":20,"sort":{"field":"asc"},"fields":["field"],"search":{"fields":[],"search_value":""},"where":{"filed":{"operator":"value"}}}
+http://hostname.com/{prefix}/{resource}?query={"offset":0,"limit":20,"sort":{"field":"asc"},"fields":["field"],"search":{"fields":[],"value":""},"where":{"filed":{"operator":"value"}}}
 ```
 
-参数    | 类型        | 默认值 | 备注
-----        | ----          | ----  | ----
-resource    | string        |       | 要访问的实体
-query       | json string   |       | 查询参数
-offset      | uint          | 0     | 记录起始位置，>=0，
-limit       | uint          | 20    | 返回记录数目，>=0，值为0时表示取起始位置后的所有数据
-sort        | json string   |       | 返回记录排序，field排序的字段，由具体的API定义，asc与desc字段排序的方向
-fields      | json string   |       |返回字段，默认返回所有字段，由具体的API定义
-search      | json string   |       |模糊查询匹配的字段,fields需要匹配的字段，由具体的API定义，search_value模糊匹配的值
-where       | json string   |       |搜素条件，filed搜素字段，由具体的API定义，value字段的值，operator运算符，
+参数     | 类型        | 默认值 | 备注
+----     | ----        | ----   | ----
+resource | string      |        | 要访问的实体
+query    | json string |        | 查询参数
+offset   | uint        | 0      | 记录起始位置，>=0，
+limit    | uint        | 20     | 返回记录数目，>=0，值为0时表示取起始位置后的所有数据
+sort     | json string |        | 返回记录排序，field排序的字段，由具体的API定义，asc与desc字段排序的方向
+fields   | json string |        | 返回字段，默认返回所有字段，由具体的API定义
+search   | json string |        | 模糊查询匹配的字段,fields需要匹配的字段，由具体的API定义，search_value模糊匹配的值
+where    | json string |        | 搜素条件，filed搜素字段，由具体的API定义，value字段的值，operator运算符，
 
 注：
 
 - 1、url前面部分遵循restful规范，例如：
 
 ```
-http://host/{prefix}/{resource}
-http://host/{prefix}/{resource}/{id}
-http://host/{prefix}/{resource}/{id}/{resource2}
+http://hostname.com/{prefix}/{resource}
+http://hostname.com/{prefix}/{resource}/{id}
+http://hostname.com/{prefix}/{resource}/{id}/{resource2}
 ```
 - 2、operator运算符有
 
 Name | Description
 ---- | -----
-eq  | Matches values that are equal to a specified value.
-gt  | Matches values that are greater than a specified value.
-gte | Matches values that are greater than or equal to a specified value.
-lt  | Matches values that are less than a specified value.
-lte | Matches values that are less than or equal to a specified value.
-ne  | Matches all values that are not equal to a specified value.
-in  | Matches any of the values specified in an array.
-nin | Matches none of the values specified in an array.
-rg  | Matches values that are in the range(使用参照例子)
+eq   | Matches values that are equal to a specified value.
+gt   | Matches values that are greater than a specified value.
+gte  | Matches values that are greater than or equal to a specified value.
+lt   | Matches values that are less than a specified value.
+lte  | Matches values that are less than or equal to a specified value.
+ne   | Matches all values that are not equal to a specified value.
+in   | Matches any of the values specified in an array.
+nin  | Matches none of the values specified in an array.
 
 
 ### 一个完整的例子
 
 ```
-https://dsp.xinyue.cn/admin/media?query=$query_value 
+https://hostname.com/admin/media?query=$query_value 
 ```
 
 $query_value如下
@@ -129,26 +128,26 @@ $query_value如下
     "where":{
         "id":{"gt":10},
         "name":{"like":"zhangsan"},
-        "updated_at":{"rg":{ //range start and end
-            "start":{"gt":"2016-12-16 16:42:23"},//操作符仅支持gt,lt,gte,lte
-            "end":{"lt":"2016-12-16 16:42:23"},
-        }}
+        "updated_at":{
+            "gt":"2016-12-16 16:42:23",   //操作符仅支持gt,lt,gte,lte
+            "lt":"2016-12-16 16:42:23"
+        }
     },
     "search":{
         "fields":["name","id"],
-        "search_value":"adview"
+        "value":"adview"
     }
 }
 ```
 
 请求参数
 
-|参数 |类型 |说明 |范围及格式
-|--- |--- |--- |---
-| sort      | string    | 指定排序参数       | 排序参数可选：id,recommend
-| fields    | string    | 返回参数          | 可选项参考返回例子中的参数
-| where     | string    | 查询条件          | 可选参数：id,channel_id,recommend,name
-| search    | string    | 查询条件，模糊查询  | 可选参数：name
+| 参数   | 类型   | 说明               | 范围及格式
+| ---    | ---    | ---                | ---
+| sort   | string | 指定排序参数       | 排序参数可选：id,recommend
+| fields | string | 返回参数           | 可选项参考返回例子中的参数
+| where  | string | 查询条件           | 可选参数：id,channel_id,recommend,name
+| search | string | 查询条件，模糊查询 | 可选参数：name
 
 返回结果
 
@@ -184,13 +183,13 @@ $query_value如下
 ### URL格式：
 
 ```
-http://host/{prefix}/{resource}
+http://hostname.com/{prefix}/{resource}
 ```
 
 ### 一个完整的例子
 
 ```
-https://dsp.xinyue.cn/admin/media
+https://hostname.com/admin/media
 ```
 
 ```json
@@ -199,19 +198,19 @@ https://dsp.xinyue.cn/admin/media
     "name": "搜狐视频",
     "position": "首页/时尚/财经/科技/汽车信息流",
     "size": "150*150,690*345",
-    "price":12.9,
+    "price":12.9
 }
 ```
 
 请求参数
 
-|参数 |类型 |说明 |范围及格式
-|--- |--- |--- |---
-| channel_id        | int       | 渠道ID\*          | >1
-| name              | string    | 名称\*             | 
-| position           | string    | 位置\*             | 
-| size              | string    | 尺寸\*             | 
-| price             | int       | 建议出价\*          | >0
+| 参数       | 类型   | 说明       | 范围及格式
+| ---        | ---    | ---        | ---
+| channel_id | int    | 渠道ID\*   | >1
+| name       | string | 名称\*     |
+| position   | string | 位置\*     |
+| size       | string | 尺寸\*     |
+| price      | int    | 建议出价\* | >0
 
 返回结果
 
@@ -229,9 +228,9 @@ https://dsp.xinyue.cn/admin/media
         "name": "搜狐视频",
         "position": "首页/时尚/财经/科技/汽车信息流",
         "size": "150*150,690*345",
-        "price":12.9,
-        "created_at":"2016-12-16 16:42:23",
-        "updated_at":"2016-12-16 16:42:23"
+        "price": 12.9,
+        "created_at": "2016-12-16 16:42:23",
+        "updated_at": "2016-12-16 16:42:23"
     }
 }
 ```
@@ -245,36 +244,36 @@ https://dsp.xinyue.cn/admin/media
 ### URL格式：
 
 ```
-http://host/{prefix}/{resource}/{id}
+http://hostname.com/{prefix}/{resource}/{id}
 ```
 
 ### 一个完整的例子
 
 ```
-https://dsp.xinyue.cn/admin/media/1
+https://hostname.com/admin/media/1
 ```
 
 ```json
 {
     "channel_id": 1,
-    "recommend" :100,
+    "recommend": 100,
     "name": "搜狐视频",
     "position": "首页/时尚/财经/科技/汽车信息流",
     "size": "150*150,690*345",
-    "price":12.9,
+    "price": 12.9
 }
 ```
 
 请求参数
 
-|参数 |类型 |说明 |范围及格式
-|--- |--- |--- |---
-| channel_id        | int       | 渠道ID          | >1
-| recommend         | int       | 排序             | >=1
-| name              | string    | 名称             | 
-| position           | string    | 位置             | 
-| size              | string    | 尺寸             | 
-| price             | int       | 建议出价          | >0
+| 参数       | 类型   | 说明     | 范围及格式
+| ---        | ---    | ---      | ---
+| channel_id | int    | 渠道ID   | >1
+| recommend  | int    | 排序     | >=1
+| name       | string | 名称     |
+| position   | string | 位置     |
+| size       | string | 尺寸     |
+| price      | int    | 建议出价 | >0
 
 返回结果
 
@@ -307,11 +306,11 @@ https://dsp.xinyue.cn/admin/media/1
 ### URL格式：
 
 ```
-http://host/{prefix}/{resource}/{id}
+http://hostname.com/{prefix}/{resource}/{id}
 ```
 
 ### 一个完整的例子
 
 ```
-https://dsp.xinyue.cn/admin/media/1
+https://hostname.com/admin/media/1
 ```
