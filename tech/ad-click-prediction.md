@@ -37,5 +37,23 @@ Methods such as regularized logistic regression are a natural fit for this probl
 Because large-scale learning has been so well studied in recent years (see [3], for example) we do not devote significant space in this paper to describing our system architecture in detail. We will note, however, that the training methods bear resemblance to the Downpour SGD method described by the Google Brain team [8], with the difference that we train a single-layer model rather than a deep network of many layers. This allows us to handle significantly larger data sets and larger models than have been reported elsewhere to our knowledge, with billions of coefficients. Because trained models are replicated to many data centers for serving (see Figure 1), we are much more concerned with sparsification at serving time rather than during training.
 
 ## 3. 在线学习与稀疏性
+想对于大规模数据集的学习算法，广义的线性模型（如逻辑回归）有很多有很多优点。尽管特征向量`x`可能有数十亿的维度，但是每个是样本通常只会有几百个非0值。这使得从磁盘或者网络来的大规模的流式数据集进行高效的训练成为可能，因为每个训练样本只需要被考虑一次。
+
+For learning at massive scale, online algorithms for generalized linear models (e.g., logistic regression) have many advantages. Although the feature vector x might have billions of dimensions, typically each instance will have only hundreds of nonzero values. This enables efficient training on large data sets by streaming examples from disk or over the network [3], since each training example only needs to be considered once.
+
+（数学符号比较多，直接贴图）
+[logistic regression](/_img/ad-click-prediction/logistic-regression.png)
+
+对这些类型的问题，OGD算法已经证明是非常有效的，能用最小的计算资源来获取很好的预测精度。然而，在实践中，另一个需要考虑的关键因素是最终模型的大小，由于可以稀疏地存储模型，w中的非0参数就是内存使用量的决定性因素。
+
+Online gradient descent 1 (OGD) has proved very effective for these kinds of problems, producing excellent prediction accuracy with a minimum of computing resources. However, in practice another key consideration is the size of the final model; since models can be stored sparsely, the number of non-zero coefficients in w is the determining factor of memory usage.
+
+不幸的是，对于稀疏性的数据集，OGD模型并不是那么有效。事实上，只要增加L1参数，就基本上不会产生系数为0的情况了。更复杂的方法，如傅伯斯和截断的梯度成功地引入稀疏[11，20]。相比于FOBOS算法，RDA算法产生更好的精度和稀疏性。然而在我们的数据集上，可以看到梯度下降类算法能比RDA产生更好的精度。于是，问题是我们设计一个算法，同时具备RDA算法的稀疏性和OGD算法的精确性吗？答案是可以的，这就是我们的`FTRL-Proximal`算法。如果不进行正则化，这个算法具有相同的梯度下降，但是因为模型的参数w和L1需要正则化才能更加有效的实现。
+
+Unfortunately, OGD is not particularly effective at producing sparse models. In fact, simply adding a subgradient of the L1 penalty to the gradient of the loss will essentially never produce coefficients that are exactly zero. More sophisticated approaches such as FOBOS and truncated gradient do succeed in introducing sparsity [11, 20]. The Regularized Dual Averaging (RDA) algorithm produces even better accuracy vs sparsity tradeoffs than FOBOS [32]. However, we have observed the gradient-descent style methods can produce better accuracy than RDA on our datasets [24]. The question, then, is can we get both the sparsity provided by RDA and the improved accuracy of OGD? The answer is yes, using the “Follow The (Proximally) Regularized Leader” algorithm, or FTRL-Proximal.  Without regularization, this algorithm is identical to standard online gradient descent, but because it uses an alternative lazy representation of the model coefficients w, L1 regularization can be implemented much more effectively.
+
+下面是模型的数学描述：
+[FTRL-Proximal](/_img/ad-click-prediction/ftrl-proximal.png)
+
 
 
