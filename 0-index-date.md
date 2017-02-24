@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 02月 13日 星期一 12:18:39 CST
+    Created by ./create_index   date: 2017年 02月 24日 星期五 12:14:27 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-02-24
+
+- [广告点击率预测](tech/ad-click-prediction.md)
 
 #### 2017-02-13
 

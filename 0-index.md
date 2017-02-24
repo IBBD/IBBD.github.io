@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 02月 13日 星期一 12:18:38 CST
+    Created by ./create_index   date: 2017年 02月 24日 星期五 12:14:25 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -100,6 +100,7 @@
   - [python命令行输出的样式美化](python/python-command-line-style.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 - Tech
+  - [广告点击率预测](tech/ad-click-prediction.md)
   - [Go GraphQL Demo](tech/go-graphql-test.md)
   - [IBBD GraphQL API 规范文档](tech/graphql-api-standard.md)
   - [日志分析之shell篇](tech/log-analyse-by-shell.md)
