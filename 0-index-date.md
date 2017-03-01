@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 02月 24日 星期五 12:14:27 CST
+    Created by ./create_index   date: 2017年 03月 01日 星期三 16:04:13 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-03-01
+
+- [产品迭代及发布流程规范](tech/release-process.md)
 
 #### 2017-02-24
 
