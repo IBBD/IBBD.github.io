@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 03月 01日 星期三 16:04:11 CST
+    Created by ./create_index   date: 2017年 03月 02日 星期四 10:05:36 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -17,6 +17,7 @@
   - [使用ElasticSearch的Aggregations功能](elk/aggregations.md)
   - [Elasticsearch的Aggregations聚合之Pipeline](elk/aggregations-pipeline.md)
   - [ELK优质资源收集](elk/elk-quality-resources.md)
+  - [elasticsearch5版本映射的变化](elk/es5-new-feature.md)
   - [Logstash](elk/logstash.md)
   - [Mapping字段类型说明](elk/mapping2.md)
   - [ElasticSearch中的Mapping配置](elk/mapping.md)
