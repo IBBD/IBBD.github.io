@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 03月 02日 星期四 10:05:36 CST
+    Created by ./create_index   date: 2017年 03月 02日 星期四 10:36:27 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -81,6 +81,8 @@
   - [TCP连接的状态](linux/tcp-connection-status.md)
   - [tcpdump抓包工具的使用](linux/tcpdump-tools.md)
   - [Uber技术栈（201609）](linux/uber-tech-201609.md)
+- 机器学习
+  - [《今日头条引擎是怎么工作的》总结](machine-learning/toutiao-engine.md)
 - 微服务
   - [github v3 api规范文档翻译](micro-services/github-api-standard-translate.md)
 - PHP

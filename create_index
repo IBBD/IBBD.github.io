@@ -20,6 +20,7 @@ dict[golang]=Golang
 dict[linux]=Linux
 dict[data-science]=数据科学
 dict[dsp]=DSP
+dict[machine-learning]=机器学习
 
 # 获取git的用户名与邮箱
 user_name=$(git config user.name)
