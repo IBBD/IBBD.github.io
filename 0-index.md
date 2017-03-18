@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 03月 02日 星期四 10:36:27 CST
+    Created by ./create_index   date: 2017年 03月 18日 星期六 23:21:31 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -49,6 +49,8 @@
   - [安装及使用Protobuf-v3（golang）](golang/protobuf-v3-for-golang.md)
   - [Golang踩坑分享](golang/share.md)
   - [（Golang）struct中tag的获取与操作](golang/struct-tag.md)
+- hadoop
+  - [HDFS shell基本命令](hadoop/hdfs-shell.md)
 - Linux
   - docker
     - [Docker最佳实践之镜像构建](linux/docker/docker-best-practice-build.md)
