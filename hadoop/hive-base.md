@@ -1,5 +1,18 @@
 # Hive基础入门
 
+```
+hive> show databases;
+OK
+default
+Time taken: 2.023 seconds, Fetched: 1 row(s)
+hive> use default;
+OK
+Time taken: 0.038 seconds
+hive> show tables;
+OK
+t_hive
+Time taken: 0.043 seconds, Fetched: 1 row(s)
+```
 
 ## 第一个demo
 

@@ -110,6 +110,15 @@ echo "hello world" > hello.txt
 # 将该文件添加到HDFS系统的跟目录中
 # 如果找不到hdfs命令，就需要先知道hadoop的安装目录
 hdfs dfs -put hello.txt hdfs:/
+
+# 创建一个新文件
+hdfs dfs -touchz /hello2.txt
+
+# 新建目录
+hdfs dfs -mkdir /hello
+
+# 删除目录
+hdfs dfs -rmdir /hello
 ```
 
 ## 查
