@@ -14,6 +14,8 @@ t_hive
 Time taken: 0.043 seconds, Fetched: 1 row(s)
 ```
 
+可见，默认是在一个default的数据库中。
+
 ## Hive数据管理
 Hive是建立在Hadoop上的数据仓库基础架构。它提供了一系列的工具，用来进行数据提取、转换、加载，这是一种可以存储、查询和分析存储在Hadoop中的大规模数据机制。可以把Hadoop下结构化数据文件映射为一张成Hive中的表，并提供类sql查询功能，除了不支持更新、索引和事务，sql其它功能都支持。可以将sql语句转换为MapReduce任务进行运行，作为sql到MapReduce的映射器。
 
@@ -82,6 +84,22 @@ OK
 a                   	int                 	                    
 b                   	string              	                    
 Time taken: 2.091 seconds, Fetched: 2 row(s)
+
+# 查看数据库的信息
+# 该命令可以查到我们创建的t_hive表所对应的的hdfs中的路径
+hive> describe database default;
+OK
+default	Default Hive database	hdfs://ibbd/user/hive/warehouse	public	ROLE	
+Time taken: 0.025 seconds, Fetched: 1 row(s)
+
+# 查看hdfs中对应的文件的格式
+# 从这里可以看到我们导入的文件
+hive> dfs -ls hdfs://ibbd/user/hive/warehouse;
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2017-03-19 23:04 hdfs://ibbd/user/hive/warehouse/t_hive
+hive> dfs -cat hdfs://ibbd/user/hive/warehouse/t_hive/hive-test.log;
+1,hello
+2,world
 
 # 删除数据表
 drop table t_hive;
@@ -244,5 +262,148 @@ ALTER TABLE page_view DROP IF EXISTS PARTITION (dt='2008-08-08', country='us');
 ALTER TABLE table_name ADD PARTITION (partCol = 'value1') location 'loc1';
 ```
 
+## 元数据相关表说明
+在hive中，元数据存储在关系数据库中（例如，我们使用的mysql）。
 
+```
+mysql> show tables;
++---------------------------+
+| Tables_in_hive            |
++---------------------------+
+| AUX_TABLE                 |
+| BUCKETING_COLS            |
+| CDS                       |
+| COLUMNS_V2                |
+| COMPACTION_QUEUE          |
+| COMPLETED_COMPACTIONS     |
+| COMPLETED_TXN_COMPONENTS  |
+| DATABASE_PARAMS           |
+| DBS                       |
+| DB_PRIVS                  |
+| DELEGATION_TOKENS         |
+| FUNCS                     |
+| FUNC_RU                   |
+| GLOBAL_PRIVS              |
+| HIVE_LOCKS                |
+| IDXS                      |
+| INDEX_PARAMS              |
+| KEY_CONSTRAINTS           |
+| MASTER_KEYS               |
+| NEXT_COMPACTION_QUEUE_ID  |
+| NEXT_LOCK_ID              |
+| NEXT_TXN_ID               |
+| NOTIFICATION_LOG          |
+| NOTIFICATION_SEQUENCE     |
+| NUCLEUS_TABLES            |
+| PARTITIONS                |
+| PARTITION_EVENTS          |
+| PARTITION_KEYS            |
+| PARTITION_KEY_VALS        |
+| PARTITION_PARAMS          |
+| PART_COL_PRIVS            |
+| PART_COL_STATS            |
+| PART_PRIVS                |
+| ROLES                     |
+| ROLE_MAP                  |
+| SDS                       |
+| SD_PARAMS                 |
+| SEQUENCE_TABLE            |
+| SERDES                    |
+| SERDE_PARAMS              |
+| SKEWED_COL_NAMES          |
+| SKEWED_COL_VALUE_LOC_MAP  |
+| SKEWED_STRING_LIST        |
+| SKEWED_STRING_LIST_VALUES |
+| SKEWED_VALUES             |
+| SORT_COLS                 |
+| TABLE_PARAMS              |
+| TAB_COL_STATS             |
+| TBLS                      |
+| TBL_COL_PRIVS             |
+| TBL_PRIVS                 |
+| TXNS                      |
+| TXN_COMPONENTS            |
+| TYPES                     |
+| TYPE_FIELDS               |
+| VERSION                   |
+| WRITE_SET                 |
++---------------------------+
+57 rows in set (0.00 sec)
+```
+
+### Database表
+
+```
+mysql> mysql> select * from DBS;
++-------+-----------------------+---------------------------------+---------+------------+------------+
+| DB_ID | DESC                  | DB_LOCATION_URI                 | NAME    | OWNER_NAME | OWNER_TYPE |
++-------+-----------------------+---------------------------------+---------+------------+------------+
+|     1 | Default Hive database | hdfs://ibbd/user/hive/warehouse | default | public     | ROLE       |
++-------+-----------------------+---------------------------------+---------+------------+------------+
+1 row in set (0.00 sec)
+```
+
+default数据库正式我们上面所看到的，使用`describe database default`命令所查到的信息。
+
+### Table表
+
+TBLS存储Hive Table的元数据信息,每个表有唯一的TBL_ID。
+SD_ID外键指向所属的Database,SD_IID关联SDS表的主键。 其中SDS存储列(CD_ID)等信息。TBLS.SD_ID关联SDS.SD_ID, SDS.SD_ID关联CDS.CD_ID, CDS.CD_ID关联COLUMNS_V2.CD_ID。
+
+```
+mysql> desc TBLS;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| TBL_ID             | bigint(20)   | NO   | PRI | NULL    |       |
+| CREATE_TIME        | int(11)      | NO   |     | NULL    |       |
+| DB_ID              | bigint(20)   | YES  | MUL | NULL    |       |
+| LAST_ACCESS_TIME   | int(11)      | NO   |     | NULL    |       |
+| OWNER              | varchar(767) | YES  |     | NULL    |       |
+| RETENTION          | int(11)      | NO   |     | NULL    |       |
+| SD_ID              | bigint(20)   | YES  | MUL | NULL    |       |
+| TBL_NAME           | varchar(128) | YES  | MUL | NULL    |       |
+| TBL_TYPE           | varchar(128) | YES  |     | NULL    |       |
+| VIEW_EXPANDED_TEXT | mediumtext   | YES  |     | NULL    |       |
+| VIEW_ORIGINAL_TEXT | mediumtext   | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+```
+
+使用`select * from TBLS`就能查到我们所创建的表的元数据信息，例如表ID，表名，创建时间等。根据表ID就能查到字段的相关定义：
+
+```
+mysql> select * from COLUMNS_V2 where CD_ID=4;
++-------+---------+-------------+-----------+-------------+
+| CD_ID | COMMENT | COLUMN_NAME | TYPE_NAME | INTEGER_IDX |
++-------+---------+-------------+-----------+-------------+
+|     4 | NULL    | a           | int       |           0 |
+|     4 | NULL    | b           | string    |           1 |
++-------+---------+-------------+-----------+-------------+
+2 rows in set (0.00 sec)
+```
+
+### SDS表(数据存储表)
+
+```
+mysql> select * from SDS\G;
+*************************** 1. row ***************************
+                    SD_ID: 4
+                    CD_ID: 4
+             INPUT_FORMAT: org.apache.hadoop.mapred.TextInputFormat
+            IS_COMPRESSED:  
+IS_STOREDASSUBDIRECTORIES:  
+                 LOCATION: hdfs://ibbd/user/hive/warehouse/t_hive
+              NUM_BUCKETS: -1
+            OUTPUT_FORMAT: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+                 SERDE_ID: 4
+```
+
+- CD_ID关联COLUMN_V2.CD_ID，指定该数据的字段信息
+- SERDE_ID关联SERDES.SERDE_ID，指定该数据的序列化信息(如是否是序列化表，DELIMITED字段等)
+
+注：更多的关于元数据表的文件，请查看下面的链接：
+
+- http://www.2cto.com/database/201311/255627.html
+- http://www.cnblogs.com/1130136248wlxk/articles/5517909.html 
 
