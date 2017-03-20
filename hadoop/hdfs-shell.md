@@ -127,6 +127,15 @@ hdfs dfs -rmdir /hello
 ```sh
 # 查看HDFS系统中根目录的文件
 hdfs dfs -ls /
+
+# 下面的命令也会输出相同的结果
+# 其中ibbd是集群名
+hdfs dfs -ls hdfs://ibbd/
+
+# 下面几个的结果也是一样的
+hdfs dfs -ls hdfs:///
+hdfs dfs -ls hdfs:/
+
 ```
 
 该命令输出如下：
