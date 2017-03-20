@@ -126,9 +126,15 @@ plt.show()
 ```
 
 ### 过滤特殊单词
-例如词频统计时，需要过滤掉一些如is, am, are之类的高频词。
+例如词频统计时，需要过滤掉一些如is, am, are之类的高频词。实现也很简单，就是使用`filter`函数，如下：
 
+```python
+text_map = text.flatMap(lambda line: line.split())
+    .filter(lambda word: word not in ["is","are", "am"])
+    .map(lambda word: (word, 1))
+```
 
+## 一个实际的例子
 
 
 
