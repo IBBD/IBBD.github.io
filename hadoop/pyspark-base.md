@@ -137,4 +137,8 @@ text_map = text.flatMap(lambda line: line.split())
 ## 一个实际的例子
 
 
+## 扩展
 
+- API：http://spark.apache.org/docs/latest/api/python/pyspark.html
+- groupByKey,reduceByKey,sortByKey算子：http://www.cnblogs.com/LgyBean/p/6262481.html
+- Logistic回归及Binary分类（二分问题）结果评估: http://lib.csdn.net/article/machinelearning/40643
