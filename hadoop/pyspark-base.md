@@ -142,3 +142,5 @@ text_map = text.flatMap(lambda line: line.split())
 - API：http://spark.apache.org/docs/latest/api/python/pyspark.html
 - groupByKey,reduceByKey,sortByKey算子：http://www.cnblogs.com/LgyBean/p/6262481.html
 - Logistic回归及Binary分类（二分问题）结果评估: http://lib.csdn.net/article/machinelearning/40643
+- Spark数据ETL: http://blog.csdn.net/u011204847/article/details/51247306
+- PySpark处理数据并图表分析: http://blog.csdn.net/u011204847/article/details/51224383
