@@ -39,6 +39,7 @@
 ![hbase逻辑视图](/_img/hbase-ph-vis1.png)
 
 Region虽然是分布式存储的最小单元，但并不是存储的最小单元。Region由一个或者多个Store组成，每个store保存一个columns family；每个Strore又由一个memStore和0至多个StoreFile组成，StoreFile包含HFile；memStore存储在内存中，StoreFile存储在HDFS上。
+
 ![hbase逻辑视图](/_img/hbase-ph-vis2.png)
 
 ## 查看版本号和帮助文档
