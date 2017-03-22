@@ -1,6 +1,19 @@
 # HDFS shell基本命令
 该文档介绍hdfs基础的增删改查及与文件系统的交互等基本操作。以下命令是基于`Hadoop 2.7.3`.
 
+## HDFS的读写流程
+
+![HDFS读取文件](/_img/hdfs-read.png)
+
+如图所示，读取文件的时候会先从NameNode读取元数据，然后根据元数据去DataNode读取具体的文件内容。
+
+![HDFS写入文件](/_img/hdfs-write.png)
+
+写入文件的时候，会先将文件分拆成Block，由NameNode决定每个块应该保存在哪些DataNode上，在DataNode上自动生成相应的副本，最后更新NameNode中的元数据信息。
+
+## 帮助命令
+帮助命令是最基础也是最重要的命令之一。
+
 hdfs的命令如下：
 
 ```
@@ -89,8 +102,7 @@ Usage: hadoop fs [generic options]
 
 这里的命令和shell中的相当类似。下面会逐一讲解一些基础的命令。
 
-## 帮助命令
-帮助命令是最基础也是最重要的命令之一。
+查看具体某个命令的帮助文档：
 
 ```
 root@s1:/home/hadoop# app/hadoop/bin/hdfs dfs -help appendToFile
