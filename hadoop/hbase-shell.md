@@ -219,6 +219,8 @@ hbase(main):012:0>  disable 'scores' --enable 'scores'
 hbase(main):012:0>  drop 'scores'
 ```
 
+注意：drop之前一定要先disable。
+
 ### 13).  status命令
 ```
 hbase(main):072:0> status
@@ -230,6 +232,43 @@ hbase(main):073:0> version
 ```
 
 另外,在 shell 中,常量不需要用引号引起来,但二进制的值需要双引号引起来,而其他值则用单引号引起来。HBase Shell 的常量可以通过在 shell 中输入“Object.constants”。
+
+### 15). 数据版本
+
+```
+# 创建表及列族
+# 默认只会存储最新的版本
+hbase(main):012:0> create 'member','address','info'
+0 row(s) in 1.2450 seconds
+
+# 更改info列族存储最新的2个版本的数据
+hbase(main):015:0> alter 'member',{NAME=>'info',VERSIONS=>2}
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 2.0320 seconds
+
+hbase(main):016:0> put 'member','hello','info:age',26
+0 row(s) in 0.0930 seconds
+
+hbase(main):017:0> put 'member','hello','info:age',27
+0 row(s) in 0.0150 seconds
+
+hbase(main):018:0> put 'member','hello','info:age',29
+0 row(s) in 0.0120 seconds
+
+# 获取历史版本的数据
+hbase(main):020:0> get 'member','hello',{COLUMN=>'info:age',VERSIONS=>3}
+COLUMN                   CELL                                                                  
+ info:age                timestamp=1490192145804, value=29                                     
+ info:age                timestamp=1490192141569, value=27       
+
+# 对时间戳做时间范围查询
+hbase(main):001:0> get 'member','hello',{COLUMN=>'info:age',TIMERANGE=>[1490192141568,1490192141570],VERSIONS=>3}
+COLUMN                   CELL                                                                  
+ info:age                timestamp=1490192141569, value=27    
+```
+
 
 ## 与HDFS的关系
 按上面的操作创建了`scores`数据表之后，在hdfs中相应的位置为：
