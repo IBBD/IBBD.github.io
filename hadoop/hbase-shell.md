@@ -1,6 +1,46 @@
 # HBase基础命令
 基于版本1.2.4
 
+## HBase特点
+
+- 大：一个表可以有数十亿行，上百万列；
+- 无模式：每行都有一个可排序的主键和任意多的列，列可以根据需要动态的增加，同一张表中不同的行可以有截然不同的列；
+- 面向列：面向列（族）的存储和权限控制，列（族）独立检索；
+- 稀疏：空（null）列并不占用存储空间，表可以设计的非常稀疏；
+- 数据多版本：每个单元中的数据可以有多个版本，默认情况下版本号自动分配，是单元格插入时的时间戳；
+- 数据类型单一：Hbase中的数据都是字符串，没有类型。
+
+## 逻辑视图及基础概念
+
+![hbase表结构](/_img/hbase-tables.png)
+
+- RowKey：是Byte array，是表中每条记录的“主键”，方便快速查找，Rowkey的设计非常重要。
+- Column Family：列族，拥有一个名称(string)，包含一个或者多个相关列
+- Column：属于某一个columnfamily，familyName:columnName，每条记录可动态添加
+- Version Number：类型为Long，默认值是系统时间戳，可由用户自定义
+- Value(Cell)：Byte array
+
+下面这个图可能看得更清楚一点：
+
+![hbase逻辑视图](/_img/hbase-logistic-vis.png)
+
+## 物理视图
+- 每个column family存储在HDFS上的一个单独文件中，空值不会被保存。
+- Key 和 Version number在每个 column family中均有一份；
+- HBase 为每个值维护了多级索引，即：<key, column family, column name, timestamp>
+
+物理存储:
+
+1. Table中所有行都按照row key的字典序排列；
+2. Table在行的方向上分割为多个Region；
+3. Region按大小分割的，每个表开始只有一个region，随着数据增多，region不断增大，当增大到一个阀值的时候，region就会等分会两个新的region，之后会有越来越多的region；
+4. Region是Hbase中分布式存储和负载均衡的最小单元，不同Region分布到不同RegionServer上。
+
+![hbase逻辑视图](/_img/hbase-ph-vis1.png)
+
+Region虽然是分布式存储的最小单元，但并不是存储的最小单元。Region由一个或者多个Store组成，每个store保存一个columns family；每个Strore又由一个memStore和0至多个StoreFile组成，StoreFile包含HFile；memStore存储在内存中，StoreFile存储在HDFS上。
+![hbase逻辑视图](/_img/hbase-ph-vis2.png)
+
 ## 查看版本号和帮助文档
 
 ```
@@ -51,7 +91,7 @@ call methods.
 
 这里 grad 对于表来说是一个列,course 对于表来说是一个列族,这个列族由三个列组成 china、math 和 english,当然我们可以根据我们的需要在 course 中建立更多的列族,如computer,physics 等相应的列添加入 course 列族。(备注:列族下面的列也是可以没有名字的。)
 ### 1). create 命令
-创建一个具有两个列族“grad”和“course”的表“scores”。其中表名、行和列都要用单引号括起来,并以逗号隔开。
+创建一个具有三个列族“name”，“grad”和“course”的表“scores”。其中表名、行和列都要用单引号括起来,并以逗号隔开。
 ```
 hbase(main):012:0> create 'scores', 'name', 'grad', 'course'
 ```
@@ -90,10 +130,19 @@ hbase(main):012:0> put 'scores', 'xiapi',  'course:english', '85'
 
 ### 5). get 命令
 a.查看表“scores”中的行“xiapi”的相关数据。
+
 ```
 hbase(main):012:0> get 'scores', 'xiapi'
+COLUMN                   CELL                                                                  
+ course:china            timestamp=1490181754907, value=97                                     
+ course:english          timestamp=1490181771805, value=85                                     
+ course:math             timestamp=1490181763773, value=128                                    
+ grad:                   timestamp=1490186456036, value=2                                      
 ```
+注意这里的结构，和普通的关系型数据库非常大的区别。
+
 b.查看表“scores”中行“xiapi”列“course :math”的值。
+
 ```
 hbase(main):012:0> get 'scores', 'xiapi', 'course:math'
 ```
@@ -132,7 +181,23 @@ hbase(main):071:0> exists 'scores'
 ```
 
 ### 9). incr 命令(赋值)
+计数器
+
 ```
+# 使用了put去修改计数器 会导致后面的错误 原因是'1'会转换成Bytes.toBytes()
+hbase(main):069:0> incr 'scores', 'xiapi', 'grad:', 1
+ERROR: org.apache.hadoop.hbase.DoNotRetryIOException: Field is not a long, it's 1 bytes wide
+
+# 直接新增一个计数器
+hbase(main):079:0> incr 'scores', 'xiapi', 'grad:hello', 2
+COUNTER VALUE = 2
+
+# 注意其结构的不同
+hbase(main):081:0> scan "scores"
+ROW                      COLUMN+CELL                                                           
+ xiapi                   column=course:math, timestamp=1490181763773, value=128                
+ xiapi                   column=grad:hello, timestamp=1490187028068, value=\x00\x00\x00\x00\x00
+                         \x00\x00\x02 
 ```
 
 ### 10). delete 命令
@@ -164,6 +229,29 @@ hbase(main):073:0> version
 ```
 
 另外,在 shell 中,常量不需要用引号引起来,但二进制的值需要双引号引起来,而其他值则用单引号引起来。HBase Shell 的常量可以通过在 shell 中输入“Object.constants”。
+
+## 与HDFS的关系
+按上面的操作创建了`scores`数据表之后，在hdfs中相应的位置为：
+
+```
+# 一个数据表对应在hdfs中就是一个目录
+hadoop@dsp-dev:~$ hdfs dfs -ls /hbase/data/default/scores/
+Found 3 items
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 17:59 /hbase/data/default/scores/.tabledesc
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 17:59 /hbase/data/default/scores/.tmp
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 20:25 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650
+
+# 从这里很明显的看出hbase是按列族存储的
+hadoop@dsp-dev:~$ hdfs dfs -ls /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650
+Found 6 items
+-rw-r--r--   1 hadoop supergroup         41 2017-03-22 17:59 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/.regioninfo
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 20:25 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/.tmp
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 20:25 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/course
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 20:25 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/grad
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 17:59 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/name
+drwxr-xr-x   - hadoop supergroup          0 2017-03-22 17:59 /hbase/data/default/scores/82ac635c5e1fa7f84be3de98f41b9650/recovered.edits
+```
+
 
 
 
