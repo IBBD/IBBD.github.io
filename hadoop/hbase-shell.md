@@ -1,14 +1,19 @@
 # HBase基础命令
 基于版本1.2.4
 
-## HBase特点
+- 官网首页：https://hbase.apache.org/
+- 中文文档（版本比较旧）：http://abloz.com/hbase/book.html
 
-- 大：一个表可以有数十亿行，上百万列；
-- 无模式：每行都有一个可排序的主键和任意多的列，列可以根据需要动态的增加，同一张表中不同的行可以有截然不同的列；
-- 面向列：面向列（族）的存储和权限控制，列（族）独立检索；
-- 稀疏：空（null）列并不占用存储空间，表可以设计的非常稀疏；
-- 数据多版本：每个单元中的数据可以有多个版本，默认情况下版本号自动分配，是单元格插入时的时间戳；
-- 数据类型单一：Hbase中的数据都是字符串，没有类型。
+## 为什么需要HBase
+
+- 半结构化或非结构化数据
+对于数据结构字段不够确定或杂乱无章很难按一个概念去进行抽取的数据适合用HBase。当业务发展需要增加存储比如一个用户的email，phone，address信息时RDBMS需要停机维护，而HBase支持动态增加.
+- 记录非常稀疏
+RDBMS的行有多少列是固定的，为null的列浪费了存储空间。而如上文提到的，HBase为null的Column不会被存储，这样既节省了空间又提高了读性能。
+- 多版本数据
+根据Row key和Column key定位到的Value可以有任意数量的版本值，因此对于需要存储变动历史记录的数据，用HBase就非常方便了。对于某一值，业务上一般只需要最新的值，但有时可能需要查询到历史值。
+- 超大数据量
+当数据量越来越大，RDBMS数据库撑不住了，就出现了读写分离策略，通过一个Master专门负责写操作，多个Slave负责读操作，服务器成本倍增。随着压力增加，Master撑不住了，这时就要分库了，把关联不大的数据分开部署，一些join查询不能用了，需要借助中间层。随着数据量的进一步增加，一个表的记录越来越大，查询就变得很慢，于是又得搞分表，比如按ID取模分成多个表以减少单个表的记录数。经历过这些事的人都知道过程是多么的折腾。采用HBase就简单了，只需要加机器即可，HBase会自动水平切分扩展，跟Hadoop的无缝集成保障了其数据可靠性（HDFS）和海量数据分析的高性能（MapReduce）
 
 ## 逻辑视图及基础概念
 
@@ -17,8 +22,9 @@
 - RowKey：是Byte array，是表中每条记录的“主键”，方便快速查找，Rowkey的设计非常重要。
 - Column Family：列族，拥有一个名称(string)，包含一个或者多个相关列
 - Column：属于某一个columnfamily，familyName:columnName，每条记录可动态添加
+- Timestamp: HBase通过row和column确定一份数据，这份数据的值可能有多个版本，不同版本的值按照时间倒序排序，即最新的数据排在最前面，查询时默认返回最新版本。Timestamp默认为系统当前时间（精确到毫秒），也可以在写入数据时指定该值。
 - Version Number：类型为Long，默认值是系统时间戳，可由用户自定义
-- Value(Cell)：Byte array
+- Value(Cell)：Byte array。每个值通过4个键唯一索引，tableName+RowKey+ColumnKey+Timestamp=>value
 
 下面这个图可能看得更清楚一点：
 
@@ -269,6 +275,17 @@ COLUMN                   CELL
  info:age                timestamp=1490192141569, value=27    
 ```
 
+#### 自定义版本号
+在使用的过程中，可能我们还经常需要自定义版本号，例如如果我们需要记录用户每天的点击数，那么我们就可以用日期做版本号，每天保留一个版本，这个非常有效：
+
+```
+hbase(main):016:0> put "member", "action", "info:clicks", 32, 20160322
+0 row(s) in 0.0070 seconds
+
+hbase(main):017:0> scan "member"
+ROW                      COLUMN+CELL
+ action                  column=info:clicks, timestamp=20160322, value=32
+```
 
 ## 与HDFS的关系
 按上面的操作创建了`scores`数据表之后，在hdfs中相应的位置为：
