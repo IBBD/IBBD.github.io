@@ -423,4 +423,23 @@ IS_STOREDASSUBDIRECTORIES:
 - Hive适合用来对一段时间内的数据进行分析查询，例如，用来计算趋势或者网站的日志。Hive不应该用来进行实时的查询。因为它需要很长时间才可以返回结果。
 - Hbase非常适合用来进行大数据的实时查询。Facebook用Hbase进行消息和实时的分析。它也可以用来统计Facebook的连接数。
 
+## 常见问题
+
+### 从csv文件加载数据
+从csv导入数据时，很可能会碰到引号的问题，需要引入插件进行解决：
+
+```sql
+create table t_csv(id int, name string, address string, sex tinyint) 
+    row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+        with serdeproperties("separatorChar"=",", "quoteChar"="'", "escapeChar"= "\\") 
+    stored as textfile;
+```
+
+另外一个解决方案是使用`\t`进行分隔。
+
+除了分隔符，还有另一个比较麻烦的问题是换行符的问题，这个恐怕得做预处理了，把字段内的换行符都处理掉。（社区也可能有相关的插件能解决问题）
+
+### 将多个文件同时导入一个外部数据表
+例如日志记录数据很可能是按照时间分成了不同的文件的，这时需要将多个文件导入一个表中。hive支持将一个目录导入，也支持将导入多个文件。
+
 
