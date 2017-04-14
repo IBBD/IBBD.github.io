@@ -429,10 +429,15 @@ IS_STOREDASSUBDIRECTORIES:
 从csv导入数据时，很可能会碰到引号的问题，需要引入插件进行解决：
 
 ```sql
-create table t_csv(id int, name string, address string, sex tinyint) 
-    row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
-        with serdeproperties("separatorChar"=",", "quoteChar"="'", "escapeChar"= "\\") 
-    stored as textfile;
+-- https://cwiki.apache.org/confluence/display/Hive/CSV+Serde
+CREATE TABLE my_table(a string, b string, ...)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = "\t",
+   "quoteChar"     = "'",
+   "escapeChar"    = "\\"
+)  
+STORED AS TEXTFILE;
 ```
 
 另外一个解决方案是使用`\t`进行分隔。
