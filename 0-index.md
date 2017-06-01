@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 04月 01日 星期六 00:03:58 CST
+    Created by ./create_index   date: 2017年 06月 01日 星期四 18:53:12 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -34,6 +34,7 @@
     - [[Golang]MessagePack包的使用：序列化与反序列化](golang/packages/messagepack.md)
   - [Golang中append函数的性能分析](golang/golang-append.md)
   - [读多写少的场景下的并发优化(golang)](golang/golang-benchmark-sync-lock-atomic.md)
+  - [Golang下的交叉编译](golang/golang-cross-compiled.md)
   - [IBBD Golang开发环境配置](golang/golang-env-config.md)
   - [Golang高并发编程](golang/golang-high-concurrence.md)
   - [Golang最新版本安装](golang/golang-install.md)
@@ -101,7 +102,6 @@
   - [在php7-fpm的docker镜像内编译GD扩展](php/php-gd-in-docker-install.md)
 - python
   - scrapy
-    - [Scrapy源码结构](python/scrapy/源码结构.md)
   - [Python中float值可能是NaN的问题](python/float-is-nan.md)
   - [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
   - [python中使用click来构建接口应用](python/pip-module-click.md)
