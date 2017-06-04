@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 06月 01日 星期四 18:53:14 CST
+    Created by ./create_index   date: 2017年 06月 04日 星期日 23:42:21 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-06-04
+
+- [各种编程语言的空值](tech/null-value.md)
 
 #### 2017-06-01
 

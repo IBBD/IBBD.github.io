@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 06月 01日 星期四 18:53:12 CST
+    Created by ./create_index   date: 2017年 06月 04日 星期日 23:42:19 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -115,6 +115,7 @@
   - [日志分析之shell篇](tech/log-analyse-by-shell.md)
   - [大型系统的日志系统架构思考](tech/log-system.md)
   - [语料库建立步骤](tech/nlp-steps.md)
+  - [各种编程语言的空值](tech/null-value.md)
   - [产品迭代及发布流程规范](tech/release-process.md)
   - [IBBD Restful API 规范](tech/restful-api-standard.md)
   - [保证程序的可测试性](tech/testing-tech.md)
