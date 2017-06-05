@@ -3,6 +3,14 @@
 
 golang对交叉编译支持也比较好，不过如果需要自己去配置还是挺麻烦的，所以找了一个工具：https://github.com/karalabe/xgo/
 
+## 该工具支持编译的平台
+
+- Linux
+- Windows
+- MacOS
+- Android
+- iOS
+
 ## 一个坑
 因为我们用的是内部的git仓库，通过配置host的形式访问，而且直接按照文档所说去执行，会有问题：
 
@@ -61,4 +69,4 @@ xgo git.ibbd.net/ai/nlp-tools/eyenlp-classify
 ## 问题
 
 #### 所有平台都编译，这个太慢，而且我们并不需要所有平台的。
-
+在容器内的跟目录下，有一个`build.sh`文件，可以修改该文件直接禁止某些平台的编译，例如禁止android和ios平台。（当然也可以通过参数的形式指定编译某些平台的版本）
