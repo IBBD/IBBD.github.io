@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 06月 04日 星期日 23:42:21 CST
+    Created by ./create_index   date: 2017年 06月 26日 星期一 12:12:43 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-06-25
+
+- [Pythonic](python/pythonic.md)
 
 #### 2017-06-04
 

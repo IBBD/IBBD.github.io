@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 06月 04日 星期日 23:42:19 CST
+    Created by ./create_index   date: 2017年 06月 26日 星期一 12:12:41 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -107,6 +107,7 @@
   - [python中使用click来构建接口应用](python/pip-module-click.md)
   - [从python2到python3的迁移](python/python2-to-python3.md)
   - [python命令行输出的样式美化](python/python-command-line-style.md)
+  - [Pythonic](python/pythonic.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 - Tech
   - [广告点击率预测](tech/ad-click-prediction.md)
