@@ -54,7 +54,7 @@ DGraph 的目标是提供 Google 生产水平的规模和吞吐量，在超过TB
 
 增加索引的操作样例如下：
 
-```
+```sh
 curl localhost:8080/query -XPOST -d '
 mutation {
   schema {
@@ -102,7 +102,7 @@ mutation {
 #### 1.2.3 边的属性：facets
 设置：
 
-```json
+```sh
 curl localhost:8080/query -XPOST -d $'
 mutation {
  set {
@@ -127,7 +127,7 @@ curl localhost:8080/query -XPOST -d $'{
 
 如果是uid边，例如：
 
-```json
+```sh
 curl localhost:8080/query -XPOST -d $'
 mutation {
  set {
@@ -141,7 +141,7 @@ mutation {
 
 这时查询语句应该是这样的：
 
-```json
+```sh
 curl localhost:8080/query -XPOST -d $'{
   data(id:alice) {
     name
