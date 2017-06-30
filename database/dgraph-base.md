@@ -152,6 +152,18 @@ curl localhost:8080/query -XPOST -d $'{
 }'
 ```
 
+根据facets进行过滤数据：
+
+```sh
+curl localhost:8080/query -XPOST -d $'{
+  data(id:<alice>) {
+    friend @facets(eq(close, true) AND eq(relative, true)) @facets(relative) {
+      name
+    }
+  }
+}'
+```
+
 
 ## 2. 与关系型数据库的区别
 Dgraph存储的是图关系，本身没有库，表，行列等概念，不过从理解上，我们可以将一个关系理解为一行记录，点和边（及边的属性）可以理解为列，不同的关系，我们可以理解为不同的表。
