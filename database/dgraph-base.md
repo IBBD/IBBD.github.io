@@ -86,7 +86,7 @@ mutation {
 
 这时查询的时候，就可以这样用：
 
-```json
+```
 {
   me(id: m.06pj8) {
     name@en
@@ -115,7 +115,7 @@ mutation {
 
 查询：
 
-```json
+```sh
 curl localhost:8080/query -XPOST -d $'{
   data(id:alice) {
     name
