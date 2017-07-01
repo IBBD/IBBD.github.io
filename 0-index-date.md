@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 06月 30日 星期五 11:58:13 CST
+    Created by ./create_index   date: 2017年 07月 02日 星期日 01:34:33 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-07-02
+
+- [Dgraph schema and index](database/dgraph-schema.md)
 
 #### 2017-06-30
 

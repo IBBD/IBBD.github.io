@@ -1,11 +1,12 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 06月 30日 星期五 11:58:12 CST
+    Created by ./create_index   date: 2017年 07月 02日 星期日 01:34:30 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
   - [Dgraph重要概念及基础入门](database/dgraph-base.md)
+  - [Dgraph schema and index](database/dgraph-schema.md)
   - [《高性能Mysql》读书笔记](database/mysql.md)
 - 数据科学
   - [解密Airbnb数据科学部门序列文章](data-science/airbnb-data-science-department.md)
