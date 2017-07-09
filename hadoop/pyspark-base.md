@@ -3,7 +3,7 @@
 
 ## 配置与启动
 
-- pyspark默认使用python2, 如果需要修改为python3, 则`vim ~/.profile`，增加一行`export PYSPARK_PYTHON=python3`
+- pyspark默认使用python2, 如果需要修改为python3, 则`vim ~/.bash_profile`，增加一行`export PYSPARK_PYTHON=python3`，注意需要重启shell。
 - 启动：`app/spark/bin/pyspark`
 
 ## spark核心概念
