@@ -102,7 +102,7 @@ DataFrame 是 Spark 在 RDD 之后新推出的一个数据集，从属于 Spark 
 
 - API文档：http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame
 
-```
+```python
 # 查看数据的字段类型
 df.columns
 
@@ -148,21 +148,38 @@ df.groupby('name').agg({'age': 'mean'}).show()
 # 排序
 df.orderBy(df.age.desc()).show()
 
+# 交叉表
+df.crosstab('name', 'age').show()
+"""
++--------+---+---+---+---+
+|name_age| 20| 25| 26| 34|
++--------+---+---+---+---+
+|    alex|  0|  1|  0|  0|
+|   world|  0|  0|  1|  1|
+|   hello|  1|  0|  0|  0|
++--------+---+---+---+---+
+"""
+
 # 增加字段
 df2 = df.withColumn('label', df.age/2.0).show()
 df2.show()
 
 # 删除字段
+# 可以同时删除多个字段
 df2.drop('label').columns
+df2.drop("age", "label").show()
 
 # 把DataFrame注册成临时表，用SQL进行查询
 df.createOrReplaceTempView('df_table')
 sqlContext.sql('select name, age from df_table').show(5)
+
+# 结果写入csv文件
+df.write.csv("/hello2.csv")
 ```
 
 在使用withColumn增加字段的时候，有一个相应的函数库pyspark.sql.functions，例如计算绝对值的abs等。不过在实际使用时，可能需要自定义函数，例如：
 
-```
+```python
 import pyspark.sql.functions as F
 import pyspark.sql.types as T
 
@@ -173,7 +190,16 @@ df2 = df.withColumn('label', user_func(df.age))
 df2.show()
 ```
 
+### 3.1 Pandas和PySpark DataFrame的区别
 
+- 在PySpark中，计算是延迟的。
+- 在Pyspark中，不能修改DataFrame，只能转换（Transform）
+- Pandas支持更多的API
+- 复杂运算在Pandas上也更加容易实现。
 
+如果需要，也可以转化为Pandas：`df.toPandas()`
 
+## 4. RDD操作
+
+- API文档：http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD
 
