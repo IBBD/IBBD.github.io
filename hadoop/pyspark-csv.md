@@ -1,45 +1,50 @@
 # Pyspark处理csv文件
-[前一篇](/hadoop/pyspark-base.md)
 
-扩展阅读：https://github.com/databricks/spark-csv
+- [前一篇](/hadoop/pyspark-base.md)
+- 扩展阅读：https://github.com/databricks/spark-csv
+- DataFrame操作：https://www.analyticsvidhya.com/blog/2016/10/spark-dataframe-and-operations/
 
-## 从csv读入数据
+## 1. spark.read.csv方式
+这种方式也可以读入json等格式
 
-```sh
-csvFile = spark.read.csv("/hello.csv", header=True)
+```python
+# 这个不会实际加载数据
+df = spark.read.csv("/hello.csv", header=True)
 
 # 查看读入的数据
-csvFile.show()
+df.show()
 
 # 类型
-print(type(csvFile))  # 输出：<class 'pyspark.sql.dataframe.DataFrame'>
-print(type(csvFile['name']))  # 输出：Column<b'name'>
+print(type(df))  # 输出：<class 'pyspark.sql.dataframe.DataFrame'>
+print(type(df['name']))  # 输出：Column<b'name'>
 
-print(csvFile.columns)
-print(csvFile.dtypes)
-print(csvFile.printSchema())
+print(df.columns)
+print(df.dtypes)
+print(df.printSchema())
 
 # 常用函数
-csvFile.first()
-csvFile.head()
-csvFile.count()
-csvFile.take(1)  # [Row(name='hello', age='20')]
-csvFile.collect()
+df.first()
+df.head()
+df.count()
+df.take(1)  # [Row(name='hello', age='20')]
+df.collect()
 
 # 选择列
 csv.select('name').show()
 csv.select('name', 'age').show()
 ```
 
-### 读入的数据格式问题
+### 1.1 读入的数据格式问题
 上面读入csv时，字段都是默认类型，也就是都是字符串类型，这样可能会对处理过程造成一些麻烦。也不复杂：
 
-```sh
+```python
+from pyspark.sql.types import *
+
 # 定义模式
-schema = StructType([StructField('name', StringType, True), \
+schema = StructType([StructField('name', StringType(), True), \
     StructField('age', IntegerType(), True)])
-csvFile = spark.read.csv("/hello.csv", header=True, schema=schema)
-print(csvFile.printSchema())
+df = spark.read.csv("/hello.csv", header=True, schema=schema)
+print(df.printSchema())
 """输出结果
 root
  |-- name: string (nullable = true)
@@ -47,29 +52,128 @@ root
 """
 
 # 将某个值都加1
-csvFile.select("name", csvFile['age']+1).show()
+df.select("name", df['age']+1).show()
 
 # 将满足条件的结果筛选出来
-csvFile.filter(csvFile['age']>22).show()
+df.filter(df['age']>22).show()
 ```
 
 
-### 将DataFrame转化为RDD
+### 1.2 将DataFrame转化为RDD
 很简单，例如：
 
-```sh
-csvRdd = csvFile.rdd
+```python
+rdd = df.rdd
 
 # 然后就可以使用rdd的方式去处理数据了
-csvRdd.filter(lambda r: r.age > '20').collect()
+rdd.filter(lambda r: r.age > '20').collect()
 ```
 
-### 读入多个文件
+### 1.3 读入多个文件
 也是非常简单，例如：
 
-```sh
+```python
 # 可以利用通配符
-csvFile = spark.read.csv("/hello_*.csv", header=True, schema=schema)
+df = spark.read.csv("/hello_*.csv", header=True, schema=schema)
 ```
+
+## 2. 使用sqlContext读入数据
+官方文档上用的就是这种方式。
+
+```python
+from pyspark.sql import SQLContext
+from pyspark.sql.types import *
+
+# 定义模式
+schema = StructType([StructField('name', StringType(), True), \
+    StructField('age', IntegerType(), True)])
+
+# 读入数据
+sqlContext = SQLContext(sc)
+df = sqlContext.read \
+    .format('com.databricks.spark.csv') \
+    .options(header='true') \
+    .load('/hello.csv', schema=schema)
+print(df.printSchema())
+```
+
+## 3. DataFrame操作
+DataFrame 是 Spark 在 RDD 之后新推出的一个数据集，从属于 Spark SQL 模块，适用于结构化数据。
+
+- API文档：http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame
+
+```
+# 查看数据的字段类型
+df.columns
+
+# 显示前面的N条数据
+df.first()
+df.head(3)
+
+# 统计记录的行数
+df.count()
+
+# 字段的描述性统计：count, mean, avg, sum, min, max
+df.summary('age').show
+"""输出结果如下：
++-------+-----------------+
+|summary|              age|
++-------+-----------------+
+|  count|                4|
+|   mean|            26.25|
+| stddev|5.795112883571237|
+|    min|               20|
+|    max|               34|
++-------+-----------------+
+"""
+
+# 选择若干列数据
+df.select('name','age').show(5)
+
+# 选择某列的唯一值
+df.select('name').distinct().show()
+
+# 缺失值填充
+# 使用-1来填充
+df.fillna(-1).show(2)
+
+# 根据条件过滤满足条件的行
+df.filter(df['age']>22).show()
+df.filter(df.age>22).show()
+
+# 数据透视
+# 可以进行的计算有：sum, min, max, count, mean
+df.groupby('name').agg({'age': 'mean'}).show()
+
+# 排序
+df.orderBy(df.age.desc()).show()
+
+# 增加字段
+df2 = df.withColumn('label', df.age/2.0).show()
+df2.show()
+
+# 删除字段
+df2.drop('label').columns
+
+# 把DataFrame注册成临时表，用SQL进行查询
+df.createOrReplaceTempView('df_table')
+sqlContext.sql('select name, age from df_table').show(5)
+```
+
+在使用withColumn增加字段的时候，有一个相应的函数库pyspark.sql.functions，例如计算绝对值的abs等。不过在实际使用时，可能需要自定义函数，例如：
+
+```
+import pyspark.sql.functions as F
+import pyspark.sql.types as T
+
+# 注意在lambda中的age参数的类型是：<class 'int'>
+# 注意传入的参数和输出的参数类型需要保持一致
+user_func = F.UserDefinedFunction(lambda age: 1 if int(age)<30 else 2, T.StringType())
+df2 = df.withColumn('label', user_func(df.age))
+df2.show()
+```
+
+
+
 
 
