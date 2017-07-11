@@ -203,3 +203,7 @@ df2.show()
 
 - API文档：http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD
 
+```python
+# 保存到csv文件
+rdd.map(lambda x: ','.join((str(w) for w in x))).saveAsTextFile('/hello_target.csv')
+```
