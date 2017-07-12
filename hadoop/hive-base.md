@@ -16,10 +16,10 @@ Time taken: 0.043 seconds, Fetched: 1 row(s)
 
 可见，默认是在一个default的数据库中。
 
-## Hive数据管理
+## 1. Hive数据管理
 Hive是建立在Hadoop上的数据仓库基础架构。它提供了一系列的工具，用来进行数据提取、转换、加载，这是一种可以存储、查询和分析存储在Hadoop中的大规模数据机制。可以把Hadoop下结构化数据文件映射为一张成Hive中的表，并提供类sql查询功能，除了不支持更新、索引和事务，sql其它功能都支持。可以将sql语句转换为MapReduce任务进行运行，作为sql到MapReduce的映射器。
 
-### （1）元数据存储
+### 1.1 元数据存储
 
 Hive将元数据存储在RDBMS中，有三种方式可以连接到数据库：
 
@@ -27,7 +27,7 @@ Hive将元数据存储在RDBMS中，有三种方式可以连接到数据库：
 - 多用户模式：在本地安装Mysql，把元数据放到Mysql内
 - 远程模式：元数据放置在远程的Mysql数据库
 
-### （2）数据存储
+### 1.2 数据存储
 
 首先，Hive没有专门的数据存储格式，也没有为数据建立索引，用于可以非常自由的组织Hive中的表，只需要在创建表的时候告诉Hive数据中的列分隔符和行分隔符，这就可以解析数据了。
 
@@ -38,7 +38,7 @@ Hive将元数据存储在RDBMS中，有三种方式可以连接到数据库：
 - Buckets：对指定列计算的hash，根据hash值切分数据，目的是为了便于并行，每一个Buckets对应一个文件。将user列分数至32个Bucket上，首先对user列的值计算hash，比如，对应hash=0的HDFS目录为：/wh/zz/ds=20140214/city=Beijing/part-00000;对应hash=20的，目录为：/wh/zz/ds=20140214/city=Beijing/part-00020。
 - ExternalTable指向已存在HDFS中的数据，可创建Partition。和Table在元数据组织结构相同，在实际存储上有较大差异。Table创建和数据加载过程，可以用统一语句实现，实际数据被转移到数据仓库目录中，之后对数据的访问将会直接在数据仓库的目录中完成。删除表时，表中的数据和元数据都会删除。ExternalTable只有一个过程，因为加载数据和创建表是同时完成。世界数据是存储在Location后面指定的HDFS路径中的，并不会移动到数据仓库中。
 
-### （3）数据交换
+### 1.3 数据交换
 
 - 用户接口：包括客户端、Web界面和数据库接口
 - 元数据存储：通常是存储在关系数据库中的，如Mysql，Derby等
@@ -47,7 +47,7 @@ Hive将元数据存储在RDBMS中，有三种方式可以连接到数据库：
 
 Hive的数据存储在HDFS中，大部分的查询由MapReduce完成。
 
-## 第一个demo
+## 2. 第一个demo
 
 准备文件：
 
@@ -105,7 +105,7 @@ hive> dfs -cat hdfs://ibbd/user/hive/warehouse/t_hive/hive-test.log;
 drop table t_hive;
 ```
 
-## 数据结构
+## 3. 数据结构
 
 ```sql
 -- 扩展数据类型
@@ -139,7 +139,7 @@ primitive_type
   | CHAR        -- (Note: Available in Hive 0.13.0 and later)
 ```
 
-## Hive  DDL
+## 4. Hive  DDL
 Hive DDL的语方法为类SQL语法，所以标准的SQL语法大多数在Hive中都可用。
 
 ```sql
@@ -192,7 +192,7 @@ lines terminated by '\n';
 3,lusi,18,shopping-music,stu:shanghai-home:beijing
 ```
 
-## 数据查询
+## 5. 数据查询
 
 ```sql
 -- 查询所有
@@ -215,7 +215,7 @@ select avg(age) from person;
 
 但在Hive中`不推荐进行这些操作：Insert、Update、Delete等操作`，因为Hive的特性是对数据仓库的数据进行提取，针对的数据是批量的，`不适合行级的运算`。
 
-## 清空表
+## 6. 清空表
 
 ```sql
 -- 使truncate清空表
@@ -224,19 +224,19 @@ TRUNCATE TABLE person;
 insert overwrite table person select * from person where 1=2;
 ```
 
-## 加载数据
+## 7. 加载数据
 
 ```
 语法：LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
-## Hive的内表
+## 8. Hive的内表
 Hive 的内表，就是正常创建的表。在删除时，既删除内表的元数据，也删除内表的数据。
 
-## Hive的外表
+## 9. Hive的外表
 删除时，仅仅删除外表的元数据。创建Hive 的外表，需要使用关键字 External：
 
-## 分区表
+## 10. 分区表
 分区表是通过关键字PARTITIONED BY来实现分区，一个表有一个或多个分区，分区是以字段的形式在表结构中存在，通过describe table命令可以查看到字段存在，但是该字段不存放实际的数据内容，仅仅是分区的表示（伪列）。
 
 在HDFS中，分区每个分区的值都会产生相应的文件夹，然后在对应的文件夹下存放相应的表数据。
@@ -266,8 +266,7 @@ ALTER TABLE page_view DROP IF EXISTS PARTITION (dt='2008-08-08', country='us');
 ALTER TABLE table_name ADD PARTITION (partCol = 'value1') location 'loc1';
 ```
 
-### 静态分区
-
+### 10.1 静态分区
 hive中创建分区表没有什么复杂的分区类型(范围分区、列表分区、hash分区、混合分区等)。分区列也不是表中的一个实际的字段，而是一个或者多个伪列。意思是说在表的数据文件中实际上并不保存分区列的信息与数据。
 下面的语句创建了一个简单的分区表：
 
@@ -289,7 +288,7 @@ insert overwrite table partition_test partition(stat_date='20110527',province='l
 
 这就是静态分区，写入数据时，需要指定分区。
 
-### 动态分区
+### 10.2 动态分区
 按照上面的方法向分区表中插入数据，如果源数据量很大，那么针对一个分区就要写一个insert，非常麻烦。况且在之前的版本中，必须先手动创建好所有的分区后才能插入，这就更麻烦了，你必须先要知道源数据中都有什么样的数据才能创建分区。
 
 动态分区可以根据查询得到的数据自动匹配到相应的分区中去。 使用动态分区要先设置hive.exec.dynamic.partition参数值为true，默认值为false，即不允许使用：
@@ -326,7 +325,7 @@ hive.exec.dynamic.partition.mode=strict
 hive> set hive.exec.dynamic.partition.mode=nostrick;
 ```
 
-## 元数据相关表说明
+## 11. 元数据相关表说明
 在hive中，元数据存储在关系数据库中（例如，我们使用的mysql）。
 
 ```
@@ -395,7 +394,7 @@ mysql> show tables;
 57 rows in set (0.00 sec)
 ```
 
-### Database表
+### 11.1 Database表
 
 ```
 mysql> mysql> select * from DBS;
@@ -409,7 +408,7 @@ mysql> mysql> select * from DBS;
 
 default数据库正式我们上面所看到的，使用`describe database default`命令所查到的信息。
 
-### Table表
+### 11.2 Table表
 
 TBLS存储Hive Table的元数据信息,每个表有唯一的TBL_ID。
 SD_ID外键指向所属的Database,SD_IID关联SDS表的主键。 其中SDS存储列(CD_ID)等信息。TBLS.SD_ID关联SDS.SD_ID, SDS.SD_ID关联CDS.CD_ID, CDS.CD_ID关联COLUMNS_V2.CD_ID。
@@ -447,7 +446,7 @@ mysql> select * from COLUMNS_V2 where CD_ID=4;
 2 rows in set (0.00 sec)
 ```
 
-### SDS表(数据存储表)
+### 11.3 SDS表(数据存储表)
 
 ```
 mysql> select * from SDS\G;
@@ -471,25 +470,25 @@ IS_STOREDASSUBDIRECTORIES:
 - http://www.2cto.com/database/201311/255627.html
 - http://www.cnblogs.com/1130136248wlxk/articles/5517909.html 
 
-## Hive与HBase的区别与应用场景
-### 区别
+## 12. Hive与HBase的区别与应用场景
+### 12.1 区别
 
 - Apache Hive是一个构建在Hadoop基础设施之上的数据仓库。通过Hive可以使用HQL语言查询存放在HDFS上的数据。HQL是一种类SQL语言，这种语言最终被转化为Map/Reduce. 虽然Hive提供了SQL查询功能，但是Hive不能够进行交互查询--因为它只能够在Haoop上批量的执行Hadoop。
 - Apache HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，Hbase的能够在它的数据库上实时运行，而不是运行MapReduce任务。
 
-### 限制
+### 12.2 限制
 
 - Hive目前不支持更新操作。另外，由于hive在hadoop上运行批量操作，它需要花费很长的时间，通常是几分钟到几个小时才可以获取到查询的结果。Hive必须提供预先定义好的schema将文件和目录映射到列，并且Hive与ACID不兼容。
 - HBase查询是通过特定的语言来编写的，这种语言需要重新学习。类SQL的功能可以通过Apache Phonenix实现，但这是以必须提供schema为代价的。另外，Hbase也并不是兼容所有的ACID特性，虽然它支持某些特性。最后但不是最重要的--为了运行Hbase，Zookeeper是必须的，zookeeper是一个用来进行分布式协调的服务，这些服务包括配置服务，维护元信息和命名空间服务。
 
-### 应用场景
+### 12.3 应用场景
 
 - Hive适合用来对一段时间内的数据进行分析查询，例如，用来计算趋势或者网站的日志。Hive不应该用来进行实时的查询。因为它需要很长时间才可以返回结果。
 - Hbase非常适合用来进行大数据的实时查询。Facebook用Hbase进行消息和实时的分析。它也可以用来统计Facebook的连接数。
 
-## 常见问题
+## 13. 常见问题
 
-### 从csv文件加载数据
+### 13.1 从csv文件加载数据
 从csv导入数据时，很可能会碰到引号的问题，需要引入插件进行解决：
 
 ```sql
@@ -508,7 +507,7 @@ STORED AS TEXTFILE;
 
 除了分隔符，还有另一个比较麻烦的问题是换行符的问题，这个恐怕得做预处理了，把字段内的换行符都处理掉。（社区也可能有相关的插件能解决问题）
 
-### 将多个文件同时导入一个外部数据表
+### 13.2 将多个文件同时导入一个外部数据表
 例如日志记录数据很可能是按照时间分成了不同的文件的，这时需要将多个文件导入一个表中。hive支持将一个目录导入，也支持将导入多个文件。
 
 
