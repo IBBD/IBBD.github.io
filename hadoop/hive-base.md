@@ -166,11 +166,11 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 
 
 create table person( 
-id int, 
-name string, 
-age int, 
-likes array<string>, 
-address map<string,string> 
+    id int, 
+    name string, 
+    age int, 
+    likes array<string>, 
+    address map<string,string> 
 ) 
 row format delimited  
 -- 指定导入数据的列与列之间的分隔符
@@ -199,7 +199,7 @@ lines terminated by '\n';
 select * from person;
 
 -- 还可以这样查
- select * from person where name='tom';
+select * from person where name='tom';
 
 -- 或者这样
 select * from person where likes[1]='music';
@@ -241,9 +241,13 @@ Hive 的内表，就是正常创建的表。在删除时，既删除内表的元
 
 在HDFS中，分区每个分区的值都会产生相应的文件夹，然后在对应的文件夹下存放相应的表数据。
 
+其实就是在数据的目录下, 用不同目录来区分, 比如, dt, 就是按日期(date)来区分, country 国家, hour 小时等等.对应的会在数据的目录下有分区目录. 可以建双分区, 就是子目录下再分区(其实就是一棵目录树).
+
+参考: http://blog.csdn.net/dajuezhao/archive/2010/07/21/5753055.aspx
+
 分区表的应用场景分析：假如针对全球的一家电子商务公司，现在有这样一个业务需求就是需要了解一下海外市场的情况，目的是进一步想拓展海外市场，但是公司对海外市场的拓展现在还没有任何的了解，那么怎么帮助公司管理层提供数据上的支撑呢？这个时候可以对之前公司针对全球销售的商品通过按“国家”来分区，在查询的时候，以国家为为纬度来进行分析海外的市场情况。
 
-```
+```sql
 partitioned by (date string)
 
 -- 修改分区的存储路径
@@ -260,6 +264,66 @@ ALTER TABLE page_view DROP IF EXISTS PARTITION (dt='2008-08-08', country='us');
 
 -- 添加分区
 ALTER TABLE table_name ADD PARTITION (partCol = 'value1') location 'loc1';
+```
+
+### 静态分区
+
+hive中创建分区表没有什么复杂的分区类型(范围分区、列表分区、hash分区、混合分区等)。分区列也不是表中的一个实际的字段，而是一个或者多个伪列。意思是说在表的数据文件中实际上并不保存分区列的信息与数据。
+下面的语句创建了一个简单的分区表：
+
+```sql
+create table partition_test(member_id string, name string)
+partitioned by (stat_date string, province string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+
+-- 这个例子中创建了stat_date和province两个字段作为分区列。通常情况下需要先预先创建好分区，然后才能使用该分区，例如：
+alter table partition_test add partition (stat_date='20110728',province='zhejiang');
+```
+
+这样我们就可以看到相应的目录: `/path/to/partition_test/stat_date=20110728/province=zhejiang`。这时就可以往分区表写入数据了：
+
+```sql
+insert overwrite table partition_test partition(stat_date='20110527',province='liaoning') 
+  select member_id,name from partition_test_input;
+```
+
+这就是静态分区，写入数据时，需要指定分区。
+
+### 动态分区
+按照上面的方法向分区表中插入数据，如果源数据量很大，那么针对一个分区就要写一个insert，非常麻烦。况且在之前的版本中，必须先手动创建好所有的分区后才能插入，这就更麻烦了，你必须先要知道源数据中都有什么样的数据才能创建分区。
+
+动态分区可以根据查询得到的数据自动匹配到相应的分区中去。 使用动态分区要先设置hive.exec.dynamic.partition参数值为true，默认值为false，即不允许使用：
+
+```
+hive> set hive.exec.dynamic.partition;
+hive.exec.dynamic.partition=false
+hive> set hive.exec.dynamic.partition=true;
+hive> set hive.exec.dynamic.partition;
+hive.exec.dynamic.partition=true
+```
+
+动态分区的使用方法很简单，假设我想向stat_date='20110728'这个分区下面插入数据，至于province插入到哪个子分区下面让数据库自己来判断，那可以这样写：
+
+```sql
+insert overwrite table partition_test partition(stat_date='20110728',province)
+  select member_id,name,province from partition_test_input where stat_date='20110728';
+```
+
+stat_date叫做静态分区列，province叫做动态分区列。select子句中需要把动态分区列按照分区的顺序写出来，静态分区列不用写出来。这样stat_date='20110728'的所有数据，会根据province的不同分别插入到/user/hive/warehouse/partition_test/stat_date=20110728/下面的不同的子文件夹下，如果源数据对应的province子分区不存在，则会自动创建，非常方便，而且避免了人工控制插入数据与分区的映射关系存在的潜在风险。
+
+注意，动态分区不允许主分区采用动态列而副分区采用静态列，这样将导致所有的主分区都要创建副分区静态列所定义的分区
+
+动态分区可以允许所有的分区列都是动态分区列，但是要首先设置一个参数hive.exec.dynamic.partition.mode ：
+
+```
+hive> set hive.exec.dynamic.partition.mode;
+hive.exec.dynamic.partition.mode=strict
+```
+它的默认值是strick，即不允许分区列全部是动态的，这是为了防止用户有可能原意是只在子分区内进行动态建分区，但是由于疏忽忘记为主分区列指定值了，这将导致一个dml语句在短时间内创建大量的新的分区（对应大量新的文件夹），对系统性能带来影响。
+所以我们要设置：
+
+```
+hive> set hive.exec.dynamic.partition.mode=nostrick;
 ```
 
 ## 元数据相关表说明
