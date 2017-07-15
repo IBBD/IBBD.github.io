@@ -46,17 +46,17 @@ fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こ
 ### 大数据
 
 ![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
-![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
-![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
 ![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
 ![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
 ![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
+![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
+![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
 
 ### 其他
 
-![Ubuntu](https://github.com/IBBD/IBBD.github.io/raw/master/_img/ubuntu.jpg)
 ![Git](https://github.com/IBBD/IBBD.github.io/raw/master/_img/git.jpg)
 ![vim](https://github.com/IBBD/IBBD.github.io/raw/master/_img/vim.jpg)
+![Ubuntu](https://github.com/IBBD/IBBD.github.io/raw/master/_img/ubuntu.jpg)
 
 
 ## 使用步骤
