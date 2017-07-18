@@ -116,12 +116,14 @@ spark://HOST1:PORT1,HOST2:PORT2 |
 mesos://HOST:PORT               | 连接到指定的Mesos集群。端口号可以配置，默认5050。如果Mesos集群依赖于ZooKeeper，可以使用 mesos://zk://… 来提交，注意 –deploy-mode需要设置为cluster，同时，HOST:PORT应指向 MesosClusterDispatcher.
 yarn                            | 连接到指定的 YARN  集群，使用–deploy-mode来指定 client模式 或是 cluster 模式。YARN集群位置需要通过 $HADOOP_CONF_DIR 或者 $YARN_CONF_DIR 变量来查找。
 
+注意：Cluster deploy mode is currently not supported for python applications on standalone clusters.
+
 ## 高级依赖管理
 通过spark-submit提交应用时，application jar和–jars选项中的jar包都会被自动传到集群上。Spark支持以下URL协议，并采用不同的分发策略：
 
-- file: – 文件绝对路径，并且file:/URI是通过驱动器的HTTP文件服务器来下载的，每个执行器都从驱动器的HTTP server拉取这些文件。
+- file: 文件绝对路径，并且file:/URI是通过驱动器的HTTP文件服务器来下载的，每个执行器都从驱动器的HTTP server拉取这些文件。
 - hdfs:, http:, https:, ftp: – 设置这些参数后，Spark将会从指定的URI位置下载所需的文件和jar包。
-- local: –  local:/ 打头的URI用于指定在每个工作节点上都能访问到的本地或共享文件。这意味着，不会占用网络IO，特别是对一些大文件或jar包，最好使用这种方式，当然，你需要把文件推送到每个工作节点上，或者通过NFS和GlusterFS共享文件。
+- local: local:/ 打头的URI用于指定在每个工作节点上都能访问到的本地或共享文件。这意味着，不会占用网络IO，特别是对一些大文件或jar包，最好使用这种方式，当然，你需要把文件推送到每个工作节点上，或者通过NFS和GlusterFS共享文件。
 
 注意，每个SparkContext对应的jar包和文件都需要拷贝到所对应执行器的工作目录下。一段时间之后，这些文件可能会占用相当多的磁盘。在YARN上，这些清理工作是自动完成的；而在Spark独立部署时，这种自动清理需要配置 spark.worker.cleanup.appDataTtl 属性。
 
