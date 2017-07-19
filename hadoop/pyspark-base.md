@@ -4,6 +4,7 @@
 ## 配置与启动
 
 - pyspark默认使用python2, 如果需要修改为python3, 则`vim ~/.bash_profile`，增加一行`export PYSPARK_PYTHON=python3`，注意需要重启shell。
+- 使用ipython作为默认的shell：`export PYSPARK_DRIVER_PYTHON=ipython`
 - 启动：`app/spark/bin/pyspark`
 
 ## spark核心概念
@@ -54,10 +55,18 @@ Learn spark
 代码如下：
 
 ```python
+conf = SparkConf().setMaster("local").setAppName("My App")
+sc = SparkContext(conf = conf)
+
 text = sc.textFile("./hello-spark.log")
 text_map = text.flatMap(lambda line: line.split()).map(lambda word: (word, 1))
 wordcount = text_map.reduceByKey(lambda x, y: x + y)
 ```
+
+配置参数说明:
+
+- 集群 URL: 告诉 Spark 如何连接到集群上。在这几个例子中我们使用的是 local ,这个特殊值可以让 Spark 运行在单机单线程上而无需连接到集群。
+- 应用名: 在例子中我们使用的是 My App 。当连接到一个集群时,这个值可以帮助你在集群管理器的用户界面中找到你的应用。
 
 注意：这里会报错`Input path does not exist: hdfs://ibbd/user/hadoop/hello-spark.log`
 
