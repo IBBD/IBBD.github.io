@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 07月 18日 星期二 22:32:11 CST
+    Created by ./create_index   date: 2017年 07月 19日 星期三 16:01:49 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -62,6 +62,7 @@
   - [Pyspark处理csv文件](hadoop/pyspark-csv.md)
   - [使用PySpark处理实际数据集](hadoop/pyspark-example01.md)
   - [Example02: 使用PySpark进行数据探索](hadoop/pyspark-example02.md)
+  - [Spark集群基础](hadoop/spark-cluster-base.md)
   - [Spark-submit及参数说明](hadoop/spark-submit.md)
 - Linux
   - docker
