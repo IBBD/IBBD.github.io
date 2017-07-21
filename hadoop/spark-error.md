@@ -4,7 +4,6 @@
 - 未正常关闭sc
 - Too many open files
 
-
 ## 内存溢出问题
 
 ```
@@ -107,7 +106,93 @@ java.io.IOException: Cannot run program "python3": error=24, Too many open files
 
 详见：http://www.cnblogs.com/ibook360/archive/2012/05/11/2495405.html
 
+## Yarn集群方式运行的问题
+错误信息如下：
 
+```
+17/07/21 20:54:22 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/07/21 20:54:28 WARN DomainSocketFactory: The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.
+17/07/21 20:54:31 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (12288 MB per container)
+Exception in thread "main" java.lang.IllegalArgumentException: Required AM memory (12288+1228 MB) is above the max threshold (12288 MB) of this cluster! Please increase the value of 'yarn.scheduler.maximum-allocation-mb'.
+```
 
+先看这个：`Required AM memory (12288+1228 MB) is above the max threshold (12288 MB) of this cluster!`，这个是因为内存使用超过了阀值。将`--driver-memory 12g`修改为`--driver-memory 10g`即可：
+
+```sh
+yarn_run() {
+    spark-submit \
+        --master yarn \
+        --deploy-mode cluster \
+        --driver-memory 10g \
+        --conf "spark.executor.memory=512m" \
+        --conf "spark.executor.cores=100" \
+        road_etl.py "$source_filename" "$target_path"
+}
+
+yarn_run
+```
+
+重新运行，还是报错如下：
+
+```
+17/07/21 21:34:58 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/07/21 21:35:03 WARN DomainSocketFactory: The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.
+```
+
+在UI上查看应用的运行情况，YarnApplicationState的值是：`ACCEPTED: waiting for AM container to be allocated, launched and register with RM.`，而Log Aggregation Status的值是：`NOT_START`, Application Node Label expression的值是`<Not set>`
+
+将`--deploy-mode`的值修改为`client`之后，没有上面的错误，不过出现新的错误：
+
+```
+17/07/21 22:17:02 ERROR YarnClientSchedulerBackend: Yarn application has already exited with state FINISHED!
+17/07/21 22:17:02 ERROR SparkContext: Error initializing SparkContext.
+
+	 diagnostics: Uncaught exception: org.apache.hadoop.yarn.exceptions.InvalidResourceRequestException: Invalid resource request, requested virtual cores < 0, or requested virtual cores > max configured, requestedVirtualCores=100, maxVirtualCores=6
+
+/var/www/spark-etl/jm-city/road_etl.py in main()
+     65     # 格式化数据
+     66     conf = SparkConf().setAppName('JM City ETL')
+---> 67     sc = SparkContext(conf=conf)
+     68     source = sc.textFile(source_filename)
+     69     mapped_data = source.map(init_map)
+
+Py4JJavaError: An error occurred while calling None.org.apache.spark.api.java.JavaSparkContext.
+: java.lang.IllegalStateException: Spark context stopped while waiting for backend
+
+17/07/21 22:17:02 ERROR Utils: Uncaught exception in thread Yarn application state monitor
+org.apache.spark.SparkException: Exception thrown in awaitResult
+```
+
+但是这些代码在local的方式运行时是正常的。修改为如下就ok了：
+
+```sh
+# 注释掉下面的一个参数设置
+# --conf "spark.executor.cores=100" \
+yarn_run() {
+    spark-submit \
+        --master yarn \
+        --deploy-mode client \
+        --driver-memory 10g \
+        --conf "spark.executor.memory=512m" \
+        road_etl.py "$source_filename" "$target_path"
+}
+```
+
+报错如下：
+
+```
+Caused by: java.io.IOException: Cannot run program "python3": error=2, 没有那个文件或目录
+```
+
+在所有节点上安装python3.
+
+```
+17/07/21 23:32:46 WARN TaskSetManager: Lost task 1.0 in stage 0.0 (TID 1, hd-s1.ibbd.net, executor 1): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+
+raise Exception("Randomness of hash of string should be disabled via PYTHONHASHSEED")
+Exception: Randomness of hash of string should be disabled via PYTHONHASHSEED
+```
+
+在`spark2-defaults.conf`中配置`spark.executorEnv.PYTHONHASHSEED=0`，即可。
 
 
