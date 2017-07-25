@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 07月 21日 星期五 20:49:08 CST
+    Created by ./create_index   date: 2017年 07月 25日 星期二 11:07:59 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -118,6 +118,7 @@
   - [从python2到python3的迁移](python/python2-to-python3.md)
   - [python命令行输出的样式美化](python/python-command-line-style.md)
   - [Pythonic](python/pythonic.md)
+  - [在Python中，set和list的性能区别](python/python-set-and-list.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 - Tech
   - [广告点击率预测](tech/ad-click-prediction.md)
