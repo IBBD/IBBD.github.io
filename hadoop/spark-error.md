@@ -1,10 +1,15 @@
 # Spark使用问题集合
 
-- 内存溢出问题
+- 内存溢出问题: OOM
 - 未正常关闭sc
 - Too many open files
+- Container killed by YARN for exceeding memory limits
 
-## 内存溢出问题
+## 内存溢出问题: OOM
+内存不够，数据太多就会抛出OOM的Exception，主要有Driver OOm和Executor OOM两种
+
+- Driver OOM: 一般是使用了collect操作将所有executor的数据聚合到dirver端导致，尽量不要使用collect操作即可
+- Executor OOM: 可以按下面的内存优化的方法增加code使用内存空间
 
 ```
 17/07/19 16:12:30 ERROR Executor: Exception in task 1310.0 in stage 0.0 (TID 1310)
@@ -22,6 +27,11 @@ java.lang.OutOfMemoryError: Unable to acquire 138448274 bytes of memory, got 479
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
 ```
+
+解决方法：
+
+- 增加executor内存总量，也就是说增加spark.executor.memory 的值
+- 增加任务并行度（大任务就被分割成小任务了），可以参考优化并行度的方法
 
 启动时增加了`--driver-memory`参数，如下：
 
@@ -186,6 +196,8 @@ Caused by: java.io.IOException: Cannot run program "python3": error=2, 没有那
 
 在所有节点上安装python3.
 
+### Lost task
+
 ```
 17/07/21 23:32:46 WARN TaskSetManager: Lost task 1.0 in stage 0.0 (TID 1, hd-s1.ibbd.net, executor 1): org.apache.spark.api.python.PythonException: Traceback (most recent call last):
 
@@ -194,5 +206,53 @@ Exception: Randomness of hash of string should be disabled via PYTHONHASHSEED
 ```
 
 在`spark2-defaults.conf`中配置`spark.executorEnv.PYTHONHASHSEED=0`，即可。
+
+## Container killed by YARN for exceeding memory limits
+
+```
+17/07/25 15:31:01 INFO ShuffleMapStage: ShuffleMapStage 0 is now unavailable on executor 1 (657/5408, false)
+17/07/25 15:31:01 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Container killed by YARN for exceeding memory limits. 1.4 GB of 1 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.
+17/07/25 15:31:01 ERROR YarnScheduler: Lost executor 1 on hd-master.ibbd.net: Container killed by YARN for exceeding memory limits. 1.4 GB of 1 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.
+17/07/25 15:31:01 INFO DAGScheduler: Resubmitted ShuffleMapTask(0, 137), so marking it as still
+```
+
+当executor的内存使用大于executor-memory与executor.memoryOverhead的加和时，Yarn会干掉这些executor，将配置变量`spark.yarn.executor.memoryOverhead`的值加大。之后错误变成如下：
+
+```
+17/07/25 15:54:36 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (12288 MB per container)
+```
+
+## Lost executor
+在yarn的cluster模式运行时，有时任务就会报错，在ui界面上会提示`CANNOT FIND ADDRESS`（出现这样的问题，所有任务好像就全部重启了，这非常耗费时间），但是这是的log查起来并不方便，所以最好使用client模式运行，使用`nohup`运行即可，这样日志都会在`nohup.out`中，有很多的工具可以方便地查看了。查看日志如下：
+
+```
+17/07/26 19:43:48 INFO YarnSchedulerBackend$YarnDriverEndpoint: Disabling executor 2.
+17/07/26 19:43:48 INFO DAGScheduler: Executor lost: 2 (epoch 0)
+17/07/26 19:43:48 INFO BlockManagerMasterEndpoint: Trying to remove executor 2 from BlockManagerMaster.
+17/07/26 19:43:48 INFO BlockManagerMasterEndpoint: Removing block manager BlockManagerId(2, hd-master.ibbd.net, 37716, None)
+17/07/26 19:43:48 INFO BlockManagerMaster: Removed 2 successfully in removeExecutor
+17/07/26 19:43:48 INFO DAGScheduler: Shuffle files lost for executor: 2 (epoch 0)
+17/07/26 19:43:48 INFO ShuffleMapStage: ShuffleMapStage 0 is now unavailable on executor 2 (1288/5408, false)
+17/07/26 19:43:49 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Container killed by YARN for exceeding memory limits. 9.2 GB of 9 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.
+17/07/26 19:43:49 ERROR YarnScheduler: Lost executor 2 on hd-master.ibbd.net: Container killed by YARN for exceeding memory limits. 9.2 GB of 9 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.
+17/07/26 19:43:49 INFO DAGScheduler: Resubmitted ShuffleMapTask(0, 137), so marking it as still running
+17/07/26 19:43:49 INFO DAGScheduler: Resubmitted ShuffleMapTask(0, 2021), so marking it as still running
+```
+
+注意这里：`WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Container killed by YARN for exceeding memory limits. 9.2 GB of 9 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead.`
+
+又是内存超过了。。。
+
+
+```
+# 执行步骤0.0
+17/07/25 16:05:51 INFO TaskSetManager: Starting task 38.0 in stage 0.0 (TID 38, hd-master.ibbd.net, executor 2, partition 38, RACK_LOCAL, 6026 bytes)
+17/07/25 16:06:10 INFO TaskSetManager: Finished task 38.0 in stage 0.0 (TID 38) in 18673 ms on hd-master.ibbd.net (executor 2) (39/5408)
+
+# 执行步骤1.0
+17/07/26 12:06:41 INFO TaskSetManager: Starting task 3126.0 in stage 1.0 (TID 8534, hd-master.ibbd.net, executor 2, partition 3126, PROCESS_LOCAL, 5768 bytes)
+17/07/26 12:06:57 INFO TaskSetManager: Finished task 3126.0 in stage 1.0 (TID 8534) in 15437 ms on hd-master.ibbd.net (executor 2) (3127/5408)
+```
+
 
 
