@@ -82,6 +82,48 @@ Shuffle是MapReduce框架中的一个特定的phase，介于Map phase和Reduce p
 
 相关文章：http://jerryshao.me/architecture/2014/01/04/spark-shuffle-detail-investigation/
 
+#### 2.1.1 什么决定需要Shuffle
+每个stage包含不需要Shuffle的RDD。
+
+RDD 包含固定数目的 partition， 每个 partiton 包含若干的 record。对于那些通过narrow tansformation（比如 map 和 filter）返回的 RDD，一个 partition 中的 record 只需要从父 RDD 对应的partition 中的 record 计算得到。每个对象只依赖于父 RDD 的一个对象。有些操作（比如 coalesce）可能导致一个 task处理多个输入 partition ，但是这种 transformation 仍然被认为是 narrow 的，因为用于计算的多个输入 record 始终是来自有限个数的 partition。
+
+然而 Spark 也支持需要 wide 依赖的 transformation，比如 groupByKey，reduceByKey。在这种依赖中，计算得到一个 partition 中的数据需要从父 RDD 中的多个 partition 中读取数据。所有拥有相同 key 的元组最终会被聚合到同一个partition 中，被同一个 stage 处理。为了完成这种操作， Spark需要对数据进行 shuffle，意味着数据需要在集群内传递，最终生成由新的 partition 集合组成的新的 stage。
+
+简单说：`一个partition的数据的处理结果只会出现在一个partition中时，就不需要shuffle`，也可以理解为`一对一`或者`多对一`的操作都不需要shuffle，而`一对多`或者`多对多`都是可能需要shuffle的（这里不一定是必须的），例如`groupByKey`操作，本来在同一个partition的记录就有可能被拆分到不同的partition上。
+
+下面是一个比较复杂的RDD图：
+
+![RDD](/_img/spark/shuffle01.png)
+
+划分Stage的边界如下：
+
+![Shuffle](/_img/spark/shuffle02.png)
+
+**运行到每个 stage 的边界时，数据在父 stage 中按照 task 写到磁盘上，而在子 stage 中通过网络按照 task 去读取数据。**这些操作会导致很重的网络以及磁盘的I/O，所以 stage 的边界是非常占资源的，在编写 Spark 程序的时候需要尽量避免的。父 stage 中 partition 个数与子 stage 的 partition 个数可能不同，所以那些产生 stage 边界的 transformation 常常需要接受一个 numPartition 的参数来觉得子 stage 中的数据将被切分为多少个 partition。
+
+正如在调试 MapReduce 是选择 reducor 的个数是一项非常重要的参数，调整在 stage 边届时的 partition 个数经常可以很大程度上影响程序的执行效率。
+
+#### 2.1.2 Shuffle的生成逻辑
+考虑如下的代码：
+
+```python
+rdd1 = someRdd.reduceByKey(...)
+rdd2 = someOtherRdd.reduceByKey(...)
+rdd3 = rdd1.join(rdd2)
+```
+
+因为没有 partitioner 传递给 reduceByKey，所以系统使用默认的 partitioner，所以 rdd1 和 rdd2 都会使用 hash 进行分 partition。代码中的两个 reduceByKey 会发生两次 shuffle 。如果 RDD 包含相同个数的 partition， join 的时候将不会发生额外的 shuffle。因为这里的 RDD 使用相同的 hash 方式进行 partition，所以全部 RDD 中同一个 partition 中的 key的集合都是相同的。因此，rdd3中一个 partiton 的输出只依赖rdd2和rdd1的同一个对应的 partition，所以第三次shuffle 是不必要的。
+
+举个例子说，当 someRdd 有4个 partition， someOtherRdd 有两个 partition，两个 reduceByKey 都使用3个partiton，所有的 task 会按照如下的方式执行：
+
+![Shuffle](/_img/spark/shuffle03.png)
+
+改变一下：
+
+![Shuffle](/_img/spark/shuffle04.png)
+
+
+
 ### 2.2 DAG可视化
 
 ![DAG可视化](/_img/spark/spark-job-stages.jpg)
