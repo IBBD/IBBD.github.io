@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 07月 27日 星期四 16:46:46 CST
+    Created by ./create_index   date: 2017年 08月 05日 星期六 00:01:17 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-08-05
+
+- [在centos上离线安装docker](tech/centos-docker-install.md)
 
 #### 2017-07-27
 
