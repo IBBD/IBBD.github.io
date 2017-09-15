@@ -1,12 +1,13 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 08月 14日 星期一 00:47:23 CST
+    Created by ./create_index   date: 2017年 09月 15日 星期五 15:00:06 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
 - 数据库
   - [Dgraph重要概念及基础入门](database/dgraph-base.md)
   - [Dgraph schema and index](database/dgraph-schema.md)
+  - [Dgraph最短路径查询](database/dgraph-shortest-path.md)
   - [《高性能Mysql》读书笔记](database/mysql.md)
 - 数据科学
   - [解密Airbnb数据科学部门序列文章](data-science/airbnb-data-science-department.md)

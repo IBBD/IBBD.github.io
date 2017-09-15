@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 08月 14日 星期一 00:47:23 CST
+    Created by ./create_index   date: 2017年 09月 15日 星期五 15:00:09 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-09-15
+
+- [Dgraph最短路径查询](database/dgraph-shortest-path.md)
 
 #### 2017-08-14
 
