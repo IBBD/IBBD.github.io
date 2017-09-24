@@ -45,6 +45,48 @@ go env
 3. 执行`./all.bash`
 4. 修改相应的环境变量
 
+## 安装过程中踩过的坑
+
+### 在ubuntu16.04上安装1.4出现问题如下
+运行`./all.bash`时出现如下问题：
+
+```
+# cmd/pprof
+/home/alex/golang/go-go1.4.3/pkg/linux_amd64/runtime/cgo.a(_all.o): unknown relocation type 42; compiled without -fpic?
+/home/alex/golang/go-go1.4.3/pkg/linux_amd64/runtime/cgo.a(_all.o): unknown relocation type 42; compiled without -fpic?
+runtime/cgo(.text): unexpected relocation type 298
+runtime/cgo(.text): unexpected relocation type 298
+# cmd/go
+/home/alex/golang/go-go1.4.3/pkg/linux_amd64/runtime/cgo.a(_all.o): unknown relocation type 42; compiled without -fpic?
+/home/alex/golang/go-go1.4.3/pkg/linux_amd64/runtime/cgo.a(_all.o): unknown relocation type 42; compiled without -fpic?
+runtime/cgo(.text): unexpected relocation type 298
+runtime/cgo(.text): unexpected relocation type 298
+```
+
+解决：先用，然后配置环境变量：
+
+```sh
+# 安装旧版go
+sudo apt-get install golang
+
+# 配置环境变量
+export GOROOT_BOOTSTRAP="$(go env GOROOT)"
+
+# 编译新版本
+cd /path/to/go-go1.9/src
+bash all.bash
+
+# 配置新版环境变量
+export GOROOT=/home/alex/golang/go-go1.9/
+export GOPATH=/var/www/golang
+export PATH=/home/alex/golang/go-go1.9/bin:$PATH
+
+# 查看新版本是否配置成功
+go env
+
+```
+
+
 
 
 
