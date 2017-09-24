@@ -63,7 +63,7 @@ runtime/cgo(.text): unexpected relocation type 298
 runtime/cgo(.text): unexpected relocation type 298
 ```
 
-解决：先用，然后配置环境变量：
+解决：
 
 ```sh
 # 安装旧版go
