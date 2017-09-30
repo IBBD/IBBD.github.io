@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2017年 09月 15日 星期五 15:00:09 CST
+    Created by ./create_index   date: 2017年 09月 30日 星期六 18:14:54 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2017-09-30
+
+- [Python最简单的异步实现](python/python-asyn-simple-io.md)
 
 #### 2017-09-15
 

@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 09月 15日 星期五 15:00:06 CST
+    Created by ./create_index   date: 2017年 09月 30日 星期六 18:14:52 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -122,6 +122,7 @@
   - [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
   - [python中使用click来构建接口应用](python/pip-module-click.md)
   - [从python2到python3的迁移](python/python2-to-python3.md)
+  - [Python最简单的异步实现](python/python-asyn-simple-io.md)
   - [python命令行输出的样式美化](python/python-command-line-style.md)
   - [Pythonic](python/pythonic.md)
   - [在Python中，set和list的性能区别](python/python-set-and-list.md)
