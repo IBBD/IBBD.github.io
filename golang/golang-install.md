@@ -1,5 +1,9 @@
 # Golang最新版本安装
 
+完整的安装脚本请看这里：https://github.com/cyy0523xc/ubuntu-init/blob/master/step05-golang.sh
+
+-----------------
+
 新版本的golang需要旧版本的golang(1.5以下的版本, 现在通常选择1.4.2)来编译, 所以安装时, 需要先安装golang1.5以下的版本.
 
 ```sh
