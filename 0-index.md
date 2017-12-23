@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2017年 09月 30日 星期六 18:14:52 CST
+    Created by ./create_index   date: 2017年 12月 23日 星期六 17:52:29 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -118,6 +118,7 @@
   - [在php7-fpm的docker镜像内编译GD扩展](php/php-gd-in-docker-install.md)
 - python
   - scrapy
+  - [Anaconda安装（ubuntu16.04）](python/anaconda-install.md)
   - [Python中float值可能是NaN的问题](python/float-is-nan.md)
   - [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
   - [python中使用click来构建接口应用](python/pip-module-click.md)
