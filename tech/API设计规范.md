@@ -151,25 +151,24 @@ http://hostname.com/{prefix}/{resource}/{id}/{resource2}
 
 #### 1.1、资源user的属性
 
-| 名称         | 类型         | 范围/格式           | 说明         |
-| ------------ | ------------ | ------------        | ------------ |
-| id           | int          | >1                  | 用户系统标识 |
-| name         | string       | 32>len>3            | 用户昵称     |
-| created_at   | datatime     | 2018-03-03 12:34:56 | 创建时间     |
+| 名称       | 类型     | 范围/格式           | 说明         |
+| -------    | ------   | ------------        | ------------ |
+| id         | int      | >1                  | 用户系统标识 |
+| name       | string   | 32>len>3            | 用户昵称     |
+| created_at | datatime | 2018-03-03 12:34:56 | 创建时间     |
 
 #### 1.2、查询符合条件的用户（版本1）
 - Method：GET
 - Auth：YES
-- URL：http://hostname.com/{prefix}/users?offset=0&limit=20&order=asc&by=id
+- URL：http://hostname.com/{prefix}/users?offset=0&limit=20&orderasc=id
 - Content-Type：application/x-www-form-urlencoded
 - parameters：
 
-| 名称         | 类型         | 范围/格式       | 说明                                    |
-| ------------ | ------------ | ------------    | ------------                            |
-| offset       | int          | total>offset>=0 | 从第几条开始去数据，默认从0开始         |
-| limit        | int          | >=0             | 取回多少条数据，默认10条，0取回所有数据 |
-| order        | enum         | asc、dsc        | 正序或倒序                              |
-| by           | enum         | id              | 来自于user的属性                        |
+| 名称      | 类型   | 范围/格式       | 说明                                    |
+| ------    | ----   | ------------    | ------------                            |
+| offset    | int    | total>offset>=0 | 从第几条开始去数据，默认从0开始         |
+| limit     | int    | >=0             | 取回多少条数据，默认10条，0取回所有数据 |
+| orderdesc | string |                 | 根据某字段倒序, 升序可用orderasc        |
 
 其他查询条件自定义
 
@@ -183,7 +182,7 @@ http://hostname.com/{prefix}/{resource}/{id}/{resource2}
 	"msg":"",
 	"field":"",
 	"data":[
-		{"id":1,"name":"zhangsan","created_at":"2018-01-01 12:23:23"}
+		{"id":1,"name":"zhangsan","created_at":"2018-01-01 12:23:23"},
 		{"id":2,"name":"李四","created_at":"2018-01-01 12:23:23"}
 	],
 	"total":2
