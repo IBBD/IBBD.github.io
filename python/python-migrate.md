@@ -156,9 +156,20 @@ def downgrade():
 
 migration会自动User的差异，自动创建变更代码。
 
+注意：`并不是所有变化都能自动生成`，具体见：https://alembic.zzzcomputing.com/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect
+
 ## 7. 重新更新到数据库
 
 ```
 flask db upgrade
 ```
+
+## 8. 手动创建迁移文件
+
+当自动生成迁移文件失效的时候，例如改变某个字段的类型，需要手动进行创建：
+
+```
+flask db revision -m 'change age to int'
+```
+
 
