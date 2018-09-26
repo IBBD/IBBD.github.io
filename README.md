@@ -3,7 +3,7 @@
 文章目录： [按目录索引](https://github.com/IBBD/blog/blob/master/0-index.md) | [按修改日期索引](https://github.com/IBBD/blog/blob/master/0-index-date.md)  
 
 ```python
-print 'Hello, world!'
+print('Hello, world!')
 ```
 
 ```javascript
