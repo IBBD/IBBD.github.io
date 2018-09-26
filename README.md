@@ -25,8 +25,8 @@ echo 'Hello, world!';
 
 ![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
 ![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
-![sklearn](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scikit-learn-logo.jpg)
-![Tensorflow](https://github.com/IBBD/IBBD.github.io/raw/master/_img/tensorflow-logo.jpg)
+![sklearn](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scikit-learn-logo.png)
+![Tensorflow](https://github.com/IBBD/IBBD.github.io/raw/master/_img/tensorflow-logo.png)
 ![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
 ![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
 ![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
