@@ -172,4 +172,21 @@ flask db upgrade
 flask db revision -m 'change age to int'
 ```
 
+生成的文件内容如下：
+
+```python
+def upgrade():
+    pass
+
+
+def downgrade():
+    pass
+```
+
+手动进行编辑即可
+
+## 附录
+
+- 默认的入口文件为`app.py`，否则可能报错。
+
 
