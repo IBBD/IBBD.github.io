@@ -2,11 +2,6 @@
 
 文章目录： [按目录索引](https://github.com/IBBD/blog/blob/master/0-index.md) | [按修改日期索引](https://github.com/IBBD/blog/blob/master/0-index-date.md)  
 
-
-```php
-echo 'Hello, world!';
-```
-
 ```python
 print 'Hello, world!'
 ```
@@ -19,7 +14,30 @@ console.log('Hello, world!');
 fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こんにちはせかい\n")
 ```
 
+
+```php
+echo 'Hello, world!';
+```
+
 ## 我们的技术
+
+### 大数据
+
+![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
+![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
+![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
+![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
+![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
+![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
+
+### 后端
+
+![Golang](https://github.com/IBBD/IBBD.github.io/raw/master/_img/golang.jpg)
+![Redis](https://github.com/IBBD/IBBD.github.io/raw/master/_img/redis.jpg)
+![MariaDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mariadb.jpg)
+![MongoDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mongodb.jpg)
+![Shell](https://github.com/IBBD/IBBD.github.io/raw/master/_img/shell.jpg)
+![Docker](https://github.com/IBBD/IBBD.github.io/raw/master/_img/docker.jpg)
 
 ### 前端
 
@@ -33,24 +51,6 @@ fmt.Printf("Hello, world or 你好，世界 or καλημ ́ρα κóσμ or こ
 ![PHP](https://github.com/IBBD/IBBD.github.io/raw/master/_img/php.jpg)
 ![Laravel](https://github.com/IBBD/IBBD.github.io/raw/master/_img/laravel.jpg)
 ![Nodejs](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nodejs.jpg)
-
-### 后端
-
-![Golang](https://github.com/IBBD/IBBD.github.io/raw/master/_img/golang.jpg)
-![Redis](https://github.com/IBBD/IBBD.github.io/raw/master/_img/redis.jpg)
-![MariaDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mariadb.jpg)
-![MongoDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mongodb.jpg)
-![Shell](https://github.com/IBBD/IBBD.github.io/raw/master/_img/shell.jpg)
-![Docker](https://github.com/IBBD/IBBD.github.io/raw/master/_img/docker.jpg)
-
-### 大数据
-
-![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
-![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
-![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
-![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
-![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
-![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
 
 ### 其他
 
