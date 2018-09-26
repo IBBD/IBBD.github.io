@@ -1,208 +1,74 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2018年 03月 14日 星期三 16:49:15 CST
+    Created by ./create_index   date: 2018年 09月 26日 星期三 17:30:01 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2018-09-26
+
+- [Flask-Migrate：数据库迁移脚本使用](python/python-migrate.md)
 
 #### 2018-03-14
 
 - [API设计规范](tech/API设计规范.md)
 
-#### 2017-12-23
-
-- [Anaconda安装（ubuntu16.04）](python/anaconda-install.md)
-
-#### 2017-09-30
-
-- [Python最简单的异步实现](python/python-asyn-simple-io.md)
-
-#### 2017-09-15
-
-- [Dgraph最短路径查询](database/dgraph-shortest-path.md)
-
-#### 2017-08-14
-
-- [利用 Spark 进行数据处理](hadoop/spark-warm-up.md)
-- [Spark 简介](hadoop/spark-introduce.md)
-
-#### 2017-08-05
-
-- [在centos上离线安装docker](tech/centos-docker-install.md)
-
-#### 2017-07-27
-
-- [Spark UI界面数据解读](hadoop/spark-ui-example.md)
-- [Spark关键性能考量](hadoop/spark-performance-points.md)
-
-#### 2017-07-25
-
-- [在Python中，set和list的性能区别](python/python-set-and-list.md)
-- [Spark性能优化](hadoop/spark-performance-optimization.md)
-
-#### 2017-07-21
-
-- [Spark使用问题集合](hadoop/spark-error.md)
-
-#### 2017-07-20
-
-- [Spark RDD方法集合](hadoop/spark-rdd-methods.md)
-
-#### 2017-07-19
-
-- [Spark集群基础](hadoop/spark-cluster-base.md)
-
-#### 2017-07-18
-
-- [Spark-submit及参数说明](hadoop/spark-submit.md)
-
-#### 2017-07-14
-
-- [Example02: 使用PySpark进行数据探索](hadoop/pyspark-example02.md)
-
-#### 2017-07-11
-
-- [使用PySpark处理实际数据集](hadoop/pyspark-example01.md)
-
-#### 2017-07-10
-
-- [Pyspark处理csv文件](hadoop/pyspark-csv.md)
-
-#### 2017-07-05
-
-- [Golang interface的一个特性](golang/golang-interface.md)
-
-#### 2017-07-02
-
-- [Dgraph schema and index](database/dgraph-schema.md)
-
-#### 2017-06-30
-
-- [Dgraph重要概念及基础入门](database/dgraph-base.md)
-
-#### 2017-06-25
-
-- [Pythonic](python/pythonic.md)
-
-#### 2017-06-04
-
-- [各种编程语言的空值](tech/null-value.md)
-
-#### 2017-06-01
-
-- [Golang下的交叉编译](golang/golang-cross-compiled.md)
-
-#### 2017-04-01
-
-- [React与GraphQl的Demo（基于Apollo React和Apollo Client）](front-end/react-graphql-apollo.md)
-
-#### 2017-03-24
-
-- [HBase基础命令](hadoop/hbase-shell.md)
-
-#### 2017-03-20
-
-- [pyspark基础入门](hadoop/pyspark-base.md)
-- [Hive基础入门](hadoop/hive-base.md)
-
-#### 2017-03-18
-
-- [HDFS shell基本命令](hadoop/hdfs-shell.md)
-
-#### 2017-03-02
-
-- [《今日头条引擎是怎么工作的》总结](machine-learning/toutiao-engine.md)
-- [elasticsearch5版本映射的变化](elk/es5-new-feature.md)
-
-#### 2017-03-01
-
-- [产品迭代及发布流程规范](tech/release-process.md)
-
-#### 2017-02-24
-
-- [广告点击率预测](tech/ad-click-prediction.md)
-
-#### 2017-02-13
-
-- [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
-
-#### 2017-02-07
-
-- [Laravel中的授权策略](php/laravel/auth-policy.md)
-
-#### 2017-01-11
-
-- [ETL数据清洗流程](data-science/etl-steps.md)
-
-#### 2017-01-03
+#### 2018-03-10
 
 - [文本分类问题解决步骤](tech/text-classify.md)
-
-#### 2016-12-23
-
-- [语料库建立步骤](tech/nlp-steps.md)
-
-#### 2016-12-22
-
-- [Laravel数据迁移是的一个坑（float类型）](php/laravel/mysql-float.md)
-
-#### 2016-12-12
-
-- [IBBD GraphQL API 规范文档](tech/graphql-api-standard.md)
-
-#### 2016-12-10
-
-- [Go GraphQL Demo](tech/go-graphql-test.md)
-
-#### 2016-12-09
-
-- [IBBD Restful API 规范](tech/restful-api-standard.md)
-
-#### 2016-12-04
-
-- [结巴分词的字典中只能按空格进行分隔的问题](data-science/jieba-fixed.md)
-
-#### 2016-11-27
-
 - [保证程序的可测试性](tech/testing-tech.md)
-
-#### 2016-11-23
-
+- [IBBD Restful API 规范](tech/restful-api-standard.md)
+- [产品迭代及发布流程规范](tech/release-process.md)
+- [各种编程语言的空值](tech/null-value.md)
+- [语料库建立步骤](tech/nlp-steps.md)
 - [大型系统的日志系统架构思考](tech/log-system.md)
 - [日志分析之shell篇](tech/log-analyse-by-shell.md)
-
-#### 2016-11-19
-
-- [使用锁数组来避免全局锁，提升map结构的并发性能（golang）](golang/golang-lock-array.md)
-- [读多写少的场景下的并发优化(golang)](golang/golang-benchmark-sync-lock-atomic.md)
-
-#### 2016-11-04
-
-- [database/sql包源码学习（Golang）](golang/packages/database-sql.md)
-
-#### 2016-11-03
-
-- [Golang Tips](golang/golang-tips.md)
-
-#### 2016-11-02
-
-- [安装及使用Protobuf-v3（golang）](golang/protobuf-v3-for-golang.md)
-
-#### 2016-11-01
-
-- [Golang中append函数的性能分析](golang/golang-append.md)
-
-#### 2016-10-27
-
-- [Golang高并发编程](golang/golang-high-concurrence.md)
-
-#### 2016-10-21
-
+- [IBBD GraphQL API 规范文档](tech/graphql-api-standard.md)
+- [Go GraphQL Demo](tech/go-graphql-test.md)
+- [在centos上离线安装docker](tech/centos-docker-install.md)
+- [广告点击率预测](tech/ad-click-prediction.md)
+- [在Python中，set和list的性能区别](python/python-set-and-list.md)
+- [Pythonic](python/pythonic.md)
+- [Python最简单的异步实现](python/python-asyn-simple-io.md)
 - [从python2到python3的迁移](python/python2-to-python3.md)
-
-#### 2016-10-20
-
+- [使用Python进行One-Hot编码及特征工程的相关问题解决](python/one-hot-encoder.md)
+- [Anaconda安装（ubuntu16.04）](python/anaconda-install.md)
+- [Laravel数据迁移是的一个坑（float类型）](php/laravel/mysql-float.md)
+- [Laravel中的授权策略](php/laravel/auth-policy.md)
+- [《今日头条引擎是怎么工作的》总结](machine-learning/toutiao-engine.md)
+- [利用 Spark 进行数据处理](hadoop/spark-warm-up.md)
+- [Spark UI界面数据解读](hadoop/spark-ui-example.md)
+- [Spark-submit及参数说明](hadoop/spark-submit.md)
+- [Spark RDD方法集合](hadoop/spark-rdd-methods.md)
+- [Spark关键性能考量](hadoop/spark-performance-points.md)
+- [Spark性能优化](hadoop/spark-performance-optimization.md)
+- [Spark 简介](hadoop/spark-introduce.md)
+- [Spark使用问题集合](hadoop/spark-error.md)
+- [Spark集群基础](hadoop/spark-cluster-base.md)
+- [Example02: 使用PySpark进行数据探索](hadoop/pyspark-example02.md)
+- [使用PySpark处理实际数据集](hadoop/pyspark-example01.md)
+- [Pyspark处理csv文件](hadoop/pyspark-csv.md)
+- [pyspark基础入门](hadoop/pyspark-base.md)
+- [Hive基础入门](hadoop/hive-base.md)
+- [HDFS shell基本命令](hadoop/hdfs-shell.md)
+- [HBase基础命令](hadoop/hbase-shell.md)
+- [安装及使用Protobuf-v3（golang）](golang/protobuf-v3-for-golang.md)
+- [database/sql包源码学习（Golang）](golang/packages/database-sql.md)
+- [Golang Tips](golang/golang-tips.md)
 - [使用Golang来模拟Python的yield](golang/golang-python-yield.md)
+- [使用锁数组来避免全局锁，提升map结构的并发性能（golang）](golang/golang-lock-array.md)
+- [Golang interface的一个特性](golang/golang-interface.md)
+- [Golang高并发编程](golang/golang-high-concurrence.md)
+- [Golang下的交叉编译](golang/golang-cross-compiled.md)
+- [读多写少的场景下的并发优化(golang)](golang/golang-benchmark-sync-lock-atomic.md)
+- [Golang中append函数的性能分析](golang/golang-append.md)
+- [React与GraphQl的Demo（基于Apollo React和Apollo Client）](front-end/react-graphql-apollo.md)
+- [elasticsearch5版本映射的变化](elk/es5-new-feature.md)
+- [结巴分词的字典中只能按空格进行分隔的问题](data-science/jieba-fixed.md)
+- [ETL数据清洗流程](data-science/etl-steps.md)
+- [Dgraph最短路径查询](database/dgraph-shortest-path.md)
+- [Dgraph schema and index](database/dgraph-schema.md)
+- [Dgraph重要概念及基础入门](database/dgraph-base.md)
 
 #### 2016-10-14
 
@@ -358,7 +224,6 @@
 
 #### 2015-10-09
 
-- [./python/scrapy/源码结构](python/scrapy/源码结构.md)
 - [php-the-right-way-learning-阅读笔记 By Alex](php/php-the-right-way-learning/alex.md)
 - [基于laravel和Bootstrap的cms系统](php/laravel/laravel-bootstrapt-cms.md)
 - [tcpdump抓包工具的使用](linux/tcpdump-tools.md)
