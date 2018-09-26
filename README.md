@@ -24,20 +24,21 @@ echo 'Hello, world!';
 ### 大数据
 
 ![Python](https://github.com/IBBD/IBBD.github.io/raw/master/_img/python.jpg)
+![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
+![sklearn](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scikit-learn-logo.jpg)
+![Tensorflow](https://github.com/IBBD/IBBD.github.io/raw/master/_img/tensorflow-logo.jpg)
 ![Hadoop](https://github.com/IBBD/IBBD.github.io/raw/master/_img/hadoop.jpg)
 ![Spark](https://github.com/IBBD/IBBD.github.io/raw/master/_img/spark.jpg)
-![ElasticSearch](https://github.com/IBBD/IBBD.github.io/raw/master/_img/elasticsearch.jpg)
 ![NLTK](https://github.com/IBBD/IBBD.github.io/raw/master/_img/nltk.jpg)
-![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
 
 ### 后端
 
+![Docker](https://github.com/IBBD/IBBD.github.io/raw/master/_img/docker.jpg)
 ![Golang](https://github.com/IBBD/IBBD.github.io/raw/master/_img/golang.jpg)
 ![Redis](https://github.com/IBBD/IBBD.github.io/raw/master/_img/redis.jpg)
 ![MariaDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mariadb.jpg)
 ![MongoDB](https://github.com/IBBD/IBBD.github.io/raw/master/_img/mongodb.jpg)
 ![Shell](https://github.com/IBBD/IBBD.github.io/raw/master/_img/shell.jpg)
-![Docker](https://github.com/IBBD/IBBD.github.io/raw/master/_img/docker.jpg)
 
 ### 前端
 
@@ -57,6 +58,7 @@ echo 'Hello, world!';
 ![Git](https://github.com/IBBD/IBBD.github.io/raw/master/_img/git.jpg)
 ![vim](https://github.com/IBBD/IBBD.github.io/raw/master/_img/vim.jpg)
 ![Ubuntu](https://github.com/IBBD/IBBD.github.io/raw/master/_img/ubuntu.jpg)
+![Scrapy](https://github.com/IBBD/IBBD.github.io/raw/master/_img/scrapy.jpg)
 
 
 ## 使用步骤
