@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2018年 09月 26日 星期三 17:30:00 CST
+    Created by ./create_index   date: 2018年 09月 26日 星期三 22:50:12 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -128,6 +128,7 @@
   - [Pythonic](python/pythonic.md)
   - [Flask-Migrate：数据库迁移脚本使用](python/python-migrate.md)
   - [在Python中，set和list的性能区别](python/python-set-and-list.md)
+  - [Flask SQLAlchemy的使用](python/sqlalchemy.md)
   - [Python变量在局部重新赋值时的问题](python/variable-local-assign.md)
 - Tech
   - [广告点击率预测](tech/ad-click-prediction.md)
