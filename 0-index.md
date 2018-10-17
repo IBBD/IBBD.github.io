@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2018年 09月 26日 星期三 22:50:12 CST
+    Created by ./create_index   date: 2018年 10月 17日 星期三 10:44:05 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -144,3 +144,4 @@
   - [IBBD Restful API 规范](tech/restful-api-standard.md)
   - [保证程序的可测试性](tech/testing-tech.md)
   - [文本分类问题解决步骤](tech/text-classify.md)
+  - [VIM使用技巧记录](tech/vim-usages.md)

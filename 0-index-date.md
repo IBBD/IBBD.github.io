@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2018年 09月 26日 星期三 22:50:13 CST
+    Created by ./create_index   date: 2018年 10月 17日 星期三 10:44:06 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2018-10-17
+
+- [VIM使用技巧记录](tech/vim-usages.md)
 
 #### 2018-09-26
 
