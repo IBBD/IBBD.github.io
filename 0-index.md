@@ -1,6 +1,6 @@
 ## 文章目录 - 按目录索引
 
-    Created by ./create_index   date: 2018年 10月 17日 星期三 10:44:05 CST
+    Created by ./create_index   date: 2018年 10月 27日 星期六 23:00:07 CST
 
 [首页](https://github.com/IBBD/blog )  |  按目录索引  |  [按修改日期索引](0-index-date.md )
 
@@ -14,6 +14,7 @@
   - [ETL数据清洗流程](data-science/etl-steps.md)
   - [结巴分词的字典中只能按空格进行分隔的问题](data-science/jieba-fixed.md)
   - [Python下Twitter数据挖掘完整工作流](data-science/mining-twitter-data-with-python.md)
+  - [使用numpy实现矩阵运算](data-science/numpy-matrix.md)
 - DSP
   - [DSP在RTB中的广告投放思路](dsp/ad-delivery-in-rtb.md)
 - ELK

@@ -1,9 +1,13 @@
 ## 文章目录 - 按修改日期索引
 
-    Created by ./create_index   date: 2018年 10月 17日 星期三 10:44:06 CST
+    Created by ./create_index   date: 2018年 10月 27日 星期六 23:00:08 CST
 
 [首页](https://github.com/IBBD/blog )  |  [按目录索引](0-index.md )  |  按日期索引
 
+
+#### 2018-10-27
+
+- [使用numpy实现矩阵运算](data-science/numpy-matrix.md)
 
 #### 2018-10-17
 
