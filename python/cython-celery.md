@@ -128,7 +128,7 @@ Redis server v=5.0.1 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=29efca43
 
 需要将redis package包版本暂时回退到`pip install redis==2.10.6`
 
-
+fix!
 
 
 
