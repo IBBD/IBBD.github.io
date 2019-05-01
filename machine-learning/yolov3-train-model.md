@@ -83,8 +83,19 @@ subdivisions=4
 在我的1050TI下运行:
 
 ```
-8779: 0.389947, 0.476666 avg, 0.001000 rate, 1.363752 seconds, 140464 images Loaded: 0.000063 seconds
+8779: 0.389947, 0.476666 avg, 0.001000 rate, 1.363752 seconds, 140464 images 
+Loaded: 0.000063 seconds
+
+# 输出参数说明：
+8779： 指示当前训练的迭代次数
+0.389947： 是总体的Loss(损失）
+0.476666 avg： 是平均Loss，这个数值应该越低越好，一般来说，一旦这个数值低于0.060730 avg就可以终止训练了。
+0.0001000 rate： 代表当前的学习率，是在.cfg文件中定义的。
+1.363752 seconds： 表示当前批次训练花费的总时间。
+140464 images： 这一行最后的这个数值是8779*16的大小，表示到目前为止，参与训练的图片的总量。
 ```
+
+貌似loss一直这里徘徊，没有继续下降。
 
 GPU使用情况如下：
 
@@ -95,7 +106,46 @@ GPU使用情况如下：
 +-------------------------------+----------------------+----------------------+
 ```
 
-显存占用不算高，batch参数应该可以再大一些。
+显存占用不算高，但是如果batch参数设置
 
+### step10 测试
+
+训练之后，会在backup目录生成权重文件：
+
+```sh
+$ ls backup
+yolov3-voc_100.weights  yolov3-voc_400.weights  yolov3-voc_700.weights  yolov3-voc.backup
+yolov3-voc_200.weights  yolov3-voc_500.weights  yolov3-voc_800.weights
+yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
+
+# 执行测试
+./darknet detector test cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
+```
+
+### step11 转成keras模型
+
+使用`https://github.com/qqwweee/keras-yolo3/`提供的转换程序：
+
+```sh
+python convert.py ../darknet/cfg/yolov3-voc.cfg ../darknet/backup/yolov3-voc_10000.weights model_data/yolov3_helmet.h5
+```
+
+报错如下：
+
+```
+Traceback (most recent call last):
+  File "convert.py", line 262, in <module>
+    _main(parser.parse_args())
+  File "convert.py", line 235, in _main
+    'Unsupported section header type: {}'.format(section))
+ValueError: Unsupported section header type: reorg_0
+```
+
+改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功。
+
+
+## 踩坑问题
+
+https://blog.csdn.net/Pattorio/article/details/80051988
 
 
