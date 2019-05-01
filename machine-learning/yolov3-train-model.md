@@ -33,7 +33,7 @@ vim Makefile
 GPU=1
 CUDNN=1
 OPENCV=0  # 本地有安装opencv，但是设置该值为1的时候会报错
-OPENMP=0
+OPENMP=0  # 如果使用cpu训练，设置该值为1，不然只会使用单个cpu
 DEBUG=0
 
 # 修改好之后，编译
@@ -72,9 +72,22 @@ helmet
 
 ```sh
 [net]
-batch=16
-subdivisions=4
+batch=1
+subdivisions=1
+
+# ....
+
+[convolutional]
+size=1
+stride=1
+pad=1
+filters=18   # 这里原来是75=3*(len(classes)+5)，我们的类别数为1，则这里为18。有几个75都要修改过来，否则会报错
+activation=linear
 ```
+
+subdivision：这个参数很有意思的，它会让你的每一个batch不是一下子都丢到网络里。而是分成subdivision对应数字的份数，一份一份的跑完后，在一起打包算作完成一次iteration。这样会降低对显存的占用情况。如果设置这个参数为1的话就是一次性把所有batch的图片都丢到网络里，如果为2的话就是一次丢一半。
+
+1050TI太渣了，只能设成1才不至于超出内存。。。
 
 ### step09 开始训练
 
