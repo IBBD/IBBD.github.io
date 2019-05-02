@@ -199,6 +199,7 @@ https://blog.csdn.net/Pattorio/article/details/80051988
 
 ### Error: l.outputs == params.inputs
 
+- cfg配置文件中classes和filter关系是否对应
 
 
 ### 超出内存Out of memory
