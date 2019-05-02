@@ -74,6 +74,9 @@ helmet
 [net]
 batch=1
 subdivisions=1
+# ....
+max_batches = 2000   # classes*2000
+step = 1600,1800     # change line steps to 80% and 90% of max_batches
 
 # ....
 
@@ -81,7 +84,7 @@ subdivisions=1
 size=1
 stride=1
 pad=1
-filters=18   # 这里原来是75=3*(len(classes)+5)，我们的类别数为1，则这里为18。有几个75都要修改过来，否则会报错
+filters=18   # 这里原来是75=3*(len(classes)+5)，我们的类别数为1，则这里为18。有几个75都要修改过来，否则会报错: filters=(classes + 5)x3
 activation=linear
 ```
 
@@ -121,6 +124,13 @@ GPU使用情况如下：
 
 显存占用不算高，但是如果batch参数设置
 
+训练完成会输出：
+
+```sh
+Saving weights to backup/yolov3-voc.backup
+Saving weights to backup/yolov3-voc_final.weights
+```
+
 ### step10 测试
 
 训练之后，会在backup目录生成权重文件：
@@ -141,6 +151,37 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 
 ```sh
 python convert.py ../darknet/cfg/yolov3-voc.cfg ../darknet/backup/yolov3-voc_10000.weights model_data/yolov3_helmet.h5
+
+# 输出
+Saved Keras model to model_data/yolov3_helmet.h5
+Read 61576342 of 61576342.0 from Darknet weights.
+```
+
+### step12 使用keras测试
+
+```sh
+python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 --classes=../darknet/data/voc.names
+```
+
+
+## 踩坑问题
+
+https://blog.csdn.net/Pattorio/article/details/80051988
+
+### 超出内存Out of memory
+
+主要调节配置文件subdivisions和batch参数，Makfile中的cudnn也可以关闭
+
+### Darknet yoloV3 训练VOC数据集时不收敛 “-nan”报错或者检测无效果
+
+50200: -nan, nan avg, 0.000010 rate, 0.434793 seconds, 50200 images
+
+主要是对于yolov3-voc.cfg文件。其中的batch和subvision训练和测试的时候应当是不一样的。默认的都是1，那是测试的时候的批次数量。在训练的时候我是改成batch=64，subversion=16；基本训练就没啥问题，也会有“nan”的报告，但是基本网络还是能够收敛的。
+
+### 使用的配置文件可能并不是yolov3的
+
+```sh
+python convert.py ../darknet/cfg/yolov3-voc.cfg ../darknet/backup/yolov3-voc_10000.weights model_data/yolov3_helmet.h5
 ```
 
 报错如下：
@@ -154,11 +195,9 @@ Traceback (most recent call last):
 ValueError: Unsupported section header type: reorg_0
 ```
 
-改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功。
+改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功，但这可能并不是需要的。
 
 
-## 踩坑问题
 
-https://blog.csdn.net/Pattorio/article/details/80051988
 
 
