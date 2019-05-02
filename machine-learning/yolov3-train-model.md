@@ -153,7 +153,8 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 使用`https://github.com/qqwweee/keras-yolo3/`提供的转换程序：
 
 ```sh
-python convert.py ../darknet/cfg/yolov3-voc.cfg ../darknet/backup/yolov3-voc_10000.weights model_data/yolov3_helmet.h5
+python3 convert.py ../darknet/cfg/yolov3-voc.cfg \
+    ../darknet/backup/yolov3-voc_final.weights model_data/yolov3_helmet.h5
 
 # 输出
 Saved Keras model to model_data/yolov3_helmet.h5
