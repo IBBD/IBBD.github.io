@@ -76,9 +76,10 @@ helmet
 [net]
 batch=1
 subdivisions=1   # 1050TI太渣了，只能设成1才不至于超出内存。。。
-# ....
 max_batches = 2000   # classes*2000
 step = 1600,1800     # change line steps to 80% and 90% of max_batches
+width=416            # 修改为608会导致结果无法收敛
+height=416
 
 # ....
 
