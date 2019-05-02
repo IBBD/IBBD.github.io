@@ -164,7 +164,16 @@ Read 61576342 of 61576342.0 from Darknet weights.
 ### step12 使用keras测试
 
 ```sh
+# 图片
 python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
+    --anchors=model_data/yolov3_helmet_anchors.txt \
+    --classes=model_data/yolov3_helmet_classes.txt 
+
+# 视频
+# 如果在服务器运行得注释掉两行代码，还的增加一行代码
+# if return_value is False: break
+python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
+    --input=../工作服安全帽.mp4 --output=out.avi \
     --anchors=model_data/yolov3_helmet_anchors.txt \
     --classes=model_data/yolov3_helmet_classes.txt 
 ```
