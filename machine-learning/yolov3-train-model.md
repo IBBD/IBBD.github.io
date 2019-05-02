@@ -6,6 +6,8 @@
 
 按照YoLo官网下载`git clone https://github.com/pjreddie/darknet`
 
+https://github.com/AlexeyAB/darknet
+
 
 ### step02 标注数据
 
@@ -73,7 +75,7 @@ helmet
 ```sh
 [net]
 batch=1
-subdivisions=1
+subdivisions=1   # 1050TI太渣了，只能设成1才不至于超出内存。。。
 # ....
 max_batches = 2000   # classes*2000
 step = 1600,1800     # change line steps to 80% and 90% of max_batches
@@ -90,7 +92,8 @@ activation=linear
 
 subdivision：这个参数很有意思的，它会让你的每一个batch不是一下子都丢到网络里。而是分成subdivision对应数字的份数，一份一份的跑完后，在一起打包算作完成一次iteration。这样会降低对显存的占用情况。如果设置这个参数为1的话就是一次性把所有batch的图片都丢到网络里，如果为2的话就是一次丢一半。
 
-1050TI太渣了，只能设成1才不至于超出内存。。。
+参数说明：
+- https://www.twblogs.net/a/5bc0da662b717711c923fb3b/zh-cn/
 
 ### step09 开始训练
 
@@ -160,13 +163,32 @@ Read 61576342 of 61576342.0 from Darknet weights.
 ### step12 使用keras测试
 
 ```sh
-python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 --classes=../darknet/data/voc.names
+python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
+    --anchors=model_data/yolov3_helmet_anchors.txt \
+    --classes=model_data/yolov3_helmet_classes.txt 
 ```
+
+这个脚本有问题，参数可以直接修改yolo.py
+
+说明：anchors参数对应的文件的值来自训练时的cfg/yolov3-voc.cfg这个文件中对应的值：
+
+```sh
+[yolo]
+mask = 6,7,8
+anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326
+classes=1
+```
+
+把对应的anchors的值复制到文件model_data/yolov3_helmet_anchors.txt即可。
 
 
 ## 踩坑问题
 
 https://blog.csdn.net/Pattorio/article/details/80051988
+
+### Error: l.outputs == params.inputs
+
+
 
 ### 超出内存Out of memory
 
