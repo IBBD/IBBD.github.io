@@ -180,8 +180,8 @@ Read 61576342 of 61576342.0 from Darknet weights.
 ```sh
 # 图片
 python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
-    --anchors=model_data/yolov3_helmet_anchors.txt \
-    --classes=model_data/yolov3_helmet_classes.txt 
+    --anchors=model_data/yolov3_anchors.txt \
+    --classes=model_data/yolov3_classes.txt 
 
 # 视频
 # 如果在服务器运行得注释掉两行代码，还的增加一行代码
@@ -189,8 +189,8 @@ python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
 # 输出avi需要修改：video_FourCC = cv2.VideoWriter_fourcc(*'XVID')
 python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
     --input=../工作服安全帽.mp4 --output=out.avi \
-    --anchors=model_data/yolov3_helmet_anchors.txt \
-    --classes=model_data/yolov3_helmet_classes.txt 
+    --anchors=model_data/yolov3_anchors.txt \
+    --classes=model_data/yolov3_classes.txt 
 ```
 
 这个脚本有问题，参数可以直接修改yolo.py
@@ -204,7 +204,7 @@ anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  37
 classes=1
 ```
 
-把对应的anchors的值复制到文件model_data/yolov3_helmet_anchors.txt即可。
+把对应的anchors的值复制到文件model_data/yolov3_anchors.txt即可。
 
 
 ## 踩坑问题
