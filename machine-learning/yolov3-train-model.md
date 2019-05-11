@@ -199,6 +199,7 @@ python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
 # 如果在服务器运行得注释掉两行代码，还的增加一行代码
 # if return_value is False: break
 # 输出avi需要修改：video_FourCC = cv2.VideoWriter_fourcc(*'XVID')
+# 如果是服务器还得把 cv2.imshow("result", result) 这附件的两行注释掉
 python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
     --input=../工作服安全帽.mp4 --output=out.avi \
     --anchors=model_data/yolov3_anchors.txt \
