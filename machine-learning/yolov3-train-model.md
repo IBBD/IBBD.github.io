@@ -46,9 +46,14 @@ https://github.com/AlexeyAB/darknet/blob/master/Makefile 这个的可配置项�
 
 ### step04 修改voc_label.py, 生成训练数据
 
-脚本在scripts目录，[修改后的脚本](./yolov3-voc_label.py)， 该脚本保存到`voc`目录，并执行。在voc下生成了helmet_helmet_train_utf8.txt 和 helmet_helmet_val_utf8.txt，分别存放了训练集和测试集图片的路径。 
+脚本在scripts目录，[修改后的脚本](./yolov3-voc_label.py)， 该脚本保存到`voc`目录，并执行。在voc下生成了helmet_helmet_train.txt 和 helmet_helmet_val.txt，分别存放了训练集和测试集图片的路径。 
 
 如果有多个train文件或者val文件，则可以合并成单一的train文件和val文件。
+
+```sh
+cat *_train.txt > train.txt
+cat *_val.txt > val.txt
+```
 
 ### step05 下载预训练模型
 
@@ -58,8 +63,8 @@ https://github.com/AlexeyAB/darknet/blob/master/Makefile 这个的可配置项�
 
 ```sh
 classes= 1
-train  = /video/darknet/voc/helmet_helmet_train_utf8.txt
-valid  = /video/darknet/voc/helmet_helmet_val_utf8.txt
+train  = voc/helmet_train_utf8.txt
+valid  = voc/helmet_val_utf8.txt
 names = data/voc.names
 backup = backup
 ```
@@ -107,10 +112,17 @@ subdivision：这个参数很有意思的，它会让你的每一个batch不是�
 ./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74
 
 # 如果使用多GPU训练
-./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1,2,3
+./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
 
 # 如果想暂停训练，并且从断点开始训练
-./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1,2,3
+./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1
+
+
+# 写成一个脚本如下：
+start_data=$(date)
+./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
+echo "start: $start_data"
+echo "end: " $(date)
 ```
 
 在我的1050TI下运行:
