@@ -6,7 +6,7 @@
 
 按照YoLo官网下载`git clone https://github.com/pjreddie/darknet`
 
-https://github.com/AlexeyAB/darknet
+https://github.com/AlexeyAB/darknet : 事实证明用这个来编译会更加高效，当然GPU得支持。
 
 
 ### step02 标注数据
@@ -42,7 +42,28 @@ DEBUG=0
 make
 ```
 
-https://github.com/AlexeyAB/darknet/blob/master/Makefile 这个的可配置项比较多，可能是一个更好的选择。
+https://github.com/AlexeyAB/darknet/blob/master/Makefile 这个的可配置项比较多，可以配置如下：
+
+```sh
+# set GPU=1 and CUDNN=1 to speedup on GPU
+# set CUDNN_HALF=1 to further speedup 3 x times (Mixed-precision on Tensor Cores) GPU: Volta, Xavier, Turing and higher
+# set AVX=1 and OPENMP=1 to speedup on CPU (if error occurs then set AVX=0)
+GPU=1
+CUDNN=1
+CUDNN_HALF=1
+OPENCV=0
+AVX=0
+OPENMP=0
+LIBSO=0
+ZED_CAMERA=0
+
+# 如果是2080TI，还可以开启如下配置
+# GeForce RTX 2080 Ti, RTX 2080, RTX 2070, Quadro RTX 8000, Quadro RTX 6000, Quadro RTX 5000, Tesla T4, XNOR Tensor Cores
+ARCH= -gencode arch=compute_75,code=[sm_75,compute_75]
+```
+
+加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存暂用也没有明显提升。
+
 
 ### step04 修改voc_label.py, 生成训练数据
 
@@ -84,11 +105,12 @@ helmet
 
 ```sh
 [net]
-batch=1
-subdivisions=1   # 1050TI太渣了，只能设成1才不至于超出内存。。。
+# 如果是1050TI，可能这两个值都只能设置为1才不至于超出内存
+batch=64
+subdivisions=16
 max_batches = 2000   # classes*2000
 step = 1600,1800     # change line steps to 80% and 90% of max_batches
-width=416            # 修改为608会导致结果无法收敛
+width=416            # 
 height=416
 
 # ....
