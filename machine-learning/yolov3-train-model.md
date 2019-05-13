@@ -42,9 +42,19 @@ DEBUG=0
 make
 ```
 
+https://github.com/AlexeyAB/darknet/blob/master/Makefile 这个的可配置项比较多，可能是一个更好的选择。
+
 ### step04 修改voc_label.py, 生成训练数据
 
-脚本在scripts目录，[修改后的脚本](./yolov3-voc_label.py)， 该脚本保存到`voc`目录，并执行。在voc下生成了helmet_helmet_train_utf8.txt 和 helmet_helmet_val_utf8.txt，分别存放了训练集和测试集图片的路径。 
+脚本在scripts目录，[修改后的脚本](./yolov3-voc_label.py)， 该脚本保存到`voc`目录，并执行。在voc下生成了helmet_helmet_train.txt 和 helmet_helmet_val.txt，分别存放了训练集和测试集图片的路径。 
+
+如果有多个train文件或者val文件，则可以合并成单一的train文件和val文件。
+
+```sh
+cat *_train.txt > train.txt
+cat *_val.txt > val.txt
+```
+
 ### step05 下载预训练模型
 
 `wget https://pjreddie.com/media/files/darknet53.conv.74`
@@ -53,8 +63,8 @@ make
 
 ```sh
 classes= 1
-train  = /video/darknet/voc/helmet_helmet_train_utf8.txt
-valid  = /video/darknet/voc/helmet_helmet_val_utf8.txt
+train  = voc/helmet_train_utf8.txt
+valid  = voc/helmet_val_utf8.txt
 names = data/voc.names
 backup = backup
 ```
@@ -76,9 +86,10 @@ helmet
 [net]
 batch=1
 subdivisions=1   # 1050TI太渣了，只能设成1才不至于超出内存。。。
-# ....
 max_batches = 2000   # classes*2000
 step = 1600,1800     # change line steps to 80% and 90% of max_batches
+width=416            # 修改为608会导致结果无法收敛
+height=416
 
 # ....
 
@@ -97,7 +108,22 @@ subdivision：这个参数很有意思的，它会让你的每一个batch不是�
 
 ### step09 开始训练
 
-`./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74`
+```sh
+./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74
+
+# 如果使用多GPU训练
+./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
+
+# 如果想暂停训练，并且从断点开始训练
+./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1
+
+
+# 写成一个脚本如下：
+start_data=$(date)
+./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
+echo "start: $start_data"
+echo "end: " $(date)
+```
 
 在我的1050TI下运行:
 
@@ -153,7 +179,8 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 使用`https://github.com/qqwweee/keras-yolo3/`提供的转换程序：
 
 ```sh
-python convert.py ../darknet/cfg/yolov3-voc.cfg ../darknet/backup/yolov3-voc_10000.weights model_data/yolov3_helmet.h5
+python3 convert.py ../darknet/cfg/yolov3-voc.cfg \
+    ../darknet/backup/yolov3-voc_final.weights model_data/yolov3_helmet.h5
 
 # 输出
 Saved Keras model to model_data/yolov3_helmet.h5
@@ -163,9 +190,20 @@ Read 61576342 of 61576342.0 from Darknet weights.
 ### step12 使用keras测试
 
 ```sh
+# 图片
 python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
-    --anchors=model_data/yolov3_helmet_anchors.txt \
-    --classes=model_data/yolov3_helmet_classes.txt 
+    --anchors=model_data/yolov3_anchors.txt \
+    --classes=model_data/yolov3_classes.txt 
+
+# 视频
+# 如果在服务器运行得注释掉两行代码，还的增加一行代码
+# if return_value is False: break
+# 输出avi需要修改：video_FourCC = cv2.VideoWriter_fourcc(*'XVID')
+# 如果是服务器还得把 cv2.imshow("result", result) 这附件的两行注释掉
+python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
+    --input=../工作服安全帽.mp4 --output=out.avi \
+    --anchors=model_data/yolov3_anchors.txt \
+    --classes=model_data/yolov3_classes.txt 
 ```
 
 这个脚本有问题，参数可以直接修改yolo.py
@@ -179,7 +217,7 @@ anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  37
 classes=1
 ```
 
-把对应的anchors的值复制到文件model_data/yolov3_helmet_anchors.txt即可。
+把对应的anchors的值复制到文件model_data/yolov3_anchors.txt即可。
 
 
 ## 踩坑问题
@@ -188,6 +226,7 @@ https://blog.csdn.net/Pattorio/article/details/80051988
 
 ### Error: l.outputs == params.inputs
 
+- cfg配置文件中classes和filter关系是否对应
 
 
 ### 超出内存Out of memory
