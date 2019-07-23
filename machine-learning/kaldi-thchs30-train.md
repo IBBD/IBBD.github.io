@@ -72,7 +72,7 @@ thchs=/thchs30
 ./run.sh
 ```
 
-大概有几个过程：数据准备，monophone单音素训练， tri1三因素训练， trib2进行lda_mllt特征变换，trib3进行sat自然语言适应，trib4做quick，dnn...
+大概有几个过程：数据准备，monophone单音素训练， tri1三因素训练， trib2进行lda_mllt特征变换，trib3进行sat自然语言适应，trib4做quick，训练DNN模型，训练DAE模型（DAE:深度自动编码器，用于去噪）
 
 然后就是等。。。
 
