@@ -132,6 +132,7 @@ steps/make_fbank.sh: [info]: no segments file exists: assuming wav.scp indexed b
 
 # 网上提供的解决方法：https://blog.csdn.net/sut_wj/article/details/71993176
 # 但是并不能解决
+Memory allocation failed
 ERROR: FstHeader::Read: Bad FST header: -
 ERROR (fstminimizeencoded[5.4.271~1-e50bd]:ReadFstKaldi():kaldi-fst-io.cc:35) Reading FST: error reading FST header from standard input
 
@@ -203,24 +204,6 @@ utils/mkgraph.sh: line 133: 46398 Done                    fsttablecompose $dir/H
 
 ```sh
 #!/bin/bash
-for x in exp/{mono,tri1,tri2b,tri3b,tri4b,tri4b_dnn,tri4b_dnn_mpe}/decode_test_phone* ; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
-#clean mono,tri1,tri2b,tri3b,GMM,DNN model
-#clean test data
-#phone task
-%WER 34.00 [ 123105 / 362027, 17267 ins, 28402 del, 77436 sub ] exp/mono/decode_test_phone/wer_9_0.0
-%WER 21.68 [ 78478 / 362027, 11305 ins, 16394 del, 50779 sub ] exp/tri1/decode_test_phone/wer_9_0.5
-%WER 18.32 [ 66320 / 362027, 8860 ins, 14855 del, 42605 sub ] exp/tri2b/decode_test_phone/wer_9_0.5
-%WER 15.98 [ 57853 / 362027, 8186 ins, 12404 del, 37263 sub ] exp/tri3b/decode_test_phone/wer_9_0.5
-%WER 19.67 [ 71215 / 362027, 10156 ins, 15669 del, 45390 sub ] exp/tri3b/decode_test_phone.si/wer_9_0.5
-%WER 14.28 [ 51699 / 362027, 7307 ins, 10875 del, 33517 sub ] exp/tri4b/decode_test_phone/wer_9_1.0
-%WER 17.54 [ 63483 / 362027, 9898 ins, 12935 del, 40650 sub ] exp/tri4b/decode_test_phone.si/wer_9_0.5
-%WER 10.38 [ 37582 / 362027, 8577 ins, 7008 del, 21997 sub ] exp/tri4b_dnn/decode_test_phone/wer_4_1.0
-%WER 10.22 [ 36997 / 362027, 8497 ins, 6834 del, 21666 sub ] exp/tri4b_dnn_mpe/decode_test_phone_it1/wer_4_1.0
-%WER 10.15 [ 36749 / 362027, 8435 ins, 6778 del, 21536 sub ] exp/tri4b_dnn_mpe/decode_test_phone_it2/wer_4_1.0
-%WER 10.13 [ 36681 / 362027, 8427 ins, 6759 del, 21495 sub ] exp/tri4b_dnn_mpe/decode_test_phone_it3/wer_4_1.0
-
-exit 0
-
 for x in exp/{mono,tri1,tri2b,tri3b,tri4b,tri4b_dnn,tri4b_dnn_mpe}/decode_test_word* ; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
 #clean mono,tri1,tri2b,tri3b,GMM,DNN model
 #clean test data
