@@ -32,14 +32,29 @@ docker pull kaldiasr/kaldi:gpu-latest
 
 ```sh
 sudo docker run -ti --name=kaldi \
-    -v "$PWD":/thchs30 \
+    -v "$PWD":/nfs/public/materials/data/thchs30-openslr \
     --runtime=nvidia \
     -w /opt/kaldi/egs/thchs30/s5 \
-    kaldiasr/kaldi:gpu-5.4 \
+    kaldiasr/kaldi:gpu-latest \
     /bin/bash
 ```
 
 说明：开始时使用“gpu-latest”这个镜像，训练完成之后没有找到相应的模型，血的教训呀。
+
+使用“gpu-5.4”这个版本的镜像在训练dnn模型时会报错：
+
+```
+### Before posting the error to forum, please try following:
+### 1) update kaldi & cuda-toolkit (& GPU driver),
+### 2) re-run 'src/configure',
+### 3) re-compile kaldi by 'make clean; make -j depend; make -j'
+###
+### If the problem persists, please send us your:
+### - GPU model name, cuda-toolkit version, driver version (run nvidia-smi), variable $(CUDA_ARCH) from src/kaldi.mk
+run.pl: job failed, log is in exp/tri4b_dnn/log/train_nnet.log
+```
+
+应该是cuda的版本问题。
 
 ## x04 修改训练脚本
 到这个步骤需要修改容器内部的训练脚本，最好在外部修改好之后，再复制到容器里面。
@@ -52,8 +67,27 @@ cd egs/thchs30/s5/
 #export decode_cmd="queue.pl --mem 4G"
 #export mkgraph_cmd="queue.pl --mem 8G"
 #export cuda_cmd="queue.pl --gpu 1"
+# 下面这组配置需要超过15G的空余内存，会导致错误发生
+export train_cmd="run.pl --max-jobs-run 8"
+export decode_cmd="run.pl --max-jobs-run 8"
+export mkgraph_cmd="run.pl --max-jobs-run 8"
+export cuda_cmd="run.pl --max-jobs-run 2"
+
+# 下面这组配置高峰时也会超过15G内存，还是会报很多错误
+export train_cmd="run.pl --max-jobs-run 6"
+export decode_cmd="run.pl --max-jobs-run 6"
+export mkgraph_cmd="run.pl --max-jobs-run 6"
+export cuda_cmd="run.pl --max-jobs-run 2"
+
+# 能运行到dnn，不过还是会报错
+export train_cmd="run.pl --max-jobs-run 4"
+export decode_cmd="run.pl --max-jobs-run 4"
+export mkgraph_cmd="run.pl --max-jobs-run 4"
+export cuda_cmd="run.pl --max-jobs-run 2"
+
+# 这组配置
 export train_cmd=run.pl
-export decode_cmd="run.pl --mem 4G"   # 机器有15G左右的内存可以使用，但是把这两个都改为12G会在训练过程中出现错误
+export decode_cmd="run.pl --mem 4G"
 export mkgraph_cmd="run.pl --mem 8G"
 export cuda_cmd="run.pl --gpu 2"
 
@@ -61,8 +95,8 @@ export cuda_cmd="run.pl --gpu 2"
 #n=4      #parallel jobs
 n=8       #parallel jobs
 
-#thchs=/nfs/public/materials/data/thchs30-openslr
-thchs=/thchs30
+# docker已经映射到这个目录
+thchs=/nfs/public/materials/data/thchs30-openslr
 ```
 
 本地使用的是2080Ti的显卡。
@@ -148,6 +182,20 @@ local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
 ```
 
 卡在这里一动不动。。。
+
+**当内存不足的时候，就容易报各种错误！**这时需要将并发数量减少，否则后面的训练可能会有各种问题。
+
+跑到“steps/train_sat.sh”这个脚本的时候，内存暴涨，超出2G以上。
+
+内存占用超出的时候，就会报错：
+
+```
+utils/mkgraph.sh: line 133: 46398 Done                    fsttablecompose $dir/Ha.fst "$clg"
+     46399                       | fstdeterminizestar --use-log=true
+     46400                       | fstrmsymbols $dir/disambig_tid.int
+     46401                       | fstrmepslocal
+     46402 Killed                  | fstminimizeencoded > $dir/HCLGa.fst.$$
+```
 
 ## x06 查看结果文件
 
