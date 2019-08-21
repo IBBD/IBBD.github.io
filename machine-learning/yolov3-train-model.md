@@ -188,6 +188,16 @@ Saving weights to backup/yolov3-voc.backup
 Saving weights to backup/yolov3-voc_final.weights
 ```
 
+关于训练的说明：
+
+- 如果你在avg loss里看到nan，意味着训练失败；在其他地方出现nan则是正常的。
+- 如果出错并显示Out of memory，尝试将.cfg文件的subdivisions值增大（建议为2n）。
+- 使用附加选项-dont_show来关闭训练时默认显示的损失曲线窗口
+- 使用附加选项-map来显示mAP值
+- 训练完成后的权重将保存于你在.data文件中设置的backup值路径下
+- 你可以从backup值的路径下找到你的备份权重文件，并以此接着训练模型
+
+
 ### step10 测试
 
 训练之后，会在backup目录生成权重文件：
@@ -201,6 +211,13 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 # 执行测试
 ./darknet detector test cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
 ```
+
+#### step10.1 训练指标可视化
+- 参考资料：[Darknet评估训练好的网络的性能](https://www.jianshu.com/p/7ae10c8f7d77)
+- scripts目录下有相应的脚本
+- 训练的时候，记得保存训练日志
+
+
 
 ### step11 转成keras模型
 
@@ -286,7 +303,8 @@ ValueError: Unsupported section header type: reorg_0
 
 改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功，但这可能并不是需要的。
 
+## 附录
 
-
+- https://karbo.online/dl/yolo_starter/
 
 
