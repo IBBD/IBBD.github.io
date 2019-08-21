@@ -62,7 +62,7 @@ ZED_CAMERA=0
 ARCH= -gencode arch=compute_75,code=[sm_75,compute_75]
 ```
 
-加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存暂用也没有明显提升。
+加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存占用也没有明显提升。
 
 
 ### step04 修改voc_label.py, 生成训练数据
@@ -76,6 +76,8 @@ cat *_train.txt > train.txt
 cat *_val.txt > val.txt
 ```
 
+注意：需要进入容器内运行。
+
 ### step05 下载预训练模型
 
 `wget https://pjreddie.com/media/files/darknet53.conv.74`
@@ -87,7 +89,7 @@ classes= 1
 train  = voc/helmet_train_utf8.txt
 valid  = voc/helmet_val_utf8.txt
 names = data/voc.names
-backup = backup
+backup = backup     # 训练的时候，该目录必须存在
 ```
 
 主要是类别数量，而train和valid这两个路径就是在step04生成的文件的路径。
@@ -115,6 +117,9 @@ height=416
 
 # ....
 
+[yolo]
+classes=2         # 有三处需要修改
+
 [convolutional]
 size=1
 stride=1
@@ -135,6 +140,7 @@ subdivision：这个参数很有意思的，它会让你的每一个batch不是�
 
 # 如果使用多GPU训练
 ./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
+./darknet detector train cfg/gf.voc.data cfg/gf-yolo3-voc.cfg darknet53.conv.74 -gpus 0,1
 
 # 如果想暂停训练，并且从断点开始训练
 ./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1
