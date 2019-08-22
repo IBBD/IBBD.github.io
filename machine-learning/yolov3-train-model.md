@@ -102,7 +102,7 @@ helmet
 
 这个是检测的目录类别的名字
 
-### step08 修改cfg/yolov3-voc.cfg
+### step08 修改cfg/yolov3-voc.cfg（cfg/yolov3-spp.cfg使用该结构的效果会更好）
 主要修改如下：
 
 ```sh
@@ -229,25 +229,35 @@ python3 convert.py ../darknet/cfg/yolov3-voc.cfg \
 # 输出
 Saved Keras model to model_data/yolov3_helmet.h5
 Read 61576342 of 61576342.0 from Darknet weights.
+
+python3 convert.py ../alexeyab_darknet/cfg/gf-yolov3-spp.cfg \
+    ../alexeyab_darknet/backup-gf-yolov3-spp-0.066425/gf-yolov3-spp_final.weights \
+    model_data/gf_yolov3_spp_l066425.h5
 ```
 
 ### step12 使用keras测试
 
 ```sh
+# 原来的代码有点问题，参数无法生效，需要修改一下才能正常执行
 # 图片
-python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
-    --anchors=model_data/yolov3_anchors.txt \
-    --classes=model_data/yolov3_classes.txt 
+python3 yolo_video.py --image --model-path=model_data/yolov3_helmet.h5 \
+    --anchors-path=model_data/yolov3_anchors.txt \
+    --classes-path=model_data/yolov3_classes.txt 
 
 # 视频
 # 如果在服务器运行得注释掉两行代码，还的增加一行代码
 # if return_value is False: break
 # 输出avi需要修改：video_FourCC = cv2.VideoWriter_fourcc(*'XVID')
 # 如果是服务器还得把 cv2.imshow("result", result) 这附件的两行注释掉
-python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
+python3 yolo_video.py --model-path=model_data/yolov3_helmet.h5 \
     --input=../工作服安全帽.mp4 --output=out.avi \
-    --anchors=model_data/yolov3_anchors.txt \
-    --classes=model_data/yolov3_classes.txt 
+    --anchors-path=model_data/yolov3_anchors.txt \
+    --classes-path=model_data/yolov3_classes.txt 
+
+# 检测图片
+python3 yolo_video.py --image \
+    --model-path=model_data/gf_yolov3_spp_l066425.h5 \
+    --classes-path=../alexeyab_darknet/data/gf.voc.names
 ```
 
 这个脚本有问题，参数可以直接修改yolo.py
