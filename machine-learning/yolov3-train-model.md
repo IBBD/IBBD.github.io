@@ -216,8 +216,7 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 - 参考资料：[Darknet评估训练好的网络的性能](https://www.jianshu.com/p/7ae10c8f7d77)
 - scripts目录下有相应的脚本
 - 训练的时候，记得保存训练日志
-
-
+- 查看损失的loss，可以使用[脚本](/machine-learning/yolov3-train-loss-show.py)
 
 ### step11 转成keras模型
 
