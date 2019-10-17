@@ -62,7 +62,7 @@ ZED_CAMERA=0
 ARCH= -gencode arch=compute_75,code=[sm_75,compute_75]
 ```
 
-加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存暂用也没有明显提升。
+加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存占用也没有明显提升。
 
 
 ### step04 修改voc_label.py, 生成训练数据
@@ -76,6 +76,8 @@ cat *_train.txt > train.txt
 cat *_val.txt > val.txt
 ```
 
+注意：需要进入容器内运行。
+
 ### step05 下载预训练模型
 
 `wget https://pjreddie.com/media/files/darknet53.conv.74`
@@ -87,7 +89,7 @@ classes= 1
 train  = voc/helmet_train_utf8.txt
 valid  = voc/helmet_val_utf8.txt
 names = data/voc.names
-backup = backup
+backup = backup     # 训练的时候，该目录必须存在
 ```
 
 主要是类别数量，而train和valid这两个路径就是在step04生成的文件的路径。
@@ -100,7 +102,7 @@ helmet
 
 这个是检测的目录类别的名字
 
-### step08 修改cfg/yolov3-voc.cfg
+### step08 修改cfg/yolov3-voc.cfg（cfg/yolov3-spp.cfg使用该结构的效果会更好）
 主要修改如下：
 
 ```sh
@@ -114,6 +116,9 @@ width=416            #
 height=416
 
 # ....
+
+[yolo]
+classes=2         # 有三处需要修改
 
 [convolutional]
 size=1
@@ -135,6 +140,7 @@ subdivision：这个参数很有意思的，它会让你的每一个batch不是�
 
 # 如果使用多GPU训练
 ./darknet detector train cfg/voc.data cfg/yolov3-voc.cfg darknet53.conv.74 -gpus 0,1
+./darknet detector train cfg/gf.voc.data cfg/gf-yolo3-voc.cfg darknet53.conv.74 -gpus 0,1
 
 # 如果想暂停训练，并且从断点开始训练
 ./darknet detector train cfg/coco.data cfg/yolov3.cfg backup/yolov3.backup -gpus 0,1
@@ -182,6 +188,16 @@ Saving weights to backup/yolov3-voc.backup
 Saving weights to backup/yolov3-voc_final.weights
 ```
 
+关于训练的说明：
+
+- 如果你在avg loss里看到nan，意味着训练失败；在其他地方出现nan则是正常的。
+- 如果出错并显示Out of memory，尝试将.cfg文件的subdivisions值增大（建议为2n）。
+- 使用附加选项-dont_show来关闭训练时默认显示的损失曲线窗口
+- 使用附加选项-map来显示mAP值
+- 训练完成后的权重将保存于你在.data文件中设置的backup值路径下
+- 你可以从backup值的路径下找到你的备份权重文件，并以此接着训练模型
+
+
 ### step10 测试
 
 训练之后，会在backup目录生成权重文件：
@@ -196,6 +212,12 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 ./darknet detector test cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
 ```
 
+#### step10.1 训练指标可视化
+- 参考资料：[Darknet评估训练好的网络的性能](https://www.jianshu.com/p/7ae10c8f7d77)
+- scripts目录下有相应的脚本
+- 训练的时候，记得保存训练日志
+- 查看损失的loss，可以使用[脚本](/machine-learning/yolov3-train-loss-show.py)
+
 ### step11 转成keras模型
 
 使用`https://github.com/qqwweee/keras-yolo3/`提供的转换程序：
@@ -207,25 +229,35 @@ python3 convert.py ../darknet/cfg/yolov3-voc.cfg \
 # 输出
 Saved Keras model to model_data/yolov3_helmet.h5
 Read 61576342 of 61576342.0 from Darknet weights.
+
+python3 convert.py ../alexeyab_darknet/cfg/gf-yolov3-spp.cfg \
+    ../alexeyab_darknet/backup-gf-yolov3-spp-0.066425/gf-yolov3-spp_final.weights \
+    model_data/gf_yolov3_spp_l066425.h5
 ```
 
 ### step12 使用keras测试
 
 ```sh
+# 原来的代码有点问题，参数无法生效，需要修改一下才能正常执行
 # 图片
-python3 yolo_video.py --image --model=model_data/yolov3_helmet.h5 \
-    --anchors=model_data/yolov3_anchors.txt \
-    --classes=model_data/yolov3_classes.txt 
+python3 yolo_video.py --image --model-path=model_data/yolov3_helmet.h5 \
+    --anchors-path=model_data/yolov3_anchors.txt \
+    --classes-path=model_data/yolov3_classes.txt 
 
 # 视频
 # 如果在服务器运行得注释掉两行代码，还的增加一行代码
 # if return_value is False: break
 # 输出avi需要修改：video_FourCC = cv2.VideoWriter_fourcc(*'XVID')
 # 如果是服务器还得把 cv2.imshow("result", result) 这附件的两行注释掉
-python3 yolo_video.py --model=model_data/yolov3_helmet.h5 \
+python3 yolo_video.py --model-path=model_data/yolov3_helmet.h5 \
     --input=../工作服安全帽.mp4 --output=out.avi \
-    --anchors=model_data/yolov3_anchors.txt \
-    --classes=model_data/yolov3_classes.txt 
+    --anchors-path=model_data/yolov3_anchors.txt \
+    --classes-path=model_data/yolov3_classes.txt 
+
+# 检测图片
+python3 yolo_video.py --image \
+    --model-path=model_data/gf_yolov3_spp_l066425.h5 \
+    --classes-path=../alexeyab_darknet/data/gf.voc.names
 ```
 
 这个脚本有问题，参数可以直接修改yolo.py
@@ -280,7 +312,8 @@ ValueError: Unsupported section header type: reorg_0
 
 改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功，但这可能并不是需要的。
 
+## 附录
 
-
+- https://karbo.online/dl/yolo_starter/
 
 
