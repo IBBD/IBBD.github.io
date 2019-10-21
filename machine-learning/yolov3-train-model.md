@@ -162,7 +162,7 @@ Loaded: 0.000063 seconds
 # 输出参数说明：
 8779： 指示当前训练的迭代次数
 0.389947： 是总体的Loss(损失）
-0.476666 avg： 是平均Loss，这个数值应该越低越好，一般来说，一旦这个数值低于0.060730 avg就可以终止训练了。
+0.476666 avg： 是平均Loss，这个数值应该越低越好，一般来说，一旦这个数值低于0.06 avg就可以终止训练了。
 0.0001000 rate： 代表当前的学习率，是在.cfg文件中定义的。
 1.363752 seconds： 表示当前批次训练花费的总时间。
 140464 images： 这一行最后的这个数值是8779*16的大小，表示到目前为止，参与训练的图片的总量。
@@ -199,15 +199,13 @@ Saving weights to backup/yolov3-voc_final.weights
 
 ### step10 计算mAP
 
+yolov3-tiny的指标如下：
+
 ```
 ./darknet detector map cfg/gf.voc.data cfg/yolov3-tiny-gf.cfg backup/yolov3-tiny-gf_final.weights
 
 # output（有省略）:
 Total BFLOPS 5.452 
- Allocate additional workspace_size = 52.43 MB 
-Loading weights from backup/yolov3-tiny-gf_final.weights...
- seen 64 
-Done!
 
  calculation mAP (mean average precision)...
 1300
@@ -225,7 +223,7 @@ class_id = 3, name = jobcard, ap = 99.49%   	 (TP = 312, FP = 18)
 Total Detection Time: 5.000000 Seconds
 ```
 
-对比spp模型：
+对比yolov3-spp指标：
 
 ```
 Total BFLOPS 140.320
@@ -241,6 +239,10 @@ class_id = 3, name = jobcard, ap = 99.53%   	 (TP = 313, FP = 13)
  mean average precision (mAP@0.50) = 0.991824, or 99.18 % 
 Total Detection Time: 20.000000 Seconds
 ```
+
+说明：
+
+- 相同的batch和subdivisions参数下，enetb0训练时会消耗更多的显存.
 
 ### step11 测试
 
@@ -356,6 +358,22 @@ ValueError: Unsupported section header type: reorg_0
 ```
 
 改成用：`https://github.com/allanzelener/YAD2K/blob/master/yad2k.py`成功，但这可能并不是需要的。
+
+### 使用darknet来预测
+
+```c
+// vim src/darknet.c
+// test_detector这个函数在调用时, 第一个参数被固定了
+// 导致自己训练的模型无法使用该命令
+    } else if (0 == strcmp(argv[1], "detect")){
+        float thresh = find_float_arg(argc, argv, "-thresh", .24);
+        int ext_output = find_arg(argc, argv, "-ext_output");
+        //char *filename = (argc > 4) ? argv[4]: 0;
+        //test_detector("cfg/coco.data", argv[2], argv[3], filename, thresh, 0.5, 0, ext_output, 0, NULL, 0);
+        char *filename = (argc > 5) ? argv[5]: 0;
+        test_detector(argv[2], argv[3], argv[4], filename, thresh, 0.5, 0, ext_output, 0, NULL, 0);
+    } else if (0 == strcmp(argv[1], "cifar")){
+```
 
 ## 附录
 
