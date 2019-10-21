@@ -118,14 +118,14 @@ height=416
 # ....
 
 [yolo]
-classes=2         # 有三处需要修改
+classes=2         # 有三处需要修改，tiny有两处
 
 [convolutional]
 size=1
 stride=1
 pad=1
 filters=18   # 这里原来是75=3*(len(classes)+5)，我们的类别数为1，则这里为18。有几个75都要修改过来，否则会报错: filters=(classes + 5)x3
-activation=linear
+activation=linear  # 注意这里，filter不要修改错了
 ```
 
 subdivision：这个参数很有意思的，它会让你的每一个batch不是一下子都丢到网络里。而是分成subdivision对应数字的份数，一份一份的跑完后，在一起打包算作完成一次iteration。这样会降低对显存的占用情况。如果设置这个参数为1的话就是一次性把所有batch的图片都丢到网络里，如果为2的话就是一次丢一半。
@@ -197,8 +197,52 @@ Saving weights to backup/yolov3-voc_final.weights
 - 训练完成后的权重将保存于你在.data文件中设置的backup值路径下
 - 你可以从backup值的路径下找到你的备份权重文件，并以此接着训练模型
 
+### step10 计算mAP
 
-### step10 测试
+```
+./darknet detector map cfg/gf.voc.data cfg/yolov3-tiny-gf.cfg backup/yolov3-tiny-gf_final.weights
+
+# output（有省略）:
+Total BFLOPS 5.452 
+ Allocate additional workspace_size = 52.43 MB 
+Loading weights from backup/yolov3-tiny-gf_final.weights...
+ seen 64 
+Done!
+
+ calculation mAP (mean average precision)...
+1300
+ detections_count = 3280, unique_truth_count = 1842  
+class_id = 0, name = idcard, ap = 99.68%   	 (TP = 397, FP = 6) 
+class_id = 1, name = idcard_back, ap = 99.50%   	 (TP = 315, FP = 2) 
+class_id = 2, name = logo, ap = 97.10%   	 (TP = 791, FP = 145) 
+class_id = 3, name = jobcard, ap = 99.49%   	 (TP = 312, FP = 18) 
+
+ for thresh = 0.25, precision = 0.91, recall = 0.99, F1-score = 0.95 
+ for thresh = 0.25, TP = 1815, FP = 171, FN = 27, average IoU = 77.33 % 
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
+ mean average precision (mAP@0.50) = 0.989424, or 98.94 % 
+Total Detection Time: 5.000000 Seconds
+```
+
+对比spp模型：
+
+```
+Total BFLOPS 140.320
+class_id = 0, name = idcard, ap = 99.72%   	 (TP = 398, FP = 4) 
+class_id = 1, name = idcard_back, ap = 99.66%   	 (TP = 316, FP = 1) 
+class_id = 2, name = logo, ap = 97.81%   	 (TP = 793, FP = 100) 
+class_id = 3, name = jobcard, ap = 99.53%   	 (TP = 313, FP = 13) 
+
+ for thresh = 0.25, precision = 0.94, recall = 0.99, F1-score = 0.96 
+ for thresh = 0.25, TP = 1820, FP = 118, FN = 22, average IoU = 83.81 % 
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
+ mean average precision (mAP@0.50) = 0.991824, or 99.18 % 
+Total Detection Time: 20.000000 Seconds
+```
+
+### step11 测试
 
 训练之后，会在backup目录生成权重文件：
 
@@ -212,13 +256,13 @@ yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
 ./darknet detector test cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
 ```
 
-#### step10.1 训练指标可视化
+#### step11.1 训练指标可视化
 - 参考资料：[Darknet评估训练好的网络的性能](https://www.jianshu.com/p/7ae10c8f7d77)
 - scripts目录下有相应的脚本
 - 训练的时候，记得保存训练日志
 - 查看损失的loss，可以使用[脚本](/machine-learning/yolov3-train-loss-show.py)
 
-### step11 转成keras模型
+### step12 转成keras模型
 
 使用`https://github.com/qqwweee/keras-yolo3/`提供的转换程序：
 
@@ -235,7 +279,7 @@ python3 convert.py ../alexeyab_darknet/cfg/gf-yolov3-spp.cfg \
     model_data/gf_yolov3_spp_l066425.h5
 ```
 
-### step12 使用keras测试
+### step13 使用keras测试
 
 ```sh
 # 原来的代码有点问题，参数无法生效，需要修改一下才能正常执行
@@ -273,7 +317,6 @@ classes=1
 
 把对应的anchors的值复制到文件model_data/yolov3_anchors.txt即可。
 
-
 ## 踩坑问题
 
 https://blog.csdn.net/Pattorio/article/details/80051988
@@ -285,7 +328,9 @@ https://blog.csdn.net/Pattorio/article/details/80051988
 
 ### 超出内存Out of memory
 
-主要调节配置文件subdivisions和batch参数，Makfile中的cudnn也可以关闭
+主要调节配置文件subdivisions和batch参数，Makfile中的cudnn也可以关闭。例如:
+
+- 将subdivisions参数值调大。
 
 ### Darknet yoloV3 训练VOC数据集时不收敛 “-nan”报错或者检测无效果
 
