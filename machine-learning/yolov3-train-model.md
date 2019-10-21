@@ -240,6 +240,18 @@ class_id = 3, name = jobcard, ap = 99.53%   	 (TP = 313, FP = 13)
 Total Detection Time: 20.000000 Seconds
 ```
 
+对比enetb0的指标:
+
+```
+# 训练命令
+# 需要先生成: enetb0.conv.15
+./darknet partial cfg/enet-gf.cfg enetb0-coco_final.weights enetb0.conv.15 15
+./darknet detector train cfg/gf.voc.data cfg/enet-gf.cfg enetb0.conv.15 -gpus 0,1
+
+# 指标
+
+```
+
 说明：
 
 - 相同的batch和subdivisions参数下，enetb0训练时会消耗更多的显存.
@@ -373,6 +385,12 @@ ValueError: Unsupported section header type: reorg_0
         char *filename = (argc > 5) ? argv[5]: 0;
         test_detector(argv[2], argv[3], argv[4], filename, thresh, 0.5, 0, ext_output, 0, NULL, 0);
     } else if (0 == strcmp(argv[1], "cifar")){
+```
+
+这样就可以使用下面的命令了:
+
+```sh
+./darknet detect cfg/gf.voc.data cfg/yolov3-tiny-gf.cfg backup/yolov3-tiny-gf_final.weights idcard-test.jpg
 ```
 
 ## 附录
