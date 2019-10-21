@@ -249,6 +249,7 @@ Total Detection Time: 20.000000 Seconds
 ./darknet detector train cfg/gf.voc.data cfg/enet-gf.cfg enetb0.conv.15 -gpus 0,1
 
 # 指标
+Total BFLOPS 3.671
 
 ```
 
