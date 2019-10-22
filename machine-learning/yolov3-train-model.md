@@ -204,6 +204,13 @@ yolov3-tiny的指标如下：
 ```
 ./darknet detector map cfg/gf.voc.data cfg/yolov3-tiny-gf.cfg backup/yolov3-tiny-gf_final.weights
 
+# 预测时间: 
+# cpu: 626.867000
+# cpu+avx+openmp: 86.209000
+# gpu: 281.105000
+# gpu+cudnn: 2.588000
+# gpu+cudnn_half: 2.860000
+
 # output（有省略）:
 Total BFLOPS 5.452 
 
@@ -250,6 +257,13 @@ Total Detection Time: 20.000000 Seconds
 
 # 训练耗时: 约200分钟
 8000: 0.129793, 0.129020 avg loss, 0.000020 rate, 2.997015 seconds, 1024000 images
+
+# 预测时间: 
+# cpu: 574.930000
+# cpu+avx+openmp: 274.690000
+# gpu: 346.442000
+# gpu+cudnn: 17.471000
+# gpu+cudnn_half: 18.417000
 
 # 指标
 Total BFLOPS 3.671
