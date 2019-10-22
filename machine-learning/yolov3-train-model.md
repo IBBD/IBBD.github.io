@@ -248,9 +248,22 @@ Total Detection Time: 20.000000 Seconds
 ./darknet partial cfg/enet-gf.cfg enetb0-coco_final.weights enetb0.conv.15 15
 ./darknet detector train cfg/gf.voc.data cfg/enet-gf.cfg enetb0.conv.15 -gpus 0,1
 
+# 训练耗时: 约200分钟
+8000: 0.129793, 0.129020 avg loss, 0.000020 rate, 2.997015 seconds, 1024000 images
+
 # 指标
 Total BFLOPS 3.671
+class_id = 0, name = idcard, ap = 99.43%   	 (TP = 397, FP = 6) 
+class_id = 1, name = idcard_back, ap = 99.67%   	 (TP = 316, FP = 1) 
+class_id = 2, name = logo, ap = 95.57%   	 (TP = 759, FP = 92) 
+class_id = 3, name = jobcard, ap = 99.80%   	 (TP = 316, FP = 11) 
 
+ for conf_thresh = 0.25, precision = 0.94, recall = 0.97, F1-score = 0.96 
+ for conf_thresh = 0.25, TP = 1788, FP = 110, FN = 54, average IoU = 82.19 % 
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
+ mean average precision (mAP@0.50) = 0.986163, or 98.62 % 
+Total Detection Time: 20.000000 Seconds
 ```
 
 说明：
