@@ -60,6 +60,22 @@ curl -XPOST localhost:5000/classify -d '[[1,1,2,1,4]]'
 
 其中的data就是模型函数classify的返回值。
 
+## 3. 让别人可以访问
+
+上面的方式启动接口服务之后，只能在自己的电脑上访问，别的同事还是访问不到。如果需要公司内的同事（局域网内）能够访问到，需要做一点改变：
+
+```python
+from fireRest import API, app
+
+# 包装classify成http服务
+API(classify)
+
+# 加上host参数，这样局域网内的同事就能通过你的内网ip进行访问了
+app.run(port=5000, host='0.0.0.0')
+```
+
+说明：关于内网ip可以在网络设置中查到，通常是`192.168.*.*`。
+
 关于这个包更多的使用方式，[可以看这里](https://github.com/ibbd-dev/python-fire-rest)。
 
 ## 总结
