@@ -67,4 +67,107 @@ sqrt(1+x) - 1 ~ x/2
 
 同阶无穷大量也有类似的特征
 
+## 05 Python做极限运算
+这里介绍Python科学计算包sympy，安装很简单`pip install sympy`
+
+### 05.01 数学中常用的常数
+虚数单位i，自然对数的底e，无穷大oo与圆周率pi
+
+![数学中的常用常数](./images/sympy-constant.png)
+
+### 05.02 初等运算
+
+![初等运算](./images/sympy-elementary.png)
+
+### 05.03 表达式与求值
+
+```python
+# 首先定义x为一个符号，表示一个变量
+x = sympy.Symbol('x')
+
+# 定义一个函数
+fx = x**2+1
+print(type(fx))
+
+# 求值
+fx.evalf(subs={x:2})
+```
+
+多元表达式:
+
+```python
+# 首先定义x为一个符号，表示一个变量
+x, y = sympy.symbols('x y')
+
+# 定义一个函数
+f_xy = x**2+x*y
+print(type(fx))
+
+# 求值
+f_xy.evalf(subs={x:2, y:0.3})
+```
+
+### 05.04 用sympy解方程（组）
+
+```python
+x = sympy.Symbol('x')
+
+# 解方程：x+1 = 0
+print(sympy.solve(x+1, x))
+# 解方程：x**2+1 = 0
+f_x = x**2 + 1
+print(sympy.solve(f_x, x))
+```
+
+方程组：
+
+```python
+x,y = sympy.symbols('x y')
+
+f1 = x+y+3
+f2 = 2*x-3*y-2
+print(sympy.solve([f1, f2], [x,y]))
+```
+
+### 05.05 数列求和
+
+```python
+n = sympy.Symbol('n')
+
+# 通项公式
+an = n+1
+
+# 计算前100项的和
+print(sympy.summation(an, (n, 1, 100)))
+
+an = 1/n
+print(sympy.summation(an, (n, 1, 100)))
+
+an = (1 + 1/n)**n
+print(float(sympy.summation(an, (n, 1, 10))))
+```
+
+### 05.06 解带有求和式的方程
+
+```python
+x = sympy.Symbol('x')
+i = sympy.Symbol('i', integer=True)
+f =  sympy.summation(x,(i,1,5)) + 10 * x - 15
+sympy.solve(f,x)
+```
+
+### 05.07 极限
+
+```python
+x = sympy.Symbol('x')
+
+# sin(x)/x在x=0处的极限
+f1 = sympy.sin(x)/x
+sympy.limit(f1, x, 0)
+
+# 在无穷大处的极限
+f2 = (1+1/x)**x
+sympy.limit(f2, x, sympy.oo)
+```
+
 
