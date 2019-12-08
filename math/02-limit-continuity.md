@@ -70,6 +70,14 @@ sqrt(1+x) - 1 ~ x/2
 ## 05 Python做极限运算
 这里介绍Python科学计算包sympy，安装很简单`pip install sympy`
 
+主要运算：
+
+- 表达式求值
+- 解方程（组）
+- 求和
+- 求极限
+
+
 ### 05.01 数学中常用的常数
 虚数单位i，自然对数的底e，无穷大oo与圆周率pi
 
@@ -91,6 +99,12 @@ print(type(fx))
 
 # 求值
 fx.evalf(subs={x:2})
+
+fx = (1+1/x)**x
+fx.evalf(subs={x:10})
+fx.evalf(subs={x:100})
+fx.evalf(subs={x:1000})
+fx.evalf(subs={x:10000})
 ```
 
 多元表达式:
@@ -147,12 +161,19 @@ an = (1 + 1/n)**n
 print(float(sympy.summation(an, (n, 1, 10))))
 ```
 
+注意这里会输出一个很大的分子/分母格式的数据，如果想得到最后的结果：
+
+```python
+res = sympy.summation(an, (n, 1, 10))
+sympy.Float(res, 3)
+```
+
 ### 05.06 解带有求和式的方程
 
 ```python
 x = sympy.Symbol('x')
 i = sympy.Symbol('i', integer=True)
-f =  sympy.summation(x,(i,1,5)) + 10 * x - 15
+f = sympy.summation(x,(i,1,5)) + 10 * x - 15
 sympy.solve(f,x)
 ```
 
