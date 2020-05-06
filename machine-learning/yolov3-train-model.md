@@ -62,8 +62,8 @@ ZED_CAMERA=0
 ARCH= -gencode arch=compute_75,code=[sm_75,compute_75]
 ```
 
-加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存占用也没有明显提升。
-
+- 加上配置CUDNN_HALF和ARCH，性能约能提升三倍，显存占用也没有明显提升。
+- 如果需要打开opencv=1，则需要安装：libopencv-dev
 
 ### step04 修改voc_label.py, 生成训练数据
 
@@ -152,6 +152,8 @@ start_data=$(date)
 echo "start: $start_data"
 echo "end: " $(date)
 ```
+
+在训练yolov4时，需要加上一个参数：`-dont_show`
 
 在我的1050TI下运行:
 
