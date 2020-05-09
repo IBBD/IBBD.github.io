@@ -365,6 +365,10 @@ classes=1
 
 https://blog.csdn.net/Pattorio/article/details/80051988
 
+### 提示找不到so文件：libcudart.so.10.0
+
+这是原来make的时候，使用的是cuda10.0，后来更新了cuda版本，重新make即可。
+
 ### Error: l.outputs == params.inputs
 
 - cfg配置文件中classes和filter关系是否对应
