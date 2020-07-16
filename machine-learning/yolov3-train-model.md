@@ -298,15 +298,15 @@ Total Detection Time: 20.000000 Seconds
 
 ```sh
 $ ls backup
-yolov3-voc_100.weights  yolov3-voc_400.weights  yolov3-voc_700.weights  yolov3-voc.backup
-yolov3-voc_200.weights  yolov3-voc_500.weights  yolov3-voc_800.weights
-yolov3-voc_300.weights  yolov3-voc_600.weights  yolov3-voc_900.weights
+yolov3-voc_100.weights ...... yolov3-voc_900.weights
 
 # 执行测试
 ./darknet detector test cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
+./darknet detector demo cfg/voc.data cfg/yolov3-voc.cfg backup/yolov3-voc_900.weights data/210.jpg
 ```
 
 #### step11.1 训练指标可视化
+
 - 参考资料：[Darknet评估训练好的网络的性能](https://www.jianshu.com/p/7ae10c8f7d77)
 - scripts目录下有相应的脚本
 - 训练的时候，记得保存训练日志
