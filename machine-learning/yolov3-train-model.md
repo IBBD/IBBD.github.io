@@ -115,6 +115,12 @@ step = 1600,1800     # change line steps to 80% and 90% of max_batches
 width=416            # 
 height=416
 
+# update_num小于burn_in时，不是使用配置的学习速率更新策略，而是按照下面的公式更新
+# lr = base_lr * power(batch_num/burn_in,pwr)
+# 全局最优点就在网络初始位置附近，所以训练开始后的burn_in次更新，学习速率从小到大变化。
+# update次数超过burn_in后，采用配置的学习速率更新策略从大到小变化，显然finetune时可以尝试。
+burn_in=1000         # 这个值默认为1000，类别比较少时可以改小一点
+
 # ....
 
 [yolo]
@@ -364,6 +370,48 @@ classes=1
 ## 踩坑问题
 
 https://blog.csdn.net/Pattorio/article/details/80051988
+
+### 项目相关的数据和配置等，都应该放到同一个目录下
+
+```sh
+# 项目根目录：projects/windows-video-monitor/
+# 标注的数据
+Annotations
+ImageSets
+JPEGImages
+# 生成的数据文件
+train.txt
+val.txt
+labels
+# 生成训练文件脚本
+voc_label.py
+# 配置文件
+voc.data
+voc.names
+# 配置文件
+yolov3.cfg
+yolov3-spp.cfg
+yolov3-tiny.cfg
+# 模型保存目录
+backup
+```
+
+### 默认每1000步保存一个文件
+
+可以修改`src/detector.c`这个文件来改变该值：
+
+```c
+// 大概在300行左右的位置
+        if (i >= (iter_save + 1000) || i % 1000 == 0) {
+            iter_save = i;
+#ifdef GPU
+            if (ngpus != 1) sync_nets(nets, ngpus, 0);
+#endif
+            char buff[256];
+            sprintf(buff, "%s/%s_%d.weights", backup_directory, base, i);
+            save_weights(net, buff);
+        }
+```
 
 ### 提示找不到so文件：libcudart.so.10.0
 

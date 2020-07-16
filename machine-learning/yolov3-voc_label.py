@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-#
-# yolov3的voc_label.py，略有修改
-# Author: alex
-# Created Time: 2019年05月01日 星期三 15时23分25秒
 import xml.etree.ElementTree as ET
 import os
-from os import getcwd
+import shutil
 
-# 找到对应的代码就知道是什么意思
-sets = [('helmet', 'helmet_train_utf8'), ('helmet', 'helmet_val_utf8')]
-classes = ['helmet']   # 只有一个类别的目标
+# 将项目相关的都放到同一个目录
+root_path = 'projects/windows-video-monitor/'    # 相对于darknet的路径
+sets = [('train', 'password_train'), ('val', 'password_val'),
+        ('train', 'system_train'), ('val', 'system_val')]
+classes = ['password', 'system']
 
 
 def convert(size, box):
@@ -23,13 +20,13 @@ def convert(size, box):
     w = w*dw
     y = y*dh
     h = h*dh
-    return (x,y,w,h)
+    return (x, y, w, h)
 
 
-def convert_annotation(year, image_id):
-    in_file = open('VOCdevkit/VOC%s/Annotations/%s.xml'%(year, image_id))
-    out_file = open('VOCdevkit/VOC%s/labels/%s.txt'%(year, image_id), 'w')
-    tree=ET.parse(in_file)
+def convert_annotation(image_id):
+    in_file = open('Annotations/%s.xml' % (image_id))
+    out_file = open('labels/%s.txt' % (image_id), 'w')
+    tree = ET.parse(in_file)
     root = tree.getroot()
     size = root.find('size')
     w = int(size.find('width').text)
@@ -39,27 +36,44 @@ def convert_annotation(year, image_id):
         difficult = obj.find('difficult').text
         cls = obj.find('name').text
         if cls not in classes or int(difficult) == 1:
+            print(cls)
             continue
         cls_id = classes.index(cls)
         xmlbox = obj.find('bndbox')
-        b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
-        bb = convert((w,h), b)
+        b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text),
+             float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
+        bb = convert((w, h), b)
         if bb[2] < 0.0001 and bb[3] < 0.0001:
-            continue    # 注意这里，否则可能会报错
-        out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
+            print(image_id, bb)
+            continue
+        out_file.write(str(cls_id) + " " +
+                       " ".join([str(a) for a in bb]) + '\n')
 
-wd = getcwd()
-for year, image_set in sets:
-    if not os.path.exists('VOCdevkit/VOC%s/labels/'%(year)):
-        os.makedirs('VOCdevkit/VOC%s/labels/'%(year))
-    image_ids = open('VOCdevkit/VOC%s/ImageSets/Main/%s.txt'%(year, image_set), encoding='utf8').read().strip().split()
-    list_file = open('%s_%s.txt'%(year, image_set), 'w')
+
+# 先清除旧文件
+if os.path.exists('labels/'):
+    shutil.rmtree('labels/')
+for txt_filename, _ in sets:
+    filename = '%s.txt' % txt_filename
+    if os.path.isfile(filename):
+        os.remove(filename)
+
+os.makedirs('labels/')
+for txt_filename, image_set in sets:
+    image_ids = open('ImageSets/Main/%s.txt' % (image_set),
+                     encoding='utf8').read().strip().split("\n")
+    image_ids = [s.strip() for s in image_ids]
+    image_ids = [s.split(' ')[0] for s in image_ids if len(s) > 1]
+    # print(image_set, len(image_ids), image_ids[0], image_ids[-1])
+    list_file = open('%s.txt' % txt_filename, 'w+')
     # print(image_ids)
     for image_id in image_ids:
-        filename = '%s/VOCdevkit/VOC%s/JPEGImages/%s.jpg'%(wd, year, image_id)
+        filename = 'JPEGImages/%s' % (image_id)
         if not os.path.isfile(filename):
+            print(filename, ' is not exists!')
             continue
-        print(filename)
-        list_file.write(filename+"\n")
-        convert_annotation(year, image_id)
+        # print(filename)
+        list_file.write(root_path+filename+"\n")
+        # print(image_id, image_id.replace('.jpg', ''))
+        convert_annotation(image_id.replace('.jpg', ''))
     list_file.close()
