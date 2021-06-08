@@ -2,7 +2,7 @@
 
 刚碰到一个错误：
 
-```
+```sh
 defined in enclosing scope on line 57) referenced before assignment
 ```
 
@@ -18,7 +18,7 @@ def func(test):
 
 然后就报错了。。。
 
-## 原因
+## 原因: 变量提升
 
 Python解释器执行到 `func2()` 中的 `if test:` 时，发现有个变量 `test` 在当前作用域(local)中无法找到该变量。它继续尝试把整块代码解释完。
 
@@ -39,9 +39,7 @@ def func(test):
     return func2
 ```
 
-
 ## 附：网上看到的一个例子
-
 
 ```python
 lst = [1, 2, 3]
@@ -87,7 +85,6 @@ func()   # [1, 1]
 
 - [Python命名空间和作用域窥探](http://blog.cipherc.com/2015/04/25/python_namespace_and_scope/)
 - [python学习笔记 - local, global and free variable](http://www.jianshu.com/p/e1fd4f14136a)
-
 
 ---------
 
